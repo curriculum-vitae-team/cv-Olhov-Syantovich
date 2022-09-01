@@ -52,5 +52,4 @@
     "eslint-plugin-react": "^7.31.1",
     "eslint-plugin-react-hooks": "^4.6.0"
   },
-  "cracoConfig": "craco.config.js"
 }
