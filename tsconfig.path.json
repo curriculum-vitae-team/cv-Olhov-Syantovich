@@ -3,13 +3,16 @@
     "baseUrl": "./src",
     "paths": {
       "@api/*": ["api/*"],
-      "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
       "@models/*": ["models/*"],
-      "@pages/*": ["pages/*"],
-      "@router/*": ["router/*"],
-      "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+
+      "@atoms/*": ["components/atoms/*"],
+      "@molecules/*": ["components/molecules/*"],
+      "@organisms/*": ["components/organisms/*"],
+      "@templates/*": ["components/templates/*"],
+      "@pages/*": ["components/pages/*"],
+      "@router/*": ["components/router/*"]
     },
   }
 }
