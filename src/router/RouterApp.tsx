@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { TokenContext } from '../context/TokenContext';
-import ProtectedRoute from '../components/atoms/ProtectedRoute/ProtectedRoute';
+
+import { ProtectedRoute } from '../components/atoms/ProtectedRoute/ProtectedRoute';
 import { PathEnum } from './pathsEnum/pathEnum';
 import { authGuard } from './guards/authGuard';
 import { roleGuard } from './guards/roleGuard';

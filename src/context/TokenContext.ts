@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { TokenContextType } from '../interfaces/user/IUser';
+import { TokenContextType } from '../app/types/TokenContext.type';
 
 const defaultValue: TokenContextType = {
   user: undefined,
