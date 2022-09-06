@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
-import { IRoute } from '../interfaces/router/IRoute';
+import { RouteProtectedProps } from './types/ProtectedRoute.type';
 
-const ProtectedRoute = ({ guards }: IRoute) => {
+export const ProtectedRoute = ({ guards }: RouteProtectedProps) => {
   let navigate = '';
   for (let i = 0; i < guards.length; i++) {
     const guardResult = guards[i]();
@@ -13,4 +13,3 @@ const ProtectedRoute = ({ guards }: IRoute) => {
   }
   return navigate ? <Navigate to={`../${navigate}`} /> : <Outlet />;
 };
-export default ProtectedRoute;

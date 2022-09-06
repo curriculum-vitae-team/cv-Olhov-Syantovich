@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { TokenContext } from '../context/TokenContext';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from '../components/atoms/ProtectedRoute/ProtectedRoute';
 import { PathEnum } from './pathsEnum/pathEnum';
-import authGuard from './guards/authGuard';
-import roleGuard from './guards/roleGuard';
+import { authGuard } from './guards/authGuard';
+import { roleGuard } from './guards/roleGuard';
 import { RolesEnum } from '../constants';
 
-const RouterApp = () => {
+export const RouterApp = () => {
   const { user } = useContext(TokenContext);
   return (
     <BrowserRouter>
@@ -31,4 +31,3 @@ const RouterApp = () => {
     </BrowserRouter>
   );
 };
-export default RouterApp;

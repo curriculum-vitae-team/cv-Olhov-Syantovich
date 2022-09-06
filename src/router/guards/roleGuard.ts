@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { TokenContext } from '../../context/TokenContext';
 import { PathEnum } from '../pathsEnum/pathEnum';
 
-const RoleGuard = (role: string) => {
+export const roleGuard = (role: string) => {
   const { user } = useContext(TokenContext);
   return function () {
     if (user?.role !== role) {
@@ -11,4 +11,3 @@ const RoleGuard = (role: string) => {
     return '';
   };
 };
-export default RoleGuard;
