@@ -6,7 +6,7 @@ module.exports = {
     alias: {
       '@api': path.resolve(__dirname, 'src/api'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
-      '@models': path.resolve(__dirname, 'src/models'),
+      '@interfaces': path.resolve(__dirname, 'src/interfaces'),
       '@utils': path.resolve(__dirname, 'src/utils'),
 
       '@atoms': path.resolve(__dirname, 'src/components/atoms'),

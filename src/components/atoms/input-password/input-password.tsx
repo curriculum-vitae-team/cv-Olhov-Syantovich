@@ -3,7 +3,7 @@ import { IconButton, Input, InputAdornment } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-const InputPassword: FC = () => {
+export const InputPassword: FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const changeVisibility = () => setVisible(!visible);
@@ -23,5 +23,3 @@ const InputPassword: FC = () => {
     />
   );
 };
-
-export default InputPassword;
