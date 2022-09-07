@@ -23,7 +23,25 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'react-hooks', 'prettier'],
   rules: {
     'prettier/prettier': ['error'],
-    'no-console': 'off',
-    'import/no-unresolved': ['off']
+    'no-console': 'off'
+  },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [
+          ['@api', './src/api'],
+          ['@hooks', './src/hooks'],
+          ['@interfaces', './src/interfaces'],
+          ['@utils', './src/utils'],
+
+          ['@atoms', './src/components/atoms'],
+          ['@molecules', './src/components/molecules'],
+          ['@organisms', './src/components/organisms'],
+          ['@templates', './src/components/templates'],
+          ['@pages', './src/components/pages']
+        ],
+        extensions: ['.ts', '.tsx']
+      }
+    }
   }
 };
