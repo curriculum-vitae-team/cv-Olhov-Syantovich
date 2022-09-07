@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
-import { RouteProtectedProps } from './types/ProtectedRoute.type';
+import { RouteProtectedProps } from '@templates/router/protected-route/protected-route.types';
 
 export const ProtectedRoute = ({ guards }: RouteProtectedProps) => {
   let navigate = '';
