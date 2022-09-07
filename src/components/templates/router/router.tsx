@@ -7,6 +7,7 @@ import { roleGuard } from '@templates/router/guards/roleGuard';
 import { RolesEnum } from '../../../constants';
 import { PathEnum } from '@templates/router/router.types';
 import { ProtectedRoute } from '@templates/router/protected-route';
+import { SignUpPage } from '@pages/SignUp';
 
 export const AppRouter = () => {
   const { user } = useContext(AppContext);
@@ -23,7 +24,7 @@ export const AppRouter = () => {
           <>
             <Route path="signin" element={<>1</>} />
             {/*SignIn*/}
-            <Route path="signup" element={<>2</>} /> {/*SignUp*/}
+            <Route path="signup" element={<SignUpPage />} /> {/*SignUp*/}
           </>
         )}
         <Route path={'/404'} element={<></>} />
