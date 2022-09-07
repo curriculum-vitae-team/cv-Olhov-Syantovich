@@ -1,1 +1,1 @@
-export { WrapColumn } from '@atoms/wrap-column/wrap-column';
+export { WrapColumn } from './wrap-column';

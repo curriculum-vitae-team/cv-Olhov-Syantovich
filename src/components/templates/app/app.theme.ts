@@ -22,22 +22,14 @@ export const theme = createTheme({
           '&:hover': {
             backgroundColor: 'rgb(55, 55, 55)'
           }
-        }
-      },
-      variants: [
-        {
-          props: { color: 'primary' },
-          style: {
-            backgroundColor: '#757de8'
-          }
         },
-        {
-          props: { color: 'secondary' },
-          style: {
-            backgroundColor: '#666'
-          }
+        textPrimary: {
+          backgroundColor: '#757de8'
+        },
+        textSecondary: {
+          backgroundColor: '#666'
         }
-      ]
+      }
     },
     MuiInput: {
       styleOverrides: {

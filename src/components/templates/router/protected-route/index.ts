@@ -1,1 +1,1 @@
-export { ProtectedRoute } from '@templates/router/protected-route/protected-route';
+export { ProtectedRoute } from './protected-route';

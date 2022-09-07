@@ -1,1 +1,1 @@
-export { ButtonFullWidth } from '@atoms/button-full-width/button-full-width';
+export { ButtonFullWidth } from './button-full-width';

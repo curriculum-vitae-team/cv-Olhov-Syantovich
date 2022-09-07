@@ -1,1 +1,1 @@
-export { Textarea } from '@atoms/textarea/textarea';
+export { Textarea } from './textarea';
