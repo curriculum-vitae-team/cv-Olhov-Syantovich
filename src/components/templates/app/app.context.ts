@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { TokenContextType } from '../app/types/TokenContext.type';
+import { TokenContextType } from '@templates/app/app.types';
 
 const defaultValue: TokenContextType = {
   user: undefined,
@@ -7,4 +7,5 @@ const defaultValue: TokenContextType = {
   setToken: undefined,
   setUser: undefined
 };
-export const TokenContext = createContext(defaultValue);
+
+export const AppContext = createContext(defaultValue);

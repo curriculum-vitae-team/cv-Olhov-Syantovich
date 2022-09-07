@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
-import { TokenContext } from '../context/TokenContext';
+import { AppContext } from '../app/app.context';
 
-import { ProtectedRoute } from '../components/atoms/ProtectedRoute/ProtectedRoute';
-import { PathEnum } from './pathsEnum/pathEnum';
-import { authGuard } from './guards/authGuard';
-import { roleGuard } from './guards/roleGuard';
-import { RolesEnum } from '../constants';
+import { authGuard } from '@templates/router/guards/authGuard';
+import { roleGuard } from '@templates/router/guards/roleGuard';
+import { RolesEnum } from '../../../constants';
+import { PathEnum } from '@templates/router/router.types';
+import { ProtectedRoute } from '@templates/router/protected-route';
 
-export const RouterApp = () => {
-  const { user } = useContext(TokenContext);
+export const AppRouter = () => {
+  const { user } = useContext(AppContext);
   return (
     <BrowserRouter>
       <Routes>

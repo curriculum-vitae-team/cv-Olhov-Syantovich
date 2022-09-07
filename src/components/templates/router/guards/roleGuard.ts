@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { TokenContext } from '../../context/TokenContext';
-import { PathEnum } from '../pathsEnum/pathEnum';
+import { PathEnum } from '@templates/router/router.types';
+import { AppContext } from '@templates/app/app.context';
 
 export const roleGuard = (role: string) => {
-  const { user } = useContext(TokenContext);
+  const { user } = useContext(AppContext);
   return function () {
     if (user?.role !== role) {
       return PathEnum.notFound;
