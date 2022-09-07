@@ -3,7 +3,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { theme } from '@templates/app/app.theme';
 import { AppRouter } from '@templates/router';
 import { AppContext } from '@templates/app/app.context';
-import { IUser } from '@interfaces/user/IUser';
+import { IUser } from '@interfaces/IUser';
 
 export const App = () => {
   const [token, setToken] = useState<string>();
