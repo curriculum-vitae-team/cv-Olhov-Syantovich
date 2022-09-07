@@ -11,8 +11,7 @@
       "@molecules/*": ["components/molecules/*"],
       "@organisms/*": ["components/organisms/*"],
       "@templates/*": ["components/templates/*"],
-      "@pages/*": ["components/pages/*"],
-      "@router/*": ["components/router/*"]
+      "@pages/*": ["components/pages/*"]
     },
   }
 }
