@@ -1,16 +1,16 @@
 import React, { FC, useState } from 'react';
-import { IconButton, Input, InputAdornment } from '@mui/material';
+import { IconButton, Input, InputAdornment, InputProps } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const InputPassword: FC = () => {
+export const InputPassword: FC<InputProps> = (props: InputProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const changeVisibility = () => setVisible(!visible);
 
   return (
     <Input
-      placeholder={'Password'}
+      placeholder={props.placeholder}
       type={visible ? 'text' : 'password'}
       required
       endAdornment={
@@ -20,6 +20,7 @@ export const InputPassword: FC = () => {
           </IconButton>
         </InputAdornment>
       }
+      {...props}
     />
   );
 };
