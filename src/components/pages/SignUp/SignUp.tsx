@@ -57,7 +57,7 @@ const SignUp = () => {
             }
           })}
         />
-        <ButtonFullWidth type={'submit'}>Sign Up</ButtonFullWidth>
+        <ButtonFullWidth type="submit">Sign Up</ButtonFullWidth>
       </form>
     </WrapColumn>
   );
