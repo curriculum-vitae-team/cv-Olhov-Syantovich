@@ -1,4 +1,4 @@
-import { IUser } from '@interfaces/user/IUser';
+import { IUser } from '@interfaces/IUser';
 import { Dispatch, SetStateAction } from 'react';
 
 export type TokenContextType = {
