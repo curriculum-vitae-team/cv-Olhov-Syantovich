@@ -1,10 +1,11 @@
 import { WrapColumn } from '@atoms/wrap-column';
 import { ButtonFullWidth } from '@atoms/button-full-width';
 import React from 'react';
-import { Typography, Input } from '@mui/material';
+import { Typography, TextField } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ISignUpDataForm } from '@pages/SignUp/SignUp.interface';
 import { validateEmailRegExp } from '@utils/regExp';
+import { InputPassword } from '@atoms/input-password';
 
 const SignUp = () => {
   const {
@@ -22,27 +23,31 @@ const SignUp = () => {
     <WrapColumn>
       <Typography>Sign Up</Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          placeholder={'Email'}
-          type={'text'}
+        <TextField
+          placeholder="Email"
           error={!!errors.email}
+          required
           {...register('email', {
+            required: 'Email can not be epmty',
             pattern: {
               value: validateEmailRegExp,
               message: 'Incorrect email'
             }
           })}
+          helperText={errors?.email?.message}
         />
-        <Input
-          placeholder={'Password'}
-          type={'password'}
+        <InputPassword
+          placeholder="Password"
           error={!!errors.password}
+          required
+          helperText={errors.password?.message}
           {...register('password', { required: 'Password can not be empty' })}
         />
-        <Input
-          placeholder={'Confirm password'}
-          type={'password'}
+        <InputPassword
+          placeholder="Confirm password"
           error={!!errors.confirmPassword}
+          helperText={errors.confirmPassword?.message}
+          required
           {...register('confirmPassword', {
             required: 'Confirm password can not be empty',
             validate: (val: string) => {
