@@ -1,1 +1,1 @@
-export { App } from '@templates/app/app';
+export { App } from './app';
