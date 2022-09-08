@@ -1,3 +1,3 @@
 import { lazy } from 'react';
 
-export const SignUpPage = lazy(() => import('@pages/SignUp/SignUp'));
+export const SignUpPage = lazy(() => import('./SignUp'));
