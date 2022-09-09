@@ -12,7 +12,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    getValues
   } = useForm<ISignUpDataForm>({
     defaultValues: { email: '', password: '', confirmPassword: '' }
   });
@@ -25,6 +25,7 @@ const SignUp = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           placeholder="Email"
+          label="Email"
           error={!!errors.email}
           required
           {...register('email', {
@@ -40,6 +41,7 @@ const SignUp = () => {
           placeholder="Password"
           error={!!errors.password}
           required
+          label="Password"
           helperText={errors.password?.message}
           {...register('password', { required: 'Password can not be empty' })}
         />
@@ -48,10 +50,11 @@ const SignUp = () => {
           error={!!errors.confirmPassword}
           helperText={errors.confirmPassword?.message}
           required
+          label="Confirm password"
           {...register('confirmPassword', {
             required: 'Confirm password can not be empty',
             validate: (val: string) => {
-              if (watch('password') != val) {
+              if (getValues('password') != val) {
                 return 'Your passwords do no match';
               }
             }
