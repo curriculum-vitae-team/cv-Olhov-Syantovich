@@ -1,25 +1,29 @@
 import React, { FC, useState } from 'react';
-import { IconButton, Input, InputAdornment } from '@mui/material';
+import { IconButton, InputAdornment, TextField, TextFieldProps } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const InputPassword: FC = () => {
+export const InputPassword: FC<TextFieldProps> = React.forwardRef((props: TextFieldProps, ref) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const changeVisibility = () => setVisible(!visible);
 
   return (
-    <Input
-      placeholder={'Password'}
+    <TextField
       type={visible ? 'text' : 'password'}
       required
-      endAdornment={
-        <InputAdornment position="end">
-          <IconButton aria-label="toggle password visibility" onClick={changeVisibility}>
-            {visible ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>
-      }
+      ref={ref}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton aria-label="toggle password visibility" onClick={changeVisibility}>
+              {visible ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        )
+      }}
+      {...props}
     />
   );
-};
+});
+InputPassword.displayName = 'InputPassword';
