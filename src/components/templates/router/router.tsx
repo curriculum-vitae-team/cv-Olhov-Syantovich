@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, Suspense } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { AppContext } from '../app/app.context';
 
@@ -7,6 +7,7 @@ import { roleGuard } from '@templates/router/guards/roleGuard';
 import { RolesEnum } from '../../../constants';
 import { PathEnum } from '@templates/router/router.types';
 import { ProtectedRoute } from '@templates/router/protected-route';
+import { SignInPage } from '@pages/SignIn';
 import { SignUpPage } from '@pages/SignUp';
 
 export const AppRouter = () => {
@@ -22,9 +23,24 @@ export const AppRouter = () => {
         </Route>
         {!user && (
           <>
-            <Route path="signin" element={<>1</>} />
+            <Route
+              path="signin"
+              element={
+                <Suspense fallback={1}>
+                  <SignInPage />
+                </Suspense>
+              }
+            />
             {/*SignIn*/}
-            <Route path="signup" element={<SignUpPage />} /> {/*SignUp*/}
+            <Route
+              path="signup"
+              element={
+                <Suspense fallback={1}>
+                  <SignUpPage />
+                </Suspense>
+              }
+            />{' '}
+            {/*SignUp*/}
           </>
         )}
         <Route path={'/404'} element={<></>} />

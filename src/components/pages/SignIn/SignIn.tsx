@@ -3,26 +3,25 @@ import { ButtonFullWidth } from '@atoms/button-full-width';
 import React from 'react';
 import { Typography, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { ISignUpDataForm } from '@pages/SignUp/SignUp.interface';
+import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { validateEmailRegExp } from '@utils/regExp';
 import { InputPassword } from '@atoms/input-password';
-import { useSignUp } from '@hooks/useSignUp/useSignUp';
-import { PathEnum } from '@templates/router/router.types';
 import { LinkTo } from '@atoms/link-to';
+import { PathEnum } from '@templates/router/router.types';
+import { useSignIn } from '@hooks/useSignIn/useSignIn';
 
-const SignUp = () => {
+const SignIn = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch
-  } = useForm<ISignUpDataForm>({
-    defaultValues: { email: '', password: '', confirmPassword: '' }
+    formState: { errors }
+  } = useForm<ISignInDataForm>({
+    defaultValues: { email: '', password: '' }
   });
-  const { onSubmit, loading } = useSignUp();
+  const { onSubmit, loading } = useSignIn();
   return (
     <WrapColumn>
-      <Typography>Sign Up</Typography>
+      <Typography>Sign In</Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           placeholder="Email"
@@ -44,27 +43,13 @@ const SignUp = () => {
           helperText={errors.password?.message}
           {...register('password', { required: 'Password can not be empty' })}
         />
-        <InputPassword
-          placeholder="Confirm password"
-          error={!!errors.confirmPassword}
-          helperText={errors.confirmPassword?.message}
-          required
-          {...register('confirmPassword', {
-            required: 'Confirm password can not be empty',
-            validate: (val: string) => {
-              if (watch('password') != val) {
-                return 'Your passwords do no match';
-              }
-            }
-          })}
-        />
         <ButtonFullWidth type="submit" disabled={loading}>
-          Sign Up
+          Sign In
         </ButtonFullWidth>
       </form>
-      <LinkTo to={PathEnum.signIn}>Sign In</LinkTo>
+      <LinkTo to={PathEnum.signUp}>Sign Up</LinkTo>
     </WrapColumn>
   );
 };
 
-export default SignUp;
+export default SignIn;
