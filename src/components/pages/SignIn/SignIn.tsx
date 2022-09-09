@@ -27,6 +27,7 @@ const SignIn = () => {
           placeholder="Email"
           error={!!errors.email}
           required
+          label="Email"
           {...register('email', {
             required: 'Email can not be epmty',
             pattern: {
@@ -40,6 +41,7 @@ const SignIn = () => {
           placeholder="Password"
           error={!!errors.password}
           required
+          label="Password"
           helperText={errors.password?.message}
           {...register('password', { required: 'Password can not be empty' })}
         />
