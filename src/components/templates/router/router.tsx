@@ -13,39 +13,29 @@ import { SignUpPage } from '@pages/SignUp';
 export const AppRouter = () => {
   const { user } = useContext(AppContext);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={PathEnum.employee} element={<ProtectedRoute guards={[authGuard]} />}>
-          <Route path="*" element={<></>} />
-        </Route>
-        <Route path={PathEnum.languages} element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}>
-          <Route path="*" element={<></>} />
-        </Route>
-        {!user && (
-          <>
-            <Route
-              path="signin"
-              element={
-                <Suspense fallback={1}>
-                  <SignInPage />
-                </Suspense>
-              }
-            />
-            {/*SignIn*/}
-            <Route
-              path="signup"
-              element={
-                <Suspense fallback={1}>
-                  <SignUpPage />
-                </Suspense>
-              }
-            />{' '}
-            {/*SignUp*/}
-          </>
-        )}
-        <Route path={'/404'} element={<></>} />
-        <Route path="*" element={<Navigate to="/404" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <Suspense fallback={1}>
+      <BrowserRouter>
+        <Routes>
+          <Route path={PathEnum.employee} element={<ProtectedRoute guards={[authGuard]} />}>
+            <Route path="*" element={<></>} />
+          </Route>
+          <Route
+            path={PathEnum.languages}
+            element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}
+          >
+            <Route path="*" element={<></>} />
+          </Route>
+          {!user && (
+            <>
+              <Route path="signin" element={<SignInPage />} />
+              {/*SignIn*/}
+              <Route path="signup" element={<SignUpPage />} /> {/*SignUp*/}
+            </>
+          )}
+          <Route path={'/404'} element={<></>} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   );
 };

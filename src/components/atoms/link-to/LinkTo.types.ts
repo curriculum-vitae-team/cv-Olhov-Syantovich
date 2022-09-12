@@ -1,4 +1,4 @@
-export type LinkTypes = {
+export type MyLinkType = {
   children: string;
   to: string;
 };
