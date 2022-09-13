@@ -65,6 +65,21 @@ export const theme = createTheme({
         }
       }
     },
+    MuiCircularProgress: {
+      styleOverrides: {
+        root: {
+          color: 'rgba(255, 255, 255, 1)'
+        }
+      }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: 'rgba(255, 255, 255, 1)',
+          textDecorationColor: 'rgba(255, 255, 255, 1)'
+        }
+      }
+    },
     MuiTypography: {
       styleOverrides: {
         root: {
