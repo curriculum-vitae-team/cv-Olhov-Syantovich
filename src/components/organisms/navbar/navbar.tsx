@@ -20,17 +20,17 @@ export const Navbar = () => {
 
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 
-  const toggleAnchorElSettings = (e: MouseEvent<HTMLElement>) => {
-    setAnchorElSettings((s) => (s ? null : e.currentTarget));
+  const toggleAnchorElSettings = (event: MouseEvent<HTMLElement>) => {
+    setAnchorElSettings((prevState) => (prevState ? null : event.currentTarget));
   };
 
-  const toggleAnchorElLanguage = (e: MouseEvent<HTMLElement>) => {
-    setAnchorElLanguage((s) => (s ? null : e.currentTarget));
+  const toggleAnchorElLanguage = (event: MouseEvent<HTMLElement>) => {
+    setAnchorElLanguage((prevState) => (prevState ? null : event.currentTarget));
   };
 
   return (
-    <Box sx={boxWrapSX}>
-      <AppBar position="static">
+    <Box sx={boxWrapSX} position="sticky">
+      <AppBar>
         <Toolbar>
           <Box sx={boxToolbarSX}>
             <IconButton size="large" edge="start" color="inherit" onClick={toggleDrawer}>

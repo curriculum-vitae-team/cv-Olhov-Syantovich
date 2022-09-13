@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Menu, MenuItem, Typography } from '@mui/material';
-import { ILanguageMenuProps, languages } from '@molecules/language-menu/language-menu.types';
+import { ILanguageMenuProps } from '@molecules/language-menu/language-menu.types';
+import { languages } from '@molecules/language-menu/language-menu.mock';
 import { menuSX, origin } from '@molecules/language-menu/language-menu.styles';
 
 export const LanguageMenu: FC<ILanguageMenuProps> = ({ anchorElLanguage, toggleAnchorElLanguage }) => {
@@ -14,9 +15,9 @@ export const LanguageMenu: FC<ILanguageMenuProps> = ({ anchorElLanguage, toggleA
       open={!!anchorElLanguage}
       onClose={toggleAnchorElLanguage}
     >
-      {languages.map((lang) => (
-        <MenuItem key={lang} onClick={toggleAnchorElLanguage}>
-          <Typography textAlign="center">{lang}</Typography>
+      {languages.map(({ name }) => (
+        <MenuItem key={name} onClick={toggleAnchorElLanguage}>
+          <Typography textAlign="center">{name}</Typography>
         </MenuItem>
       ))}
     </Menu>

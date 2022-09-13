@@ -4,7 +4,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 export interface ISettingsMenuProps {
   anchorElSettings: null | HTMLElement;
-  toggleAnchorElSettings: (e: MouseEvent<HTMLElement>) => void;
+  toggleAnchorElSettings: (event: MouseEvent<HTMLElement>) => void;
 }
 
 interface ISettingsMenuItem {

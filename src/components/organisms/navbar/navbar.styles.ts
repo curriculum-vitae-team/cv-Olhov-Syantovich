@@ -1,8 +1,5 @@
 export const boxWrapSX = {
-  flexGrow: 1,
-  position: 'sticky',
-  zIndex: 10,
-  top: 0
+  zIndex: 10
 };
 
 export const boxToolbarSX = {
