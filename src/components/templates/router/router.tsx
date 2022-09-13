@@ -9,11 +9,12 @@ import { PathEnum } from '@templates/router/router.types';
 import { ProtectedRoute } from '@templates/router/protected-route';
 import { SignInPage } from '@pages/SignIn';
 import { SignUpPage } from '@pages/SignUp';
+import { Loader } from '@atoms/loader/loader';
 
 export const AppRouter = () => {
   const { user } = useContext(AppContext);
   return (
-    <Suspense fallback={1}>
+    <Suspense fallback={<Loader />}>
       <BrowserRouter>
         <Routes>
           <Route path={PathEnum.employee} element={<ProtectedRoute guards={[authGuard]} />}>

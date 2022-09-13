@@ -8,7 +8,7 @@ import { validateEmailRegExp } from '@utils/regExp';
 import { InputPassword } from '@atoms/input-password';
 import { useSignUp } from '@hooks/useSignUp/useSignUp';
 import { PathEnum } from '@templates/router/router.types';
-import { LinkTo } from '@atoms/link-to';
+import { LinkTo } from '@atoms/link-to/LinkTo';
 
 const SignUp = () => {
   const {
