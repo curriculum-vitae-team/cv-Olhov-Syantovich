@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
-import { MyLinkType } from '@atoms/link-to/LinkTo.types';
-import { Link as LinkRouter } from 'react-router-dom';
-import { Link } from '@mui/material';
+import { Link as LinkRouter, LinkProps as ReactRouterLinkProps } from 'react-router-dom';
+import { Link, LinkProps as MuiLinkProps } from '@mui/material';
 
-export const LinkTo: FC<MyLinkType> = ({ children, to }: MyLinkType) => {
+export const LinkTo: FC<MuiLinkProps & ReactRouterLinkProps> = ({
+  children,
+  to
+}: ReactRouterLinkProps & MuiLinkProps) => {
   return (
     <Link component={LinkRouter} to={`/${to}`}>
       {children}
