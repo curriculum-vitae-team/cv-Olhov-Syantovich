@@ -9,7 +9,7 @@ export interface ICv {
   name: string;
   description: string;
   user?: IUser;
-  projects: IProject[];
+  projects?: IProject[];
   skills: ISkillMastery[];
   languages: ILanguageProficiency[];
   is_template: boolean;
