@@ -50,6 +50,21 @@ export const theme = createTheme({
         }
       }
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+          maxWidth: 600,
+          minWidth: 150,
+          margin: '10px auto',
+          borderRadius: 5,
+          borderColor: 'white',
+          fontFamily: 'Poppins',
+          color: 'rgba(255, 255, 255, 1)',
+          backgroundColor: 'rgb(44, 44, 44)'
+        }
+      }
+    },
     MuiTypography: {
       styleOverrides: {
         root: {
