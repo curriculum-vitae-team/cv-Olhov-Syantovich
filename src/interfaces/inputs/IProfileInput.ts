@@ -1,9 +1,9 @@
-import { ILanguageProficiencyInput } from '@interfaces/inputs/ILanguageProficiencyInput';
-import { ISkillMasteryInput } from '@interfaces/inputs/ISkillMasteryInput';
+import { ILanguageProficiency } from '@interfaces/ILanguageProficiency';
+import { ISkillMastery } from '@interfaces/ISkillMastery';
 
 export interface IProfileInput {
   first_name: string;
   last_name: string;
-  skills: ISkillMasteryInput[];
-  languages: ILanguageProficiencyInput[];
+  skills: ISkillMastery[];
+  languages: ILanguageProficiency[];
 }
