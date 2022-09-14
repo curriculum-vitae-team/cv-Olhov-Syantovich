@@ -17,7 +17,7 @@ export const InputPassword: FC<TextFieldProps> = React.forwardRef((props: TextFi
         endAdornment: (
           <InputAdornment position="end">
             <IconButton aria-label="toggle password visibility" onClick={changeVisibility}>
-              {visible ? <VisibilityOff /> : <Visibility />}
+              {visible ? <Visibility /> : <VisibilityOff />}
             </IconButton>
           </InputAdornment>
         )
