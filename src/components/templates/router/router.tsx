@@ -4,7 +4,7 @@ import { AppContext } from '../app/app.context';
 
 import { authGuard } from '@templates/router/guards/authGuard';
 import { roleGuard } from '@templates/router/guards/roleGuard';
-import { RolesEnum } from '../../../constants';
+import { RolesEnum } from '../../../constants/user-roles.enum';
 import { PathEnum } from '@templates/router/router.types';
 import { ProtectedRoute } from '@templates/router/protected-route';
 import { SignInPage } from '@pages/SignIn';
