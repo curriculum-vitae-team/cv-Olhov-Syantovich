@@ -10,12 +10,14 @@ import { ProtectedRoute } from '@templates/router/protected-route';
 import { SignInPage } from '@pages/SignIn';
 import { SignUpPage } from '@pages/SignUp';
 import { Loader } from '@atoms/loader/loader';
+import { TabsBetweenSign } from '@templates/tabs-between-sign/tabs-between-sign';
 
 export const AppRouter = () => {
   const { user } = useContext(AppContext);
   return (
     <Suspense fallback={<Loader />}>
       <BrowserRouter>
+        {!user && <TabsBetweenSign />}
         <Routes>
           <Route path={PathEnum.employee} element={<ProtectedRoute guards={[authGuard]} />}>
             <Route path="*" element={<></>} />
@@ -28,9 +30,10 @@ export const AppRouter = () => {
           </Route>
           {!user && (
             <>
-              <Route path="signin" element={<SignInPage />} />
+              <Route path={PathEnum.signIn} element={<SignInPage />} />
               {/*SignIn*/}
-              <Route path="signup" element={<SignUpPage />} /> {/*SignUp*/}
+              <Route path={PathEnum.signUp} element={<SignUpPage />} /> {/*SignUp*/}
+              <Route path="*" element={<Navigate to={PathEnum.signIn} replace />} />
             </>
           )}
           <Route path={'/404'} element={<></>} />
