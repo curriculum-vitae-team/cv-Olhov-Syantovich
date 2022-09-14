@@ -1,8 +1,4 @@
-import { ISkill } from '@interfaces/ISkill';
-
-export interface IProject {
-  id: string;
-  created_at: string;
+export interface IProjectInput {
   name: string;
   internal_name?: string;
   description: string;
@@ -10,5 +6,5 @@ export interface IProject {
   start_date: string;
   end_date?: string;
   team_size: number;
-  tech_stack?: ISkill[];
+  skillsIds: string[];
 }
