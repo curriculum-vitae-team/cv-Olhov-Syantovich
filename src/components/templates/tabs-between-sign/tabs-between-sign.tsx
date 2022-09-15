@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Tabs, Tab, AppBar } from '@mui/material';
 import { PathEnum } from '@templates/router/router.types';
 import { Link, Outlet } from 'react-router-dom';
+import { Loader } from '@atoms/loader/loader';
 
 export const TabsBetweenSign = () => {
   const [value, setValue] = React.useState(0);
@@ -18,7 +19,9 @@ export const TabsBetweenSign = () => {
           <Tab label={PathEnum.signUp} component={Link} to={PathEnum.signUp} />
         </Tabs>
       </AppBar>
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
