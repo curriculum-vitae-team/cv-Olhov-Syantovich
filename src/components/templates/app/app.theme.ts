@@ -16,7 +16,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           minWidth: 100,
-          margin: '10px auto',
+          margin: '10px',
           borderRadius: 5,
           borderColor: 'white',
           fontFamily: 'Poppins',
@@ -84,10 +84,10 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: 'rgba(255, 255, 255, 1)',
-          textAlign: 'center',
           fontFamily: 'Poppins'
         },
         h3: {
+          margin: '20px 0',
           fontSize: 32,
           fontWeight: 600
         },
