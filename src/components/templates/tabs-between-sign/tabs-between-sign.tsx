@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Tabs, Tab, AppBar } from '@mui/material';
+import { Tabs, Tab, AppBar } from '@mui/material';
 import { PathEnum } from '@templates/router/router.types';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 export const TabsBetweenSign = () => {
   const [value, setValue] = React.useState(0);
@@ -11,15 +11,14 @@ export const TabsBetweenSign = () => {
   };
 
   return (
-    <AppBar>
-      <Box sx={{ width: '100%', position: 'absolute', top: '200px' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} centered>
-            <Tab label={PathEnum.signIn} component={Link} to={PathEnum.signIn} />
-            <Tab label={PathEnum.signUp} component={Link} to={PathEnum.signUp} />
-          </Tabs>
-        </Box>
-      </Box>
-    </AppBar>
+    <>
+      <AppBar position="fixed">
+        <Tabs value={value} onChange={handleChange} centered>
+          <Tab label={PathEnum.signIn} component={Link} to={PathEnum.signIn} />
+          <Tab label={PathEnum.signUp} component={Link} to={PathEnum.signUp} />
+        </Tabs>
+      </AppBar>
+      <Outlet />
+    </>
   );
 };

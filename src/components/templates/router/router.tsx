@@ -17,7 +17,6 @@ export const AppRouter = () => {
   return (
     <Suspense fallback={<Loader />}>
       <BrowserRouter>
-        {!user && <TabsBetweenSign />}
         <Routes>
           <Route path={PathEnum.employee} element={<ProtectedRoute guards={[authGuard]} />}>
             <Route path="*" element={<></>} />
@@ -30,9 +29,11 @@ export const AppRouter = () => {
           </Route>
           {!user && (
             <>
-              <Route path={PathEnum.signIn} element={<SignInPage />} />
-              {/*SignIn*/}
-              <Route path={PathEnum.signUp} element={<SignUpPage />} /> {/*SignUp*/}
+              <Route element={<TabsBetweenSign />}>
+                <Route path={PathEnum.signIn} element={<SignInPage />} />
+                <Route path={PathEnum.signUp} element={<SignUpPage />} />
+              </Route>
+
               <Route path="*" element={<Navigate to={PathEnum.signIn} replace />} />
             </>
           )}
