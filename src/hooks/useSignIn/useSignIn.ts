@@ -17,6 +17,7 @@ export const useSignIn = () => {
     if (data && setToken && setUser) {
       setUser(data.login.user);
       setToken(data.login.access_token);
+      localStorage.setItem('token', data.login.access_token);
       navigate(`/${PathEnum.employee}`);
     }
   }, [data, error]);
