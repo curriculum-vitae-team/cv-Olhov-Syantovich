@@ -27,7 +27,7 @@ const SignIn = () => {
           required
           label="Email"
           {...register('email', {
-            required: 'Email can not be epmty',
+            required: 'Email can not be empty',
             pattern: {
               value: validateEmailRegExp,
               message: 'Incorrect email'

@@ -1,5 +1,6 @@
 export const buttonFullWidthSX = {
   width: '100%',
   maxWidth: 600,
-  backgroundColor: 'rgb(44, 44, 44)'
+  backgroundColor: 'rgb(44, 44, 44)',
+  margin: '10px 0'
 };

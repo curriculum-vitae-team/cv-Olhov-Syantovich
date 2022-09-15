@@ -6,7 +6,6 @@ import { AppContext } from '@templates/app/app.context';
 import { IUser } from '@interfaces/IUser';
 import { ApolloProvider } from '@apollo/client';
 import client from '@api/index';
-import { EmployeeDetails } from '@pages/EmployeeDetails';
 
 export const App = () => {
   const [token, setToken] = useState<string>();
@@ -17,8 +16,7 @@ export const App = () => {
       <AppContext.Provider value={{ token, setToken, user, setUser }}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <EmployeeDetails />
-          {/*<AppRouter />*/}
+          <AppRouter />
         </ThemeProvider>
       </AppContext.Provider>
     </ApolloProvider>

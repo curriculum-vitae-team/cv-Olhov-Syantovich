@@ -1,1 +1,0 @@
-export { PublicInfoView } from './PublicInfoView';
