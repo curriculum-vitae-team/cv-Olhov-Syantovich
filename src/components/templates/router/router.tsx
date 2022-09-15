@@ -12,6 +12,7 @@ import { SignUpPage } from '@pages/SignUp';
 import { Loader } from '@atoms/loader/loader';
 import { Employees } from '@pages/Employees';
 import { PageWithNavbar } from '@templates/page-with-navbar';
+import { TabsBetweenSign } from '@templates/tabs-between-sign/tabs-between-sign';
 
 export const AppRouter = () => {
   const { user } = useContext(AppContext);
@@ -37,9 +38,12 @@ export const AppRouter = () => {
           </Route>
           {!user && (
             <>
-              <Route path="signin" element={<SignInPage />} />
-              {/*SignIn*/}
-              <Route path="signup" element={<SignUpPage />} /> {/*SignUp*/}
+              <Route element={<TabsBetweenSign />}>
+                <Route path={PathEnum.signIn} element={<SignInPage />} />
+                <Route path={PathEnum.signUp} element={<SignUpPage />} />
+              </Route>
+
+              <Route path="*" element={<Navigate to={PathEnum.signIn} replace />} />
             </>
           )}
           <Route path={'/404'} element={<></>} />

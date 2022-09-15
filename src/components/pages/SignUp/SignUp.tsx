@@ -7,8 +7,6 @@ import { ISignUpDataForm } from '@pages/SignUp/SignUp.interface';
 import { validateEmailRegExp } from '@utils/regExp';
 import { InputPassword } from '@atoms/input-password';
 import { useSignUp } from '@hooks/useSignUp/useSignUp';
-import { PathEnum } from '@templates/router/router.types';
-import { LinkTo } from '@atoms/link-to/LinkTo';
 
 const SignUp = () => {
   const {
@@ -65,7 +63,6 @@ const SignUp = () => {
           Sign Up
         </ButtonFullWidth>
       </form>
-      <LinkTo to={PathEnum.signIn}>Sign In</LinkTo>
     </WrapColumn>
   );
 };

@@ -50,6 +50,14 @@ export const theme = createTheme({
         }
       }
     },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: 'rgba(255, 255, 255, 1)',
+          backgroundColor: 'rgb(44, 44, 44)'
+        }
+      }
+    },
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -62,6 +70,13 @@ export const theme = createTheme({
           fontFamily: 'Poppins',
           color: 'rgba(255, 255, 255, 1)',
           backgroundColor: 'rgb(44, 44, 44)'
+        }
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-input:-webkit-autofill': { '-webkit-box-shadow': '0 0 0 100px rgb(44, 44, 44) inset' }
         }
       }
     },
@@ -136,6 +151,14 @@ export const theme = createTheme({
         root: {
           fontSize: 22,
           fontWeight: 500
+        }
+      }
+    },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          '& .MuiTab-root.Mui-selected': { color: 'white' },
+          '& .MuiTabs-indicator': { backgroundColor: 'white' }
         }
       }
     }
