@@ -6,8 +6,6 @@ import { useForm } from 'react-hook-form';
 import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { validateEmailRegExp } from '@utils/regExp';
 import { InputPassword } from '@atoms/input-password';
-import { LinkTo } from '@atoms/link-to/LinkTo';
-import { PathEnum } from '@templates/router/router.types';
 import { useSignIn } from '@hooks/useSignIn/useSignIn';
 
 const SignIn = () => {
@@ -49,7 +47,6 @@ const SignIn = () => {
           Sign In
         </ButtonFullWidth>
       </form>
-      <LinkTo to={PathEnum.signUp}>Sign Up</LinkTo>
     </WrapColumn>
   );
 };
