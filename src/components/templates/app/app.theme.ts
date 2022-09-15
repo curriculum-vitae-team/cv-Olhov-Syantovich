@@ -111,6 +111,33 @@ export const theme = createTheme({
           color: 'rgba(255, 255, 255, 1)'
         }
       }
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: { color: 'white', backgroundColor: 'rgb(51,50,50)' }
+      }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          color: 'white'
+        }
+      }
+    },
+    MuiTablePagination: {
+      styleOverrides: {
+        root: {
+          color: 'white'
+        }
+      }
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          fontSize: 22,
+          fontWeight: 500
+        }
+      }
     }
   }
 });

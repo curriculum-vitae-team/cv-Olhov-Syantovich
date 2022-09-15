@@ -10,6 +10,8 @@ import { ProtectedRoute } from '@templates/router/protected-route';
 import { SignInPage } from '@pages/SignIn';
 import { SignUpPage } from '@pages/SignUp';
 import { Loader } from '@atoms/loader/loader';
+import { Employees } from '@pages/Employees';
+import { PageWithNavbar } from '@templates/page-with-navbar';
 
 export const AppRouter = () => {
   const { user } = useContext(AppContext);
@@ -18,13 +20,20 @@ export const AppRouter = () => {
       <BrowserRouter>
         <Routes>
           <Route path={PathEnum.employee} element={<ProtectedRoute guards={[authGuard]} />}>
-            <Route path="*" element={<></>} />
+            <Route
+              path=""
+              element={
+                <PageWithNavbar>
+                  <Employees />
+                </PageWithNavbar>
+              }
+            />
           </Route>
           <Route
             path={PathEnum.languages}
             element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}
           >
-            <Route path="*" element={<></>} />
+            <Route path="" element={<></>} />
           </Route>
           {!user && (
             <>
