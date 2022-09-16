@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid, Typography, Box } from '@mui/material';
 import { BoxOfDescription, BoxOfTable, NameOfTable, TitleOfPageSX } from '@pages/Employees/Employees.style';
-import TableEmployees from '@pages/Employees/components/Table/Table';
+import Table from '@pages/Employees/components/Table/Table';
 import { EmployeeHeaderTable } from '@pages/Employees/components/EmployeeHeaderTable/EmployeeHeaderTable';
-import { EmployeeBodyTable } from '@pages/Employees/components/EmployeeBodyTable/EmployeeBodyTable';
+import { EmployeeRowTable } from '@pages/Employees/components/EmployeeBodyTable/EmployeeBodyTable';
 
 const Employees = () => {
   return (
@@ -17,7 +17,7 @@ const Employees = () => {
         </Grid>
       </Grid>
       <Box sx={BoxOfTable}>
-        <TableEmployees TableBody={EmployeeBodyTable} TableHeader={EmployeeHeaderTable} />
+        <Table TableRow={EmployeeRowTable} TableHeader={EmployeeHeaderTable} />
       </Box>
     </>
   );

@@ -161,6 +161,13 @@ export const theme = createTheme({
           '& .MuiTabs-indicator': { backgroundColor: 'white' }
         }
       }
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          color: 'white'
+        }
+      }
     }
   }
 });

@@ -1,14 +1,15 @@
-import { OrderEnum, TableRowType } from '@pages/Employees/components/Table/Table.type';
+import { OrderEnum } from '@pages/Employees/components/Table/Table.type';
+import { ProcessedUsersType } from '@hooks/useGetEmployees/useGetEmployees.type';
 
 export function getComparator(
   order: OrderEnum,
-  orderBy: keyof TableRowType
-): (a: TableRowType, b: TableRowType) => number {
+  orderBy: keyof ProcessedUsersType
+): (a: ProcessedUsersType, b: ProcessedUsersType) => number {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-export function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+export function descendingComparator(a: ProcessedUsersType, b: ProcessedUsersType, orderBy: keyof ProcessedUsersType) {
   if (b[orderBy] === null) {
     return 1;
   }

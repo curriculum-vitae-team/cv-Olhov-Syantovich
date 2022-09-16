@@ -1,16 +1,17 @@
 import React, { FC } from 'react';
+import { TableEmployeeEnum } from '@pages/Employees/Employees.enum';
 
 export type TableEmployeesTypeColumns = {
-  field: string;
   headerName: string;
   sx?: { width?: number; minWidth?: number };
 };
 export type TableRowType = {
-  [key: string]: undefined | string;
   id?: string;
   email?: string;
-  department_name?: string;
-  position_name?: string;
+  department_name?: string | null;
+  position_name?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
 };
 export enum OrderEnum {
   asc = 'asc',
@@ -18,12 +19,12 @@ export enum OrderEnum {
 }
 export type TableContextType = {
   sortBy: string;
-  setSortBy?: React.Dispatch<React.SetStateAction<string>>;
+  setSortBy?: React.Dispatch<React.SetStateAction<TableEmployeeEnum>>;
   order: OrderEnum;
   setOrder?: React.Dispatch<React.SetStateAction<OrderEnum>>;
 };
 export type TableProps = {
-  TableHeader: FC<JSX.Element>;
-  TableBody: FC<JSX.Element>;
+  TableHeader: () => JSX.Element;
+  TableRow: (props: TableRowType) => JSX.Element;
   TableFooter?: FC<JSX.Element>;
 };
