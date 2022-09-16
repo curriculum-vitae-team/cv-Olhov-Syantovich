@@ -28,9 +28,11 @@ export const GET_USER_BY_ID = gql`
         full_name
         skills {
           skill_name
+          mastery
         }
         languages {
           language_name
+          proficiency
         }
       }
       department_name

@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext } from 'react';
 import { PageHeader } from '@molecules/page-header';
 import { PersonalInformation } from '@pages/EmployeeInfo/components/PersonalInformation';
 import { Button, Divider } from '@mui/material';
@@ -6,7 +6,7 @@ import { WrapRow } from '@atoms/wrap-row';
 import { SkillsInfo } from '@pages/EmployeeInfo/components/SkillsInfo';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { GET_USER_BY_ID } from '@api/users/queries';
+import { GET_USER_BY_ID } from '@api/user/queries';
 import { Loader } from '@atoms/loader/loader';
 import { LanguagesInfo } from '@pages/EmployeeInfo/components/LanguagesInfo';
 import { AppContext } from '@templates/app/app.context';
@@ -18,10 +18,6 @@ const EmployeeInfo: FC = () => {
   });
 
   const { user } = useContext(AppContext);
-
-  const [edit, setEdit] = useState<boolean>(true);
-
-  const togglePublic = () => setEdit(!edit);
 
   if (loading) {
     return <Loader />;
@@ -49,9 +45,7 @@ const EmployeeInfo: FC = () => {
 
       {(user?.role === 'ADMIN' || user?.id === data.user.id) && (
         <WrapRow>
-          <Button color="primary" onClick={togglePublic}>
-            Edit
-          </Button>
+          <Button color="primary">Edit</Button>
         </WrapRow>
       )}
     </>
