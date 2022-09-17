@@ -5,7 +5,5 @@ export const RowWrap = styled('div')({
   textAlign: 'center',
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: '20px'
+  justifyContent: 'right'
 });
