@@ -1,30 +1,31 @@
 import React, { FC } from 'react';
-import { TableEmployeeEnum } from '@pages/Employees/Employees.enum';
+import { IUser } from '@interfaces/IUser';
 
 export type TableEmployeesTypeColumns = {
   headerName: string;
   sx?: { width?: number; minWidth?: number };
 };
 export type TableRowType = {
-  id?: string;
-  email?: string;
-  department_name?: string | null;
-  position_name?: string | null;
-  firstName?: string | null;
-  lastName?: string | null;
+  element: IUser;
 };
 export enum OrderEnum {
   asc = 'asc',
   desc = 'desc'
 }
 export type TableContextType = {
-  sortBy: string;
-  setSortBy?: React.Dispatch<React.SetStateAction<TableEmployeeEnum>>;
-  order: OrderEnum;
+  sortBy?: string;
+  setSortBy?: React.Dispatch<React.SetStateAction<string>>;
+  order?: OrderEnum;
   setOrder?: React.Dispatch<React.SetStateAction<OrderEnum>>;
-};
-export type TableProps = {
+} | null;
+export type TableProps<T> = {
   TableHeader: () => JSX.Element;
-  TableRow: (props: TableRowType) => JSX.Element;
+  TableRow: ({ element }: { element: T }) => JSX.Element;
   TableFooter?: FC<JSX.Element>;
+  data?: Array<T>;
+  searchFields: string[];
+  sortFields: string[];
+};
+export type AbstractData = {
+  id: string;
 };

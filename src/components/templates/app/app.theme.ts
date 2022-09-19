@@ -134,8 +134,12 @@ export const theme = createTheme({
     },
     MuiTableCell: {
       styleOverrides: {
+        head: {
+          fontWeight: 'bold',
+          fontSize: 18
+        },
         root: {
-          color: 'white'
+          fontSize: 14
         }
       }
     },

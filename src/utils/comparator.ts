@@ -1,25 +1,24 @@
-import { OrderEnum } from '@pages/Employees/components/Table/Table.type';
-import { ProcessedUsersType } from '@hooks/useGetEmployees/useGetEmployees.type';
+import { findNestedObj } from '@utils/deepSearch';
 
-export function getComparator(
-  order: OrderEnum,
-  orderBy: keyof ProcessedUsersType
-): (a: ProcessedUsersType, b: ProcessedUsersType) => number {
+export function getComparator<T extends object>(order: string, orderBy: string): (a: T, b: T) => number {
   return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
+    ? (a, b) => descendingComparator(findNestedObj(a, orderBy), findNestedObj(b, orderBy), orderBy)
+    : (a, b) => -descendingComparator(findNestedObj(a, orderBy), findNestedObj(b, orderBy), orderBy);
 }
-export function descendingComparator(a: ProcessedUsersType, b: ProcessedUsersType, orderBy: keyof ProcessedUsersType) {
-  if (b[orderBy] === null) {
+export function descendingComparator<T extends object>(a: T, b: T, orderBy: string) {
+  if (orderBy === undefined) {
     return 1;
   }
-  if (a[orderBy] === null) {
+  if (!b[orderBy as keyof typeof b]) {
+    return 1;
+  }
+  if (!a[orderBy as keyof typeof a]) {
     return -1;
   }
-  if (b[orderBy] < a[orderBy]) {
+  if (b[orderBy as keyof typeof b] < a[orderBy as keyof typeof a]) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (b[orderBy as keyof typeof b] > a[orderBy as keyof typeof a]) {
     return 1;
   }
   return 0;
