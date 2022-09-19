@@ -32,6 +32,7 @@ module.exports = {
           ['@api', './src/api'],
           ['@hooks', './src/hooks'],
           ['@interfaces', './src/interfaces'],
+          ['@store', './src/store'],
           ['@utils', './src/utils'],
 
           ['@atoms', './src/components/atoms'],

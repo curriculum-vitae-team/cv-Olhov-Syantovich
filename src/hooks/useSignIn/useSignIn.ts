@@ -1,19 +1,19 @@
 import { useQuery } from '@apollo/client';
-
-import { useContext, useEffect } from 'react';
-import { AppContext } from '@templates/app/app.context';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { LOGIN } from '@api/auth/queries';
+import user from '@store/user';
 
 export const useSignIn = () => {
   const { data, error, loading, refetch } = useQuery(LOGIN);
 
-  const { setToken, setUser } = useContext(AppContext);
   useEffect(() => {
-    if (data && setToken && setUser) {
-      setUser(data.login.user);
-      setToken(data.login.access_token);
+    if (data) {
+      user.setUser(data.login.user);
+      user.setToken(data.login.access_token);
+      localStorage.setItem('user', JSON.stringify(data.login.user));
+      localStorage.setItem('token', JSON.stringify(data.login.access_token));
     }
   }, [data, error]);
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {
