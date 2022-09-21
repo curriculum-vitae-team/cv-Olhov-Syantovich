@@ -12,6 +12,7 @@ export const useSignIn = () => {
   const { setToken, setUser } = useContext(AppContext);
   useEffect(() => {
     if (data && setToken && setUser) {
+      localStorage.setItem('token', data.login.access_token);
       setUser(data.login.user);
       setToken(data.login.access_token);
     }

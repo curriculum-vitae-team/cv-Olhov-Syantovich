@@ -1,14 +1,9 @@
 import React, { FC } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
-import {
-  avatarSX,
-  boxSX,
-  emailSX,
-  wrapSX
-} from '@pages/EmployeeInfo/components/PersonalInformation/PersonalInformation.styles';
-import { PersonalInformationProps } from '@pages/EmployeeInfo/components/PersonalInformation/PersonalInformation.types';
+import { avatarSX, boxSX, emailSX, wrapSX } from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.styles';
+import { PersonalInformationProps } from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.types';
 
-export const PersonalInformation: FC<PersonalInformationProps> = ({ user }) => {
+export const PersonalInfo: FC<PersonalInformationProps> = ({ user }) => {
   return (
     <Box sx={wrapSX}>
       <Avatar sx={avatarSX} src={user.profile.full_name || ''} />
