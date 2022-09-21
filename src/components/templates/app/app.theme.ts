@@ -161,14 +161,6 @@ export const theme = createTheme({
           '& .MuiTabs-indicator': { backgroundColor: 'white' }
         }
       }
-    },
-    MuiSnackbar: {
-      styleOverrides: {
-        root: {
-          position: 'absolute',
-          top: 0
-        }
-      }
     }
   }
 });

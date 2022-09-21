@@ -1,25 +1,27 @@
 import { makeAutoObservable } from 'mobx';
 import { IToast, SeverityEnum } from './ToastsStore.type';
 
-class ToastsStore {
+class ToastsStoreClass {
   freeId: number;
-  toast?: IToast;
+  toasts$: Array<IToast | undefined>;
   delay: number;
 
   constructor(delay: number) {
     this.delay = delay;
-    this.freeId = 1;
+    this.freeId = 0;
+    this.toasts$ = [];
     makeAutoObservable(this);
   }
 
   addToast(severity: SeverityEnum, message: string) {
-    this.toast = { severity, message, id: this.freeId };
+    this.toasts$[this.freeId] = { severity, message, id: this.freeId };
+    const id = this.freeId;
+    setTimeout(() => this.closeId(id), this.delay);
     this.freeId++;
-    setTimeout(() => this.closeId(this.freeId), this.delay);
   }
   closeId(id: number) {
-    console.log('close', this.toast && this.toast.id === id ? undefined : this.toast);
-    this.toast = this.toast && this.toast.id === id ? undefined : this.toast;
+    console.log(id);
+    this.toasts$[id] = undefined;
   }
 }
-export default new ToastsStore(2000);
+export const ToastStore = new ToastsStoreClass(2000);

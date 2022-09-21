@@ -7,7 +7,7 @@ import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { LOGIN } from '@api/auth/queries';
 import { useNavigate } from 'react-router-dom';
 import { PathEnum } from '@templates/router/router.types';
-import ToastsStore from '../../store/toastStore/ToastsStore';
+import { ToastStore } from '../../store/toastStore/ToastsStore';
 import { SeverityEnum } from '../../store/toastStore/ToastsStore.type';
 
 export const useSignIn = () => {
@@ -18,6 +18,7 @@ export const useSignIn = () => {
     if (data && setToken && setUser) {
       setUser(data.login.user);
       setToken(data.login.access_token);
+      ToastStore.addToast(SeverityEnum.success, 'Success');
       localStorage.setItem('token', data.login.access_token);
       navigate(`/${PathEnum.employees}/${data.login.user.id}`);
     }
@@ -25,7 +26,7 @@ export const useSignIn = () => {
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {
     refetch({
       auth: { email, password }
-    }).catch((error) => ToastsStore.addToast(SeverityEnum.error, error.message));
+    }).catch((error) => ToastStore.addToast(SeverityEnum.error, error.message));
   };
   return { onSubmit, error, loading };
 };
