@@ -13,6 +13,9 @@ import { Loader } from '@atoms/loader/loader';
 import { Employees } from '@pages/Employees';
 import { PageWithNavbar } from '@templates/page-with-navbar';
 import { TabsBetweenSign } from '@templates/tabs-between-sign/tabs-between-sign';
+import { EmployeeDetailsTabs } from '@templates/employee-details-tabs/employee-details-tabs';
+import { EmployeeCv } from '@pages/EmployeeCv';
+import { EmployeeInfo } from '@pages/EmployeeInfo';
 
 export const AppRouter = () => {
   const { user } = useContext(AppContext);
@@ -20,6 +23,7 @@ export const AppRouter = () => {
     <Suspense fallback={<Loader />}>
       <BrowserRouter>
         <Routes>
+
           <Route path={PathEnum.employee} element={<ProtectedRoute guards={[authGuard]} />}>
             <Route
               path=""
@@ -36,6 +40,12 @@ export const AppRouter = () => {
           >
             <Route path="" element={<></>} />
           </Route>
+
+          <Route element={<EmployeeDetailsTabs />}>
+            <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
+            <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
+          </Route>
+
           {!user && (
             <>
               <Route element={<TabsBetweenSign />}>
