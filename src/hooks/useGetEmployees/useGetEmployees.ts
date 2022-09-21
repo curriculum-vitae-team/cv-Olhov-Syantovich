@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { GET_USERS } from '@api/users/queries';
+import { GET_USERS } from '@api/user/queries';
 import { IUser } from '@interfaces/IUser';
 
 export const useGetEmployees = () => {

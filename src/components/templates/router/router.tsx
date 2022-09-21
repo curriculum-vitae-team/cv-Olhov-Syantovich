@@ -23,8 +23,7 @@ export const AppRouter = () => {
     <Suspense fallback={<Loader />}>
       <BrowserRouter>
         <Routes>
-
-          <Route path={PathEnum.employee} element={<ProtectedRoute guards={[authGuard]} />}>
+          <Route path={PathEnum.employees} element={<ProtectedRoute guards={[authGuard]} />}>
             <Route
               path=""
               element={

@@ -18,7 +18,7 @@ export const useSignIn = () => {
       setUser(data.login.user);
       setToken(data.login.access_token);
       localStorage.setItem('token', data.login.access_token);
-      navigate(`/${PathEnum.employee}`);
+      navigate(`/${PathEnum.employees}`);
     }
   }, [data, error]);
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {

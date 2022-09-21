@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@mui/material';
-import { BoxOfDescription, BoxOfTable, NameOfTable, TitleOfPageSX } from '@pages/Employees/Employees.style';
+import { Box } from '@mui/material';
+import { BoxOfTable } from '@pages/Employees/Employees.style';
 import Table from '@pages/Employees/components/Table/Table';
 import { EmployeeHeaderTable } from '@pages/Employees/components/EmployeeHeaderTable/EmployeeHeaderTable';
 import { EmployeeRowTable } from '@pages/Employees/components/EmployeeRowTable/EmployeeRowTable';
@@ -9,19 +9,13 @@ import { TableEmployeeEnum } from '@pages/Employees/Employees.enum';
 import { searchEmployee } from '@pages/Employees/utils/search-employee';
 import { getComparatorEmployee } from '@pages/Employees/utils/comorator-employees';
 import { Loader } from '@atoms/loader/loader';
+import { PageHeader } from '@molecules/page-header';
 
 const Employees = () => {
   const { data, loading } = useGetEmployees();
   return (
     <>
-      <Grid container sx={BoxOfDescription} flexDirection="column" justifyContent="space-between">
-        <Grid item>
-          <Typography sx={TitleOfPageSX}>Employee</Typography>
-        </Grid>
-        <Grid item>
-          <Typography sx={NameOfTable}>Employee list</Typography>
-        </Grid>
-      </Grid>
+      <PageHeader header={'Employee'} description={'Employee list'} />
       <Box sx={BoxOfTable}>
         {loading ? (
           <Loader />

@@ -17,7 +17,7 @@ export const useSignUp = () => {
       setUser(data.signup.user);
       setToken(data.signup.access_token);
       localStorage.setItem('token', data.signup.access_token);
-      navigate(`/${PathEnum.employee}`);
+      navigate(`/${PathEnum.employees}`);
     }
   }, [data, error]);
   const onSubmit: SubmitHandler<ISignUpDataForm> = ({ email, password }) => {
