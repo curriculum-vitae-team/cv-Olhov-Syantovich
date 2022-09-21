@@ -13,7 +13,7 @@ import { TabsBetweenSign } from '@templates/tabs-between-sign/tabs-between-sign'
 import { EmployeeDetailsTabs } from '@templates/employee-details-tabs/employee-details-tabs';
 import { EmployeeCv } from '@pages/EmployeeCv';
 import { EmployeeInfo } from '@pages/EmployeeInfo';
-import user from '@store/user';
+import { userStore } from '@store/UserStore';
 
 export const AppRouter = () => {
   return (
@@ -35,7 +35,7 @@ export const AppRouter = () => {
             <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
           </Route>
 
-          {!user.user && (
+          {!userStore.user$ && (
             <>
               <Route element={<TabsBetweenSign />}>
                 <Route path={PathEnum.signIn} element={<SignInPage />} />

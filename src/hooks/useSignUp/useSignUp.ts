@@ -3,15 +3,15 @@ import { SIGNUP } from '@api/auth/mutations';
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { ISignUpDataForm } from '@pages/SignUp/SignUp.interface';
-import user from '@store/user';
+import { userStore } from '@store/UserStore';
 
 export const useSignUp = () => {
   const [signUp, { data, error, loading }] = useMutation(SIGNUP);
 
   useEffect(() => {
     if (data) {
-      user.setUser(data.login.user);
-      user.setToken(data.login.access_token);
+      userStore.setUser(data.login.user);
+      userStore.setToken(data.login.access_token);
       localStorage.setItem('user', JSON.stringify(data.login.user));
       localStorage.setItem('token', JSON.stringify(data.login.access_token));
     }

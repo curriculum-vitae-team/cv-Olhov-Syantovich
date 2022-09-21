@@ -10,7 +10,7 @@ import { NavigationMenu } from '@molecules/navigation-menu';
 import { SettingsMenu } from '@molecules/settings-menu';
 import { LanguageMenu } from '@molecules/language-menu';
 import { boxToolbarSX, boxWrapSX, getAnchor, menuItemSX, typographySX } from '@organisms/navbar/navbar.styles';
-import user from '@store/user';
+import { userStore } from '@store/UserStore';
 
 export const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -40,7 +40,7 @@ export const Navbar = () => {
           <MenuItem sx={menuItemSX} onClick={toggleAnchorElSettings}>
             <Avatar src="https://as2.ftcdn.net/v2/jpg/01/42/39/07/1000_F_142390782_d2lz4ZJFf5zlgdzPZyL3AmOY6OoHwlaP.jpg" />
             <Typography sx={typographySX}>
-              {user.user?.profile?.full_name ? user.user?.profile?.full_name : user.user?.email}
+              {userStore.user$?.profile?.full_name ? userStore.user$?.profile?.full_name : userStore.user$?.email}
             </Typography>
           </MenuItem>
 

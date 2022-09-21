@@ -9,7 +9,7 @@ import { useQuery } from '@apollo/client';
 import { GET_USER_BY_ID } from '@api/user/queries';
 import { Loader } from '@atoms/loader/loader';
 import { LanguagesInfo } from '@pages/EmployeeInfo/components/LanguagesInfo';
-import user from '@store/user';
+import { userStore } from '@store/UserStore';
 
 const EmployeeInfo: FC = () => {
   const { id } = useParams();
@@ -41,7 +41,7 @@ const EmployeeInfo: FC = () => {
         </>
       )}
 
-      {(user.user?.role === 'admin' || user.user?.id === data.user.id) && (
+      {(userStore.user$?.role === 'admin' || userStore.user$?.id === data.user.id) && (
         <WrapRow>
           <Button color="primary">Edit</Button>
         </WrapRow>

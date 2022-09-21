@@ -1,9 +1,9 @@
 import { PathEnum } from '@templates/router/router.types';
-import user from '@store/user';
+import { userStore } from '@store/UserStore';
 
 export const roleGuard = (role: string) => {
   return function () {
-    if (user.user?.role !== role) {
+    if (userStore.user$?.role !== role) {
       return PathEnum.notFound;
     }
     return '';

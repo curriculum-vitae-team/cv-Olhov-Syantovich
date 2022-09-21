@@ -1,8 +1,8 @@
 import { PathEnum } from '@templates/router/router.types';
-import user from '@store/user';
+import { userStore } from '@store/UserStore';
 
 export const authGuard = () => {
-  if (!user.token) {
+  if (!userStore.token$) {
     return PathEnum.signIn;
   }
   return '';
