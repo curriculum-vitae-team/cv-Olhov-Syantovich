@@ -17,15 +17,19 @@ export type TableContextType = {
   setSortBy?: React.Dispatch<React.SetStateAction<string>>;
   order?: OrderEnum;
   setOrder?: React.Dispatch<React.SetStateAction<OrderEnum>>;
+  sortFields: string[];
 } | null;
-export type TableProps<T> = {
+export type TableProps = {
   TableHeader: () => JSX.Element;
-  TableRow: ({ element }: { element: T }) => JSX.Element;
+  TableRow: ({ element }: TableRowType) => JSX.Element;
   TableFooter?: FC<JSX.Element>;
-  data?: Array<T>;
+  data?: Array<IUser>;
   searchFields: string[];
   sortFields: string[];
+  searchFunction: (searchFields: string[], search: string) => (user: IUser) => boolean;
+  compareFunction: (order: string, orderBy: string) => (a: IUser, b: IUser) => number;
 };
 export type AbstractData = {
   id: string;
+  [key: string]: unknown;
 };

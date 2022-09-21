@@ -5,6 +5,7 @@ const defaultValue: TableContextType = {
   sortBy: '',
   setSortBy: undefined,
   order: OrderEnum.asc,
-  setOrder: undefined
+  setOrder: undefined,
+  sortFields: []
 };
 export const TableContext = createContext(defaultValue);

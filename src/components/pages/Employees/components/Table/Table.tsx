@@ -1,12 +1,20 @@
 import React, { useState, memo } from 'react';
 import { TableContainer, Table as TableMui, Paper, TableBody } from '@mui/material';
-import { AbstractData, OrderEnum, TableProps } from '@pages/Employees/components/Table/Table.type';
-import { Loader } from '@atoms/loader/loader';
-import { getComparator } from '@utils/comparator';
+import { OrderEnum, TableProps } from '@pages/Employees/components/Table/Table.type';
 import { TableContext } from '@pages/Employees/components/Table/Table.context';
 import { SearchInput } from '@atoms/search-input/search-input';
+import { IUser } from '@interfaces/IUser';
 
-const Table = <T extends AbstractData>({ TableHeader, TableRow, TableFooter, data = [] }: TableProps<T>) => {
+const Table = ({
+  TableHeader,
+  TableRow,
+  TableFooter,
+  data = [],
+  sortFields,
+  searchFields,
+  searchFunction,
+  compareFunction
+}: TableProps) => {
   const [sortBy, setSortBy] = useState<string>('');
   const [order, setOrder] = useState<OrderEnum>(OrderEnum.asc);
   const [search, setSearch] = useState('');
@@ -15,31 +23,21 @@ const Table = <T extends AbstractData>({ TableHeader, TableRow, TableFooter, dat
     setSearch(event.target.value);
   };
   return (
-    <TableContext.Provider value={{ sortBy, setSortBy, order, setOrder }}>
+    <TableContext.Provider value={{ sortBy, setSortBy, order, setOrder, sortFields }}>
       <TableContainer component={Paper}>
         <SearchInput onChange={handlerOnChangeSearch} />
         <TableMui sx={{ minWidth: 500 }} aria-label="custom pagination table">
           {TableHeader && <TableHeader />}
-          {!data?.length ? (
-            <Loader />
-          ) : (
+          {
             <TableBody>
               {data
-                ?.filter((user) => {
-                  for (const value of Object.values(user)) {
-                    if (value.toString().toLowerCase().includes(search.toLowerCase())) {
-                      return true;
-                    }
-                  }
-                  return false;
-                })
-                .sort(getComparator(order, sortBy))
-                .map((e) => {
+                ?.filter(searchFunction(searchFields, search))
+                .sort(compareFunction(order, sortBy))
+                .map((e: IUser) => {
                   return <TableRow key={e.id} element={e} />;
                 })}
             </TableBody>
-          )}
-
+          }
           {TableFooter && <TableFooter key={'footer'} props={{}} type={'footer'} />}
         </TableMui>
       </TableContainer>

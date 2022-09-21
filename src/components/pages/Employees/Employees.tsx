@@ -6,9 +6,12 @@ import { EmployeeHeaderTable } from '@pages/Employees/components/EmployeeHeaderT
 import { EmployeeRowTable } from '@pages/Employees/components/EmployeeRowTable/EmployeeRowTable';
 import { useGetEmployees } from '@hooks/useGetEmployees/useGetEmployees';
 import { TableEmployeeEnum } from '@pages/Employees/Employees.enum';
+import { searchEmployee } from '@pages/Employees/utils/search-employee';
+import { getComparatorEmployee } from '@pages/Employees/utils/comorator-employees';
+import { Loader } from '@atoms/loader/loader';
 
 const Employees = () => {
-  const { data } = useGetEmployees();
+  const { data, loading } = useGetEmployees();
   return (
     <>
       <Grid container sx={BoxOfDescription} flexDirection="column" justifyContent="space-between">
@@ -20,13 +23,19 @@ const Employees = () => {
         </Grid>
       </Grid>
       <Box sx={BoxOfTable}>
-        <Table
-          TableRow={EmployeeRowTable}
-          TableHeader={EmployeeHeaderTable}
-          data={data.users}
-          searchFields={[TableEmployeeEnum.firstName, TableEmployeeEnum.lastName]}
-          sortFields={[TableEmployeeEnum.email, TableEmployeeEnum.firstName, TableEmployeeEnum.lastName]}
-        />
+        {loading ? (
+          <Loader />
+        ) : (
+          <Table
+            TableRow={EmployeeRowTable}
+            TableHeader={EmployeeHeaderTable}
+            data={data.users.map((user) => ({ ...user }))}
+            searchFields={[TableEmployeeEnum.firstName, TableEmployeeEnum.lastName]}
+            sortFields={[TableEmployeeEnum.email, TableEmployeeEnum.firstName, TableEmployeeEnum.lastName]}
+            searchFunction={searchEmployee}
+            compareFunction={getComparatorEmployee}
+          />
+        )}
       </Box>
     </>
   );
