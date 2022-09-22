@@ -1,19 +1,21 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 import { EmployeeDialogProps } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.types';
 import { Avatar, Box, Divider } from '@mui/material';
 import { avatarSX, boxSX } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.styles';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_DEPARTMENTS } from '@api/department/queries';
 import { Loader } from '@atoms/loader/loader';
 import { GET_SKILLS } from '@api/skill/queries';
 import { GET_POSITIONS } from '@api/position/queries';
 import { GET_LANGUAGES } from '@api/language/queries';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { IUpdateUserInput } from '@interfaces/inputs/IUpdateUserInput';
 import { PersonalInfoForm } from '@pages/EmployeeInfo/components/Form/PersonalInfoForm';
 import { FullScreenDialog } from '@templates/FullScreenDialog';
 import { SkillsForm } from '@pages/EmployeeInfo/components/Form/SkillsForm';
 import { LanguagesForm } from '@pages/EmployeeInfo/components/Form/LanguagesForm';
+import { ISkillMastery } from '@interfaces/ISkillMastery';
+import { ILanguageProficiency } from '@interfaces/ILanguageProficiency';
+import { UPDATE_USER } from '@api/user/mutations';
 
 export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user, dialogOpen, closeDialog }) => {
   const { loading: loadingDepartments, error: errorDepartments, data: departmentsData } = useQuery(GET_DEPARTMENTS);
@@ -21,19 +23,30 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user, dialogOpen, clos
   const { loading: loadingPositions, error: errorPositions, data: positionsData } = useQuery(GET_POSITIONS);
   const { loading: loadingLanguages, error: errorLanguages, data: languagesData } = useQuery(GET_LANGUAGES);
 
-  const { register, handleSubmit } = useForm<IUpdateUserInput>({
-    defaultValues: {
-      profile: {
-        first_name: user.profile.first_name,
-        last_name: user.profile.last_name,
-        skills: user.profile.skills,
-        languages: user.profile.languages
-      }
-    }
-  });
+  const [updateUser, { data, error, loading }] = useMutation(UPDATE_USER);
 
-  const check: SubmitHandler<IUpdateUserInput> = (obj) => {
-    console.log(obj);
+  const [skills, setSkills] = useState<ISkillMastery[]>(user.profile.skills);
+  const [languages, setLanguages] = useState<ILanguageProficiency[]>(user.profile.languages);
+  const [personalInfo, setPersonalInfo] = useState<IUpdateUserInput>({
+    profile: {
+      first_name: user.profile.first_name,
+      last_name: user.profile.last_name,
+      skills,
+      languages
+    },
+    departmentId: user.department_name,
+    positionId: user.position_name
+  } as IUpdateUserInput);
+
+  const check = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(personalInfo);
+    // updateUser({
+    //   variables: {
+    //     id: '146',
+    //     user: { ...personalInfo, departmentId: '1', positionId: '2' } as IUpdateUserInput
+    //   }
+    // });
   };
 
   if (loadingDepartments || loadingSkills || loadingPositions || loadingLanguages) {
@@ -41,20 +54,24 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user, dialogOpen, clos
   }
 
   return (
-    <form onSubmit={handleSubmit(check)}>
+    <form onSubmit={check}>
       <FullScreenDialog dialogOpen={dialogOpen} closeDialog={closeDialog} isUpdate={true} header={'Employee'}>
         <Box sx={boxSX}>
           <Avatar sx={avatarSX} src={user.profile.full_name || ''} />
           <PersonalInfoForm
-            register={register}
+            personalInfo={personalInfo}
+            setPersonalInfo={setPersonalInfo}
             departments={departmentsData.departments}
             positions={positionsData.positions}
-            user={user}
           />
           <Divider />
-          <SkillsForm register={register} skills={skillsData.skills} user={user} />
+          <SkillsForm skills={skills} setSkills={setSkills} allSkills={skillsData.skills} />
           <Divider />
-          <LanguagesForm register={register} languages={languagesData.languages} user={user} />
+          <LanguagesForm
+            languages={languages}
+            setLanguages={setLanguages}
+            allAvailableLanguages={languagesData.languages}
+          />
         </Box>
       </FullScreenDialog>
     </form>

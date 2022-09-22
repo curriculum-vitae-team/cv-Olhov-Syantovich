@@ -1,10 +1,9 @@
-import { UseFormRegister } from 'react-hook-form';
-import { IUpdateUserInput } from '@interfaces/inputs/IUpdateUserInput';
-import { IUser } from '@interfaces/IUser';
 import { ILanguage } from '@interfaces/ILanguage';
+import { Dispatch, SetStateAction } from 'react';
+import { ILanguageProficiency } from '@interfaces/ILanguageProficiency';
 
 export type LanguagesFormProps = {
-  register: UseFormRegister<IUpdateUserInput>;
-  languages: ILanguage[];
-  user: IUser;
+  languages: ILanguageProficiency[];
+  setLanguages: Dispatch<SetStateAction<ILanguageProficiency[]>>;
+  allAvailableLanguages: ILanguage[];
 };

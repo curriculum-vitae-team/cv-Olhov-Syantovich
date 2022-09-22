@@ -30,6 +30,7 @@ module.exports = {
       alias: {
         map: [
           ['@api', './src/api'],
+          ['@constants', './src/constants'],
           ['@hooks', './src/hooks'],
           ['@interfaces', './src/interfaces'],
           ['@utils', './src/utils'],

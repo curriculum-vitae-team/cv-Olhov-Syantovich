@@ -5,6 +5,7 @@ module.exports = {
   webpack: {
     alias: {
       '@api': path.resolve(__dirname, 'src/api'),
+      '@constants': path.resolve(__dirname, 'src/constants'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@interfaces': path.resolve(__dirname, 'src/interfaces'),
       '@utils': path.resolve(__dirname, 'src/utils'),

@@ -1,7 +1,9 @@
 import { styled } from '@mui/material/styles';
 
 export const wrapSX = {
-  padding: '0 10px 20px'
+  padding: '0 10px 20px',
+  display: 'flex',
+  flexDirection: 'column'
 };
 
 export const titleSX = {
@@ -25,4 +27,8 @@ export const iconSX = {
   mt: '23px',
   width: '30px',
   height: '30px'
+};
+
+export const buttonSX = {
+  margin: 'auto'
 };

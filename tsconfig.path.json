@@ -3,6 +3,7 @@
     "baseUrl": "./src",
     "paths": {
       "@api/*": ["api/*"],
+      "@constants/*": ["constants/*"],
       "@hooks/*": ["hooks/*"],
       "@interfaces/*": ["interfaces/*"],
       "@utils/*": ["utils/*"],
