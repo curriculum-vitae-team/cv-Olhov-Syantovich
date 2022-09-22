@@ -1,26 +1,25 @@
 import { useQuery } from '@apollo/client';
-
-import { useContext, useEffect } from 'react';
-import { AppContext } from '@templates/app/app.context';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { LOGIN } from '@api/auth/queries';
+import { userStore } from '@store/UserStore';
+import { ToastStore } from '@store/toastStore/ToastsStore';
+import { SeverityEnum } from '@store/toastStore/ToastsStore.type';
 import { useNavigate } from 'react-router-dom';
 import { PathEnum } from '@templates/router/router.types';
-import { ToastStore } from '../../store/toastStore/ToastsStore';
-import { SeverityEnum } from '../../store/toastStore/ToastsStore.type';
 
 export const useSignIn = () => {
   const { data, error, loading, refetch } = useQuery(LOGIN);
   const navigate = useNavigate();
-  const { setToken, setUser } = useContext(AppContext);
+
   useEffect(() => {
-    if (data && setToken && setUser) {
-      setUser(data.login.user);
-      setToken(data.login.access_token);
-      ToastStore.addToast(SeverityEnum.success, 'Success');
-      localStorage.setItem('token', data.login.access_token);
-      navigate(`/${PathEnum.employees}/${data.login.user.id}`);
+    if (data) {
+      userStore.setUser(data.login.user);
+      userStore.setToken(data.login.access_token);
+      localStorage.setItem('user', JSON.stringify(data.login.user));
+      localStorage.setItem('token', JSON.stringify(data.login.access_token));
+      navigate(`/${PathEnum.employees}`);
     }
   }, [data, error]);
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {

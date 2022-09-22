@@ -1,6 +1,5 @@
-import React, { useContext, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
-import { AppContext } from '../app/app.context';
 
 import { authGuard } from '@templates/router/guards/authGuard';
 import { roleGuard } from '@templates/router/guards/roleGuard';
@@ -15,9 +14,9 @@ import { EmployeeDetailsTabs } from '@templates/employee-details-tabs/employee-d
 import { EmployeeCv } from '@pages/EmployeeCv';
 import { EmployeeInfo } from '@pages/EmployeeInfo';
 import { CustomizedToast } from '@templates/Toasts/toasts';
+import { userStore } from '@store/UserStore';
 
 export const AppRouter = () => {
-  const { user } = useContext(AppContext);
   return (
     <Suspense fallback={<Loader />}>
       <BrowserRouter>
@@ -38,13 +37,12 @@ export const AppRouter = () => {
               <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
             </Route>
 
-            {!user && (
+            {!userStore.user$ && (
               <>
                 <Route element={<TabsBetweenSign />}>
                   <Route path={PathEnum.signIn} element={<SignInPage />} />
                   <Route path={PathEnum.signUp} element={<SignUpPage />} />
                 </Route>
-
                 <Route path="*" element={<Navigate to={PathEnum.signIn} replace />} />
               </>
             )}
