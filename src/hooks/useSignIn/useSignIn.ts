@@ -4,8 +4,6 @@ import { SubmitHandler } from 'react-hook-form';
 import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { LOGIN } from '@api/auth/queries';
 import { userStore } from '@store/UserStore';
-import { ToastStore } from '@store/toastStore/ToastsStore';
-import { SeverityEnum } from '@store/toastStore/ToastsStore.type';
 import { useNavigate } from 'react-router-dom';
 import { PathEnum } from '@templates/router/router.types';
 
@@ -25,7 +23,7 @@ export const useSignIn = () => {
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {
     refetch({
       auth: { email, password }
-    }).catch((error) => ToastStore.addToast(SeverityEnum.error, error.message));
+    });
   };
   return { onSubmit, error, loading };
 };

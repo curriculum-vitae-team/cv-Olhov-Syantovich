@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeObservable, observable, action } from 'mobx';
 import { IToast, SeverityEnum } from './ToastsStore.type';
 
 class ToastsStoreClass {
@@ -10,7 +10,7 @@ class ToastsStoreClass {
     this.delay = delay;
     this.freeId = 0;
     this.toasts$ = [];
-    makeAutoObservable(this);
+    makeObservable(this, { toasts$: observable, addToast: action, closeId: action });
   }
 
   addToast(severity: SeverityEnum, message: string) {
@@ -20,7 +20,6 @@ class ToastsStoreClass {
     this.freeId++;
   }
   closeId(id: number) {
-    console.log(id);
     this.toasts$[id] = undefined;
   }
 }
