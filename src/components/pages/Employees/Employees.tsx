@@ -1,38 +1,30 @@
-import React from 'react';
-import { Box } from '@mui/material';
-import { BoxOfTable } from '@pages/Employees/Employees.style';
-import Table from '@pages/Employees/components/Table/Table';
-import { EmployeeHeaderTable } from '@pages/Employees/components/EmployeeHeaderTable/EmployeeHeaderTable';
-import { EmployeeRowTable } from '@pages/Employees/components/EmployeeRowTable/EmployeeRowTable';
+import { memo } from 'react';
+import { Container } from '@mui/material';
 import { useGetEmployees } from '@hooks/useGetEmployees/useGetEmployees';
-import { TableEmployeeEnum } from '@pages/Employees/Employees.enum';
-import { searchEmployee } from '@pages/Employees/utils/search-employee';
-import { getComparatorEmployee } from '@pages/Employees/utils/comorator-employees';
-import { Loader } from '@atoms/loader/loader';
 import { PageHeader } from '@molecules/page-header';
+import { createTable } from '@templates/table';
+import { IUser } from '@interfaces/IUser';
+import { UsersTableHead } from './components/users-table-head';
+import { UsersTableRow } from './components/users-table-row';
+
+const Table = createTable<IUser>();
 
 const Employees = () => {
   const { data, loading } = useGetEmployees();
+
   return (
-    <>
-      <PageHeader header={'Employee'} description={'Employee list'} />
-      <Box sx={BoxOfTable}>
-        {loading ? (
-          <Loader />
-        ) : (
-          <Table
-            TableRow={EmployeeRowTable}
-            TableHeader={EmployeeHeaderTable}
-            data={data.users.map((user) => ({ ...user }))}
-            searchFields={[TableEmployeeEnum.firstName, TableEmployeeEnum.lastName]}
-            sortFields={[TableEmployeeEnum.email, TableEmployeeEnum.firstName, TableEmployeeEnum.lastName]}
-            searchFunction={searchEmployee}
-            compareFunction={getComparatorEmployee}
-          />
-        )}
-      </Box>
-    </>
+    <Container maxWidth="xl">
+      <PageHeader header="Employee" description="Employee list" />
+      <Table
+        items={data.users}
+        loading={loading}
+        searchKeys={['profile.full_name', 'email', 'department_name', 'position_name']}
+        sortByKey="department_name"
+        TableHeadComponent={UsersTableHead}
+        TableRowComponent={UsersTableRow}
+      />
+    </Container>
   );
 };
 
-export default Employees;
+export default memo(Employees);

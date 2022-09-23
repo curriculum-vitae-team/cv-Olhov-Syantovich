@@ -4,12 +4,13 @@ module.exports = {
     es2021: true
   },
   extends: [
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'prettier',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript'
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:react/jsx-runtime'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -20,28 +21,15 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: ['react', '@typescript-eslint', 'react-hooks', 'prettier'],
+  plugins: ['prettier', 'import', '@typescript-eslint'],
   rules: {
-    'prettier/prettier': ['error'],
-    'no-console': 'off'
+    'prettier/prettier': ['warn'],
+    'no-console': 'warn',
+    '@typescript-eslint/no-empty-function': 'warn'
   },
   settings: {
     'import/resolver': {
-      alias: {
-        map: [
-          ['@api', './src/api'],
-          ['@hooks', './src/hooks'],
-          ['@interfaces', './src/interfaces'],
-          ['@utils', './src/utils'],
-
-          ['@atoms', './src/components/atoms'],
-          ['@molecules', './src/components/molecules'],
-          ['@organisms', './src/components/organisms'],
-          ['@templates', './src/components/templates'],
-          ['@pages', './src/components/pages']
-        ],
-        extensions: ['.ts', '.tsx']
-      }
+      typescript: {}
     }
   }
 };

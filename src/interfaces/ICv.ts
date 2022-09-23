@@ -8,7 +8,7 @@ export interface ICv {
   created_at: string;
   name: string;
   description: string;
-  user?: IUser;
+  user?: Omit<IUser, 'cvs'>;
   projects?: IProject[];
   skills: ISkillMastery[];
   languages: ILanguageProficiency[];
