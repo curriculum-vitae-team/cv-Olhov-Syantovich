@@ -8,58 +8,43 @@ import {
   titleSX,
   wrapSX
 } from '@pages/EmployeeInfo/components/Form/SkillsForm/SkillForm.styles';
-import { ISkillMastery } from '@interfaces/ISkillMastery';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { skillMastery } from '@constants/skillMasteries';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import { ISkillMastery } from '@interfaces/ISkillMastery';
 
-export const SkillsForm: FC<SkillsFormProps> = ({ skills, setSkills, allSkills }) => {
-  const availableSkills = useMemo(
-    () =>
-      [...allSkills.filter((skill) => !skills.find((item) => item.skill_name === skill.name))].reduce(
-        (res, value) => [...res, value.name],
-        [] as string[]
-      ),
-    [allSkills, skills]
-  );
+export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
+  const { control, register, getValues } = useFormContext();
+  const { fields, append, remove, update } = useFieldArray({ control, name: 'profile.skills' });
+  const availableSkills = useMemo(() => {
+    const currSkills = getValues('profile.skills');
+    return [
+      ...allSkills.filter((skill) => !currSkills.find((item: ISkillMastery) => item.skill_name === skill.name))
+    ].reduce((res, value) => [...res, value.name], [] as string[]);
+  }, [allSkills, getValues('profile.skills')]);
 
-  const handleSkillChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) =>
-    setSkills(
-      skills.reduce(
-        (res, skill, id) => [...res, id === index ? { ...skill, skill_name: event.target.value } : skill],
-        [] as ISkillMastery[]
-      )
-    );
+  const handleSkillAdd = () => append({ skill_name: availableSkills[0], mastery: skillMastery[0] });
 
-  const handleMasteryChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) =>
-    setSkills(
-      skills.reduce(
-        (res, skill, id) => [...res, id === index ? { ...skill, mastery: event.target.value } : skill],
-        [] as ISkillMastery[]
-      )
-    );
-
-  const handleSkillDelete = (skill_name: string) =>
-    setSkills(skills.filter((skill) => skill.skill_name !== skill_name));
-
-  const handleSkillAdd = () => setSkills([...skills, { skill_name: availableSkills[0], mastery: skillMastery[0] }]);
+  const handleDelete = (id: number) => () => remove(id);
 
   return (
     <Box sx={wrapSX}>
       <Typography variant={'h3'} sx={titleSX}>
         Skills
       </Typography>
-      {skills.map(({ skill_name, mastery }, index) => (
-        <SkillGrid key={skill_name}>
+      {fields.map((field, index) => (
+        <SkillGrid key={field.id}>
           <TextField
             select
             required
             placeholder="Skill"
             label="Skill"
-            value={skill_name}
-            onChange={(event) => handleSkillChange(event, index)}
+            defaultValue={getValues('profile.skills')[index].skill_name}
+            // onChange={handleChange(index, 'skill_name')}
+            {...register(`profile.skills.${index}.skill_name`)}
           >
-            {[skill_name, ...availableSkills].map((name) => (
+            {[getValues('profile.skills')[index].skill_name, ...availableSkills].map((name) => (
               <MenuItem key={name} value={name}>
                 {name}
               </MenuItem>
@@ -70,16 +55,16 @@ export const SkillsForm: FC<SkillsFormProps> = ({ skills, setSkills, allSkills }
             required
             placeholder="Mastery"
             label="Mastery"
-            value={mastery}
-            onChange={(event) => handleMasteryChange(event, index)}
+            defaultValue={getValues('profile.skills')[index].mastery}
+            {...register(`profile.skills.${index}.mastery`)}
           >
-            {skillMastery.map((mastery) => (
+            {skillMastery.map((mastery: string) => (
               <MenuItem key={mastery} value={mastery}>
                 {mastery}
               </MenuItem>
             ))}
           </TextField>
-          <IconButton edge="start" color="inherit" sx={iconSX} onClick={() => handleSkillDelete(skill_name)}>
+          <IconButton edge="start" color="inherit" sx={iconSX} onClick={handleDelete(index)}>
             <CloseIcon />
           </IconButton>
         </SkillGrid>

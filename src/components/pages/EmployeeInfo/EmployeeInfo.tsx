@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { PageHeader } from '@molecules/page-header';
 import { PersonalInfo } from '@pages/EmployeeInfo/components/Info/PersonalInfo';
 import { Button, Divider } from '@mui/material';
@@ -9,14 +9,13 @@ import { useQuery } from '@apollo/client';
 import { GET_USER_BY_ID } from '@api/user/queries';
 import { Loader } from '@atoms/loader/loader';
 import { LanguagesInfo } from '@pages/EmployeeInfo/components/Info/LanguagesInfo';
-import { AppContext } from '@templates/app/app.context';
 import { EmployeeDialog } from '@pages/EmployeeInfo/components/EmployeeDialog';
+import { userStore } from '@store/UserStore';
 
 const EmployeeInfo: FC = () => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
-  const { user } = useContext(AppContext);
   const { id } = useParams();
-  const { loading, data } = useQuery(GET_USER_BY_ID, {
+  const { loading, data, error } = useQuery(GET_USER_BY_ID, {
     variables: { id: id }
   });
 
@@ -46,7 +45,7 @@ const EmployeeInfo: FC = () => {
         </>
       )}
 
-      {(user?.role === 'admin' || user?.id === '146' || data.user.id) && (
+      {(userStore.user$?.role === 'admin' || userStore.user$?.id === data.user.id) && (
         <WrapRow>
           <Button color="primary" onClick={toggleDialogOpen}>
             Edit

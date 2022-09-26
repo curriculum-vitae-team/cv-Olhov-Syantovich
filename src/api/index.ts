@@ -1,12 +1,13 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { userStore } from '@store/UserStore';
 
 const httpLink = createHttpLink({
   uri: 'https://cv-gen-be.herokuapp.com/api/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
+  const token = userStore.token$;
   return {
     headers: {
       ...headers,

@@ -1,25 +1,11 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { FC } from 'react';
 import { CustomGrid } from '@pages/EmployeeInfo/components/Form/PersonalInfoForm/PersonalInfoForm.styles';
 import { PersonalInfoFormProps } from '@pages/EmployeeInfo/components/Form/PersonalInfoForm/PersonalInfoForm.types';
 import { MenuItem, TextField } from '@mui/material';
+import { useFormContext } from 'react-hook-form';
 
-export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({
-  personalInfo,
-  setPersonalInfo,
-  departments,
-  positions
-}) => {
-  const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setPersonalInfo({ ...personalInfo, profile: { ...personalInfo.profile, first_name: event.target.value } });
-
-  const handleLastNameChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setPersonalInfo({ ...personalInfo, profile: { ...personalInfo.profile, last_name: event.target.value } });
-
-  const handleDepartmentChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setPersonalInfo({ ...personalInfo, departmentId: event.target.value });
-
-  const handlePositionChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setPersonalInfo({ ...personalInfo, positionId: event.target.value });
+export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({ personalInfo, departments, positions }) => {
+  const { register } = useFormContext();
 
   return (
     <CustomGrid>
@@ -28,22 +14,22 @@ export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({
         required
         label="First Name"
         value={personalInfo.profile.first_name}
-        onChange={handleFirstNameChange}
+        {...register('profile.first_name')}
       />
       <TextField
         placeholder="Last Name"
         required
         label="Last Name"
-        value={personalInfo.profile.last_name}
-        onChange={handleLastNameChange}
+        defaultValue={personalInfo.profile.last_name}
+        {...register('profile.last_name')}
       />
       <TextField
         select
         required
         placeholder="Department"
         label="Department"
-        value={personalInfo.departmentId || departments[0].name}
-        onChange={handleDepartmentChange}
+        defaultValue={personalInfo.departmentId || null}
+        {...register('department_name')}
       >
         {departments.map(({ name, id }) => (
           <MenuItem key={id} value={name}>
@@ -56,8 +42,8 @@ export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({
         required
         placeholder="Position"
         label="Position"
-        value={personalInfo.positionId || positions[0].name}
-        onChange={handlePositionChange}
+        defaultValue={personalInfo.positionId || null}
+        {...register('position_name')}
       >
         {positions.map(({ name, id }) => (
           <MenuItem key={id} value={name}>

@@ -6,6 +6,7 @@
       "@constants/*": ["constants/*"],
       "@hooks/*": ["hooks/*"],
       "@interfaces/*": ["interfaces/*"],
+      "@store/*": ["store/*"],
       "@utils/*": ["utils/*"],
 
       "@atoms/*": ["components/atoms/*"],

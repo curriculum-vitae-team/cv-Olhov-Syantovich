@@ -33,6 +33,7 @@ module.exports = {
           ['@constants', './src/constants'],
           ['@hooks', './src/hooks'],
           ['@interfaces', './src/interfaces'],
+          ['@store', './src/store'],
           ['@utils', './src/utils'],
 
           ['@atoms', './src/components/atoms'],

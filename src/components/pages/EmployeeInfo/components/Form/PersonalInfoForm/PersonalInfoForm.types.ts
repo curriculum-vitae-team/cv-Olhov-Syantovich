@@ -5,7 +5,6 @@ import { Dispatch, SetStateAction } from 'react';
 
 export type PersonalInfoFormProps = {
   personalInfo: IUpdateUserInput;
-  setPersonalInfo: Dispatch<SetStateAction<IUpdateUserInput>>;
   departments: IDepartment[];
   positions: IPosition[];
 };

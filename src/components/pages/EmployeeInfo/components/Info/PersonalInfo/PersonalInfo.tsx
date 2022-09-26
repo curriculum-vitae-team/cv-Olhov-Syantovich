@@ -7,7 +7,7 @@ export const PersonalInfo: FC<PersonalInformationProps> = ({ user }) => {
   return (
     <Box sx={wrapSX}>
       <Avatar sx={avatarSX} src={user.profile.full_name || ''} />
-      <Typography variant={'h3'}>{user.profile.full_name || 'Vitalya Bleat'}</Typography>
+      <Typography variant={'h3'}>{user.profile.full_name || ''}</Typography>
       <Typography variant={'h5'} sx={emailSX}>
         {user.email || 'vitalyableat@gmail.com'}
       </Typography>
