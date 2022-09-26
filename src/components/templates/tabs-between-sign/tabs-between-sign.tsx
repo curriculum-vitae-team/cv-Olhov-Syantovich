@@ -1,11 +1,11 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { Tabs, Tab, AppBar } from '@mui/material';
 import { PathEnum } from '@templates/router/router.types';
 import { Link, Outlet } from 'react-router-dom';
 import { Loader } from '@atoms/loader/loader';
 
 export const TabsBetweenSign = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

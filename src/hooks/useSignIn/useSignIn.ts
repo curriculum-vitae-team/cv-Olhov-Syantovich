@@ -4,8 +4,8 @@ import { SubmitHandler } from 'react-hook-form';
 import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { LOGIN } from '@api/auth/queries';
 import { userStore } from '@store/UserStore';
-import { useNavigate } from 'react-router-dom';
 import { PathEnum } from '@templates/router/router.types';
+import { useNavigate } from 'react-router-dom';
 
 export const useSignIn = () => {
   const { data, error, loading, refetch } = useQuery(LOGIN);
@@ -19,7 +19,7 @@ export const useSignIn = () => {
       localStorage.setItem('token', JSON.stringify(data.login.access_token));
       navigate(`/${PathEnum.employees}`);
     }
-  }, [data, error]);
+  }, [data, error, navigate]);
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {
     refetch({
       auth: { email, password }

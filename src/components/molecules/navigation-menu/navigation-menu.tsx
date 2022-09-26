@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import Box from '@mui/material/Box';
 import { navigationMenuList } from '@molecules/navigation-menu/navigation-menu.types';

@@ -1,10 +1,13 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Menu, MenuItem, Typography } from '@mui/material';
 import { ILanguageMenuProps } from '@molecules/language-menu/language-menu.types';
 import { languages } from '@molecules/language-menu/language-menu.mock';
 import { menuSX, origin } from '@molecules/language-menu/language-menu.styles';
 
-export const LanguageMenu: FC<ILanguageMenuProps> = ({ anchorElLanguage, toggleAnchorElLanguage }) => {
+export const LanguageMenu: FC<ILanguageMenuProps> = ({
+  anchorElLanguage,
+  toggleAnchorElLanguage
+}) => {
   return (
     <Menu
       sx={menuSX}

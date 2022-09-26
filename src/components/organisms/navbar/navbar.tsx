@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import { useState, MouseEvent } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,7 +9,13 @@ import { Avatar, Drawer, MenuItem, Typography } from '@mui/material';
 import { NavigationMenu } from '@molecules/navigation-menu';
 import { SettingsMenu } from '@molecules/settings-menu';
 import { LanguageMenu } from '@molecules/language-menu';
-import { boxToolbarSX, boxWrapSX, getAnchor, menuItemSX, typographySX } from '@organisms/navbar/navbar.styles';
+import {
+  boxToolbarSX,
+  boxWrapSX,
+  getAnchor,
+  menuItemSX,
+  typographySX
+} from '@organisms/navbar/navbar.styles';
 import { userStore } from '@store/UserStore';
 
 export const Navbar = () => {
@@ -40,7 +46,9 @@ export const Navbar = () => {
           <MenuItem sx={menuItemSX} onClick={toggleAnchorElSettings}>
             <Avatar src="https://as2.ftcdn.net/v2/jpg/01/42/39/07/1000_F_142390782_d2lz4ZJFf5zlgdzPZyL3AmOY6OoHwlaP.jpg" />
             <Typography sx={typographySX}>
-              {userStore.user$?.profile?.full_name ? userStore.user$?.profile?.full_name : userStore.user$?.email}
+              {userStore.user$?.profile?.full_name
+                ? userStore.user$?.profile?.full_name
+                : userStore.user$?.email}
             </Typography>
           </MenuItem>
 
@@ -50,8 +58,14 @@ export const Navbar = () => {
         </Toolbar>
       </AppBar>
 
-      <SettingsMenu anchorElSettings={anchorElSettings} toggleAnchorElSettings={toggleAnchorElSettings} />
-      <LanguageMenu anchorElLanguage={anchorElLanguage} toggleAnchorElLanguage={toggleAnchorElLanguage} />
+      <SettingsMenu
+        anchorElSettings={anchorElSettings}
+        toggleAnchorElSettings={toggleAnchorElSettings}
+      />
+      <LanguageMenu
+        anchorElLanguage={anchorElLanguage}
+        toggleAnchorElLanguage={toggleAnchorElLanguage}
+      />
 
       <Drawer anchor={getAnchor()} open={drawerOpen} onClick={toggleDrawer}>
         <NavigationMenu />

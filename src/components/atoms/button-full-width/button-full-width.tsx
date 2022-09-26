@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Button, ButtonProps, CircularProgress } from '@mui/material';
 import { buttonFullWidthSX } from '@atoms/button-full-width/button-full-width.styles';
 
