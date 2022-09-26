@@ -1,13 +1,12 @@
-import { makeAutoObservable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { IUser } from '@interfaces/IUser';
 import { getFromLocalStorage } from '@utils/getFromLocalStorage';
 
 class UserStore {
   user$: IUser | undefined = getFromLocalStorage('user');
   token$: string | undefined = getFromLocalStorage('token');
-
   constructor() {
-    makeAutoObservable(this, {}, { deep: true });
+    makeObservable(this, { user$: observable, token$: observable, setToken: action, setUser: action });
   }
 
   setToken(token: string) {

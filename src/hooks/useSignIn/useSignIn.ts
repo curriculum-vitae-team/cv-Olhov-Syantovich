@@ -4,9 +4,12 @@ import { SubmitHandler } from 'react-hook-form';
 import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { LOGIN } from '@api/auth/queries';
 import { userStore } from '@store/UserStore';
+import { useNavigate } from 'react-router-dom';
+import { PathEnum } from '@templates/router/router.types';
 
 export const useSignIn = () => {
   const { data, error, loading, refetch } = useQuery(LOGIN);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data) {
@@ -14,6 +17,7 @@ export const useSignIn = () => {
       userStore.setToken(data.login.access_token);
       localStorage.setItem('user', JSON.stringify(data.login.user));
       localStorage.setItem('token', JSON.stringify(data.login.access_token));
+      navigate(`/${PathEnum.employees}`);
     }
   }, [data, error]);
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {
