@@ -3,4 +3,5 @@ export type FullScreenDialogProps = {
   closeDialog: () => void;
   isUpdate: boolean;
   header: string;
+  defaultValues: object;
 };

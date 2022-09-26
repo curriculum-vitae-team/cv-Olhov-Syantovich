@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { PageHeader } from '@molecules/page-header';
 import { PersonalInfo } from '@pages/EmployeeInfo/components/Info/PersonalInfo';
 import { Button, Divider } from '@mui/material';
@@ -11,15 +11,13 @@ import { Loader } from '@atoms/loader/loader';
 import { LanguagesInfo } from '@pages/EmployeeInfo/components/Info/LanguagesInfo';
 import { EmployeeDialog } from '@pages/EmployeeInfo/components/EmployeeDialog';
 import { userStore } from '@store/UserStore';
+import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore';
 
 const EmployeeInfo: FC = () => {
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const { id } = useParams();
-  const { loading, data, error } = useQuery(GET_USER_BY_ID, {
+  const { loading, data } = useQuery(GET_USER_BY_ID, {
     variables: { id: id }
   });
-
-  const toggleDialogOpen = () => setDialogOpen(!dialogOpen);
 
   if (loading) {
     return <Loader />;
@@ -47,13 +45,26 @@ const EmployeeInfo: FC = () => {
 
       {(userStore.user$?.role === 'admin' || userStore.user$?.id === data.user.id) && (
         <WrapRow>
-          <Button color="primary" onClick={toggleDialogOpen}>
+          <Button
+            color="primary"
+            onClick={() =>
+              DialogStore.openDialog({
+                defaultValuesForm: {
+                  profile: { last_name: '', first_name: '', skills: [] },
+                  position_name: '',
+                  department_name: ''
+                },
+                element: EmployeeDialog,
+                propsOfElement: { user: data.user },
+                isUpdate: false,
+                header: 'Employee'
+              })
+            }
+          >
             Edit
           </Button>
         </WrapRow>
       )}
-
-      {dialogOpen && <EmployeeDialog user={data.user} dialogOpen={dialogOpen} closeDialog={toggleDialogOpen} />}
     </>
   );
 };

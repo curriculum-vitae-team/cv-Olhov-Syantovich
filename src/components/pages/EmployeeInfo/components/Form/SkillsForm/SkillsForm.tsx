@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { SkillsFormProps } from '@pages/EmployeeInfo/components/Form/SkillsForm/SkillsForm.types';
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
 import {
@@ -16,7 +16,7 @@ import { ISkillMastery } from '@interfaces/ISkillMastery';
 
 export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
   const { control, register, getValues } = useFormContext();
-  const { fields, append, remove, update } = useFieldArray({ control, name: 'profile.skills' });
+  const { fields, append, remove } = useFieldArray({ control, name: 'profile.skills' });
   const availableSkills = useMemo(() => {
     const currSkills = getValues('profile.skills');
     return [

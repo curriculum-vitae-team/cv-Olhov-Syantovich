@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
@@ -7,48 +8,36 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import { Transition } from '@atoms/transition';
-import { FullScreenDialogProps } from '@templates/FullScreenDialog/FullScreenDialog.types';
 import { appBarSX, typographySX } from '@templates/FullScreenDialog/FullScreenDialog.styles';
-import { useForm, FormProvider } from 'react-hook-form';
-import { useMutation } from '@apollo/client';
-import { UPDATE_USER } from '@api/user/mutations';
+import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore';
+import { observer } from 'mobx-react-lite';
 
-export const FullScreenDialog: FC<PropsWithChildren<FullScreenDialogProps>> = ({
-  dialogOpen,
-  closeDialog,
-  isUpdate,
-  header,
-  children
-}) => {
-  const useForm_ = useForm({
-    defaultValues: {
-      profile: { last_name: '', first_name: '', skills: [] },
-      position_name: '',
-      department_name: ''
-    }
-  });
-  const { handleSubmit } = useForm_;
-  const [updateUser, { data, error, loading }] = useMutation(UPDATE_USER);
+export const FullScreenDialog = observer(() => {
+  const InnerElement: React.ElementType | undefined = DialogStore.elementToRender;
   return (
-    <FormProvider {...useForm_}>
-      <Dialog fullScreen open={dialogOpen} onClose={closeDialog} TransitionComponent={Transition}>
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
-          <AppBar sx={appBarSX}>
-            <Toolbar>
-              <IconButton edge="start" color="inherit" onClick={closeDialog}>
-                <CloseIcon />
-              </IconButton>
-              <Typography sx={typographySX} variant="h6">
-                {header}
-              </Typography>
-              <Button autoFocus color="primary" type="submit">
-                {isUpdate ? 'Update' : 'Create'}
-              </Button>
-            </Toolbar>
-          </AppBar>
-          {children}
-        </form>
+    <>
+      <Dialog
+        fullScreen
+        open={DialogStore.isOpened$}
+        onClose={DialogStore.closeDialog}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={appBarSX}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={DialogStore.closeDialog}>
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={typographySX} variant="h6">
+              {DialogStore.header}
+            </Typography>
+            <Button autoFocus color="primary" type="submit" form="formInDialog">
+              {DialogStore.isUpdate$ ? 'Update' : 'Create'}
+            </Button>
+          </Toolbar>
+        </AppBar>
+        {InnerElement && <InnerElement {...DialogStore.propsOfElement} />}
       </Dialog>
-    </FormProvider>
+      <Outlet />
+    </>
   );
-};
+});
