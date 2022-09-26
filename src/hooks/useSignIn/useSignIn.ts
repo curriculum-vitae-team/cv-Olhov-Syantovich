@@ -1,26 +1,25 @@
 import { useQuery } from '@apollo/client';
-
-import { useContext, useEffect } from 'react';
-import { AppContext } from '@templates/app/app.context';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
 import { LOGIN } from '@api/auth/queries';
-import { useNavigate } from 'react-router-dom';
+import { userStore } from '@store/UserStore';
 import { PathEnum } from '@templates/router/router.types';
+import { useNavigate } from 'react-router-dom';
 
 export const useSignIn = () => {
   const { data, error, loading, refetch } = useQuery(LOGIN);
-
-  const { setToken, setUser } = useContext(AppContext);
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (data && setToken && setUser) {
-      setUser(data.login.user);
-      setToken(data.login.access_token);
-      localStorage.setItem('token', data.login.access_token);
+    if (data) {
+      userStore.setUser(data.login.user);
+      userStore.setToken(data.login.access_token);
+      localStorage.setItem('user', JSON.stringify(data.login.user));
+      localStorage.setItem('token', JSON.stringify(data.login.access_token));
       navigate(`/${PathEnum.employees}`);
     }
-  }, [data, error]);
+  }, [data, error, navigate]);
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {
     refetch({
       auth: { email, password }

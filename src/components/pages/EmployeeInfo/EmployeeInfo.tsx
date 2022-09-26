@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import { FC } from 'react';
 import { PageHeader } from '@molecules/page-header';
 import { PersonalInformation } from '@pages/EmployeeInfo/components/PersonalInformation';
 import { Button, Divider } from '@mui/material';
@@ -9,15 +9,13 @@ import { useQuery } from '@apollo/client';
 import { GET_USER_BY_ID } from '@api/user/queries';
 import { Loader } from '@atoms/loader/loader';
 import { LanguagesInfo } from '@pages/EmployeeInfo/components/LanguagesInfo';
-import { AppContext } from '@templates/app/app.context';
+import { userStore } from '@store/UserStore';
 
 const EmployeeInfo: FC = () => {
   const { id } = useParams();
   const { loading, data } = useQuery(GET_USER_BY_ID, {
     variables: { id: id }
   });
-
-  const { user } = useContext(AppContext);
 
   if (loading) {
     return <Loader />;
@@ -43,7 +41,7 @@ const EmployeeInfo: FC = () => {
         </>
       )}
 
-      {(user?.role === 'ADMIN' || user?.id === data.user.id) && (
+      {(userStore.user$?.role === 'admin' || userStore.user$?.id === data.user.id) && (
         <WrapRow>
           <Button color="primary">Edit</Button>
         </WrapRow>

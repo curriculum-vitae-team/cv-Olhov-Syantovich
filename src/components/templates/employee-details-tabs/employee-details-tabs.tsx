@@ -1,4 +1,4 @@
-import React, { Suspense, SyntheticEvent, useState } from 'react';
+import { Suspense, SyntheticEvent, useState } from 'react';
 import { Tabs, Tab, Divider } from '@mui/material';
 import { PathEnum } from '@templates/router/router.types';
 import { Link, Outlet, useParams } from 'react-router-dom';
@@ -17,8 +17,18 @@ export const EmployeeDetailsTabs = () => {
     <PageWithNavbar>
       <WrapPageInfo>
         <Tabs value={value} onChange={handleChange}>
-          <Tab value="Info" label={'Info'} component={Link} to={PathEnum.employeeInfo.replace(':id', id || '')} />
-          <Tab value="CV" label={'CV'} component={Link} to={PathEnum.employeeCv.replace(':id', id || '')} />
+          <Tab
+            value="Info"
+            label={'Info'}
+            component={Link}
+            to={PathEnum.employeeInfo.replace(':id', id || '')}
+          />
+          <Tab
+            value="CV"
+            label={'CV'}
+            component={Link}
+            to={PathEnum.employeeCv.replace(':id', id || '')}
+          />
         </Tabs>
         <Divider />
         <Suspense fallback={<Loader />}>

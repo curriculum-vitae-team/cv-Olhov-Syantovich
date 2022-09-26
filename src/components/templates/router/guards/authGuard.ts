@@ -1,10 +1,8 @@
-import { useContext } from 'react';
 import { PathEnum } from '@templates/router/router.types';
-import { AppContext } from '@templates/app/app.context';
+import { userStore } from '@store/UserStore';
 
 export const authGuard = () => {
-  // const { token } = useContext(AppContext);
-  // if (!token) {
+  // if (!userStore.token$) {
   //   return PathEnum.signIn;
   // }
   return '';

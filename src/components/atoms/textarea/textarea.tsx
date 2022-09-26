@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { TextAreaType } from '@atoms/textarea/textarea.types';
 import { DefaultTextarea } from '@atoms/textarea/textarea.styles';
 

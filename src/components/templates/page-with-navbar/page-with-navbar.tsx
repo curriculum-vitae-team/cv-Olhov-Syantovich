@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Navbar } from '@organisms/navbar';
 import { boxSX } from '@templates/page-with-navbar/page-with-navbar.styles';
 

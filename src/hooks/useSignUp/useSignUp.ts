@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client';
 import { SIGNUP } from '@api/auth/mutations';
-import { useContext, useEffect } from 'react';
-import { AppContext } from '@templates/app/app.context';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { ISignUpDataForm } from '@pages/SignUp/SignUp.interface';
+import { userStore } from '@store/UserStore';
 import { PathEnum } from '@templates/router/router.types';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,15 +11,15 @@ export const useSignUp = () => {
   const [signUp, { data, error, loading }] = useMutation(SIGNUP);
   const navigate = useNavigate();
 
-  const { setToken, setUser } = useContext(AppContext);
   useEffect(() => {
-    if (data && setToken && setUser) {
-      setUser(data.signup.user);
-      setToken(data.signup.access_token);
-      localStorage.setItem('token', data.signup.access_token);
+    if (data) {
+      userStore.setUser(data.login.user);
+      userStore.setToken(data.login.access_token);
+      localStorage.setItem('user', JSON.stringify(data.login.user));
+      localStorage.setItem('token', JSON.stringify(data.login.access_token));
       navigate(`/${PathEnum.employees}`);
     }
-  }, [data, error]);
+  }, [data, error, navigate]);
   const onSubmit: SubmitHandler<ISignUpDataForm> = ({ email, password }) => {
     signUp({
       variables: { auth: { email, password } }
