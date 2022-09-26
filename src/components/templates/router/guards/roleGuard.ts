@@ -3,9 +3,9 @@ import { userStore } from '@store/UserStore';
 
 export const roleGuard = (role: string) => {
   return function () {
-    // if (userStore.user$?.role !== role) {
-    //   return PathEnum.notFound;
-    // }
+    if (userStore.user$?.role !== role) {
+      return PathEnum.notFound;
+    }
     return '';
   };
 };

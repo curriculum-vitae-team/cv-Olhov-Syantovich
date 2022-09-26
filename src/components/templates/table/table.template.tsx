@@ -8,7 +8,6 @@ import { TableContext } from './table.context';
 
 const TableTemplate = <T extends Item>({
   items,
-  loading,
   searchKeys,
   sortByKey,
   TableHeadComponent,
