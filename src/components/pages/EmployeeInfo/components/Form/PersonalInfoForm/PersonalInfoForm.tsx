@@ -13,7 +13,7 @@ export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({ personalInfo, depa
         placeholder="First Name"
         required
         label="First Name"
-        value={personalInfo.profile.first_name}
+        defaultValue={personalInfo.profile.first_name}
         {...register('profile.first_name')}
       />
       <TextField
