@@ -6,7 +6,12 @@ class UserStore {
   user$: IUser | undefined = getFromLocalStorage('user');
   token$: string | undefined = getFromLocalStorage('token');
   constructor() {
-    makeObservable(this, { user$: observable, token$: observable, setToken: action, setUser: action });
+    makeObservable(this, {
+      user$: observable,
+      token$: observable,
+      setToken: action,
+      setUser: action
+    });
   }
 
   setToken(token: string) {

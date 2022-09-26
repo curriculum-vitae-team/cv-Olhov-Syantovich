@@ -1,9 +1,9 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
 import { Outlet } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { ToastStore } from '../../../store/toastStore/ToastsStore';
+import { ToastStore } from '@store/toastStore/ToastsStore';
 import { Loader } from '@atoms/loader/loader';
 import { AlertStyleSX, StackStyleSX } from '@templates/Toasts/toast.style';
 

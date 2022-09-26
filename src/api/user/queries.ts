@@ -7,8 +7,11 @@ export const GET_USERS = gql`
       email
       created_at
       profile {
+        id
         first_name
         last_name
+        full_name
+        avatar
       }
       department_name
       position_name

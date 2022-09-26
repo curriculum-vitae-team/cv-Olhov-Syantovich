@@ -1,6 +1,5 @@
 import { WrapColumn } from '@atoms/wrap-column';
 import { ButtonFullWidth } from '@atoms/button-full-width';
-import React from 'react';
 import { Typography, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { ISignUpDataForm } from '@pages/SignUp/SignUp.interface';

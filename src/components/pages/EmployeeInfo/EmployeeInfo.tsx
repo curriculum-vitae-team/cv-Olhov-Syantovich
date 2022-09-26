@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { PageHeader } from '@molecules/page-header';
 import { PersonalInformation } from '@pages/EmployeeInfo/components/PersonalInformation';
 import { Button, Divider } from '@mui/material';

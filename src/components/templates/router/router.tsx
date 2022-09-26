@@ -1,14 +1,16 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
 import { authGuard } from '@templates/router/guards/authGuard';
 import { roleGuard } from '@templates/router/guards/roleGuard';
-import { RolesEnum } from '../../../constants/user-roles.enum';
+import { RolesEnum } from '@constants/user-roles.enum';
 import { PathEnum } from '@templates/router/router.types';
 import { ProtectedRoute } from '@templates/router/protected-route';
 import { SignInPage } from '@pages/SignIn';
 import { SignUpPage } from '@pages/SignUp';
 import { Loader } from '@atoms/loader/loader';
+import { Employees } from '@pages/Employees';
+import { PageWithNavbar } from '@templates/page-with-navbar';
 import { TabsBetweenSign } from '@templates/tabs-between-sign/tabs-between-sign';
 import { EmployeeDetailsTabs } from '@templates/employee-details-tabs/employee-details-tabs';
 import { EmployeeCv } from '@pages/EmployeeCv';
@@ -23,7 +25,14 @@ export const AppRouter = () => {
         <Routes>
           <Route element={<CustomizedToast />}>
             <Route path={PathEnum.employees} element={<ProtectedRoute guards={[authGuard]} />}>
-              <Route path="*" element={<></>} />
+              <Route
+                path=""
+                element={
+                  <PageWithNavbar>
+                    <Employees />
+                  </PageWithNavbar>
+                }
+              />
             </Route>
             <Route
               path={PathEnum.languages}

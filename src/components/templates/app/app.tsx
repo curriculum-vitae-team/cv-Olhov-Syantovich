@@ -1,4 +1,3 @@
-import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { theme } from '@templates/app/app.theme';
 import { AppRouter } from '@templates/router';
