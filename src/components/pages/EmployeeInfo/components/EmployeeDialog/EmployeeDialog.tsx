@@ -1,7 +1,10 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { EmployeeDialogProps } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.types';
 import { Avatar, Box, Divider } from '@mui/material';
-import { avatarSX, boxSX } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.styles';
+import {
+  avatarSX,
+  boxSX
+} from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.styles';
 import { useQuery } from '@apollo/client';
 import { GET_DEPARTMENTS } from '@api/department/queries';
 import { Loader } from '@atoms/loader/loader';
@@ -31,7 +34,10 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
   return (
     <Box sx={boxSX}>
       <FormProvider {...useForm_}>
-        <form onSubmit={useForm_.handleSubmit((data) => console.log(data))} id="formInDialog">
+        <form
+          onSubmit={useForm_.handleSubmit((data) => alert(JSON.stringify(data)))}
+          id="formInDialog"
+        >
           <Avatar sx={avatarSX} src={user.profile.full_name || ''} />
           <PersonalInfoForm
             personalInfo={
@@ -52,7 +58,10 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
           <Divider />
           <SkillsForm allSkills={skillsData.skills} />
           <Divider />
-          <LanguagesForm languages={user.profile.languages} allAvailableLanguages={languagesData.languages} />
+          <LanguagesForm
+            languages={user.profile.languages}
+            allAvailableLanguages={languagesData.languages}
+          />
         </form>
       </FormProvider>
     </Box>

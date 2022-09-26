@@ -1,6 +1,9 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { LanguagesFormProps } from '@pages/EmployeeInfo/components/Form/LanguagesForm/LanguagesForm.types';
-import { titleSX, wrapSX } from '@pages/EmployeeInfo/components/Form/LanguagesForm/LanguagesForm.styles';
+import {
+  titleSX,
+  wrapSX
+} from '@pages/EmployeeInfo/components/Form/LanguagesForm/LanguagesForm.styles';
 import { Box, Typography } from '@mui/material';
 
 export const LanguagesForm: FC<LanguagesFormProps> = ({ languages, allAvailableLanguages }) => {

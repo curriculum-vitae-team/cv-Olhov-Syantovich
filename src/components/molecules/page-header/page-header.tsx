@@ -1,14 +1,13 @@
-import React, { FC } from 'react';
-import { Box, Typography } from '@mui/material';
+import { FC } from 'react';
+import { AppBar, Typography } from '@mui/material';
 import { PageHeaderProps } from '@molecules/page-header/page-header.types';
-import { boxSX } from '@molecules/page-header/page-header.styles';
 
 export const PageHeader: FC<PageHeaderProps> = ({ header, description }) => {
   return (
-    <Box sx={boxSX}>
+    <AppBar position="sticky" sx={{ top: 64, background: '#212121', boxShadow: 'none', zIndex: 1 }}>
       <Typography variant="h6">Breadcrumbs</Typography>
       <Typography variant="h3">{header}</Typography>
       <Typography variant="h6">{description}</Typography>
-    </Box>
+    </AppBar>
   );
 };

@@ -1,6 +1,11 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
-import { avatarSX, boxSX, emailSX, wrapSX } from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.styles';
+import {
+  avatarSX,
+  boxSX,
+  emailSX,
+  wrapSX
+} from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.styles';
 import { PersonalInformationProps } from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.types';
 
 export const PersonalInfo: FC<PersonalInformationProps> = ({ user }) => {

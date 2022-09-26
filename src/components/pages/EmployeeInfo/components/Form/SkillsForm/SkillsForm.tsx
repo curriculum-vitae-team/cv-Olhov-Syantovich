@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { SkillsFormProps } from '@pages/EmployeeInfo/components/Form/SkillsForm/SkillsForm.types';
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
 import {
@@ -20,9 +20,11 @@ export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
   const availableSkills = useMemo(() => {
     const currSkills = getValues('profile.skills');
     return [
-      ...allSkills.filter((skill) => !currSkills.find((item: ISkillMastery) => item.skill_name === skill.name))
+      ...allSkills.filter(
+        (skill) => !currSkills.find((item: ISkillMastery) => item.skill_name === skill.name)
+      )
     ].reduce((res, value) => [...res, value.name], [] as string[]);
-  }, [allSkills, getValues('profile.skills')]);
+  }, [allSkills, getValues]);
 
   const handleSkillAdd = () => append({ skill_name: availableSkills[0], mastery: skillMastery[0] });
 

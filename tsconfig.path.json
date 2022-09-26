@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@api/*": ["api/*"],
-      "@constants/*": ["constants/*"],
-      "@hooks/*": ["hooks/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@store/*": ["store/*"],
-      "@utils/*": ["utils/*"],
-
-      "@atoms/*": ["components/atoms/*"],
-      "@molecules/*": ["components/molecules/*"],
-      "@organisms/*": ["components/organisms/*"],
-      "@templates/*": ["components/templates/*"],
-      "@pages/*": ["components/pages/*"]
-    },
+      "@api/*": ["src/api/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@utils/*": ["src/utils/*"],
+      "@constants/*": ["src/constants/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@atoms/*": ["src/components/atoms/*"],
+      "@molecules/*": ["src/components/molecules/*"],
+      "@organisms/*": ["src/components/organisms/*"],
+      "@templates/*": ["src/components/templates/*"],
+      "@pages/*": ["src/components/pages/*"],
+      "@store/*": ["src/store/*"]
+    }
   }
 }

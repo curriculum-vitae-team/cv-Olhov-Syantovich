@@ -1,10 +1,14 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { CustomGrid } from '@pages/EmployeeInfo/components/Form/PersonalInfoForm/PersonalInfoForm.styles';
 import { PersonalInfoFormProps } from '@pages/EmployeeInfo/components/Form/PersonalInfoForm/PersonalInfoForm.types';
 import { MenuItem, TextField } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 
-export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({ personalInfo, departments, positions }) => {
+export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({
+  personalInfo,
+  departments,
+  positions
+}) => {
   const { register } = useFormContext();
 
   return (

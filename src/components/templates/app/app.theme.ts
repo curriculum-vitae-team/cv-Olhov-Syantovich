@@ -75,7 +75,9 @@ export const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          '& .MuiOutlinedInput-input:-webkit-autofill': { '-webkit-box-shadow': '0 0 0 100px rgb(44, 44, 44) inset' }
+          '& .MuiOutlinedInput-input:-webkit-autofill': {
+            boxShadow: '0 0 0 100px rgb(44, 44, 44) inset'
+          }
         }
       }
     },
@@ -128,13 +130,16 @@ export const theme = createTheme({
     },
     MuiTable: {
       styleOverrides: {
-        root: { color: 'white', backgroundColor: 'rgb(51,50,50)' }
+        root: {
+          color: 'white',
+          backgroundColor: 'rgb(51,50,50)'
+        }
       }
     },
     MuiTableCell: {
       styleOverrides: {
         root: {
-          color: 'white'
+          top: 'inherit'
         }
       }
     },
@@ -158,6 +163,13 @@ export const theme = createTheme({
         root: {
           '& .MuiTab-root.Mui-selected': { color: 'white' },
           '& .MuiTabs-indicator': { backgroundColor: 'white' }
+        }
+      }
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          color: 'white'
         }
       }
     }

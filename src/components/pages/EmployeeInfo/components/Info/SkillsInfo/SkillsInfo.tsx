@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { wrapSX, titleSX } from '@pages/EmployeeInfo/components/Info/SkillsInfo/SkillsInfo.styles';
 import { SkillsInfoProps } from '@pages/EmployeeInfo/components/Info/SkillsInfo/SkillsInfo.types';

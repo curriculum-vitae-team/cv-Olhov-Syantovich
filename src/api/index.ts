@@ -9,7 +9,8 @@ const httpLink = createHttpLink({
   uri: 'https://cv-gen-be.herokuapp.com/api/graphql'
 });
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) graphQLErrors.forEach(({ message }) => ToastStore.addToast(SeverityEnum.error, message));
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message }) => ToastStore.addToast(SeverityEnum.error, message));
 
   if (networkError) ToastStore.addToast(SeverityEnum.error, `[Network error]: ${networkError}`);
 });
