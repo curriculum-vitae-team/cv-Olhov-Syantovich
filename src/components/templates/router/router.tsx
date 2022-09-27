@@ -18,8 +18,9 @@ import { EmployeeInfo } from '@pages/EmployeeInfo';
 import { CustomizedToast } from '@templates/Toasts/toasts';
 import { userStore } from '@store/UserStore';
 import { PageHeader } from '@molecules/page-header';
+import { observer } from 'mobx-react-lite';
 
-export const AppRouter = () => {
+export const AppRouter = observer(() => {
   return (
     <Suspense fallback={<Loader />}>
       <BrowserRouter>
@@ -37,13 +38,15 @@ export const AppRouter = () => {
                   <Route path="*" element={<></>} />
                 </Route>
 
-                <Route element={<EmployeeDetailsTabs />}>
-                  <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
-                  <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
+                <Route element={<ProtectedRoute guards={[authGuard]} />}>
+                  <Route element={<EmployeeDetailsTabs />}>
+                    <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
+                    <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
+                  </Route>
                 </Route>
               </Route>
             </Route>
-            {!userStore.user$ && (
+            {!userStore.user$ && !userStore.token$ && (
               <>
                 <Route element={<TabsBetweenSign />}>
                   <Route path={PathEnum.signIn} element={<SignInPage />} />
@@ -59,4 +62,4 @@ export const AppRouter = () => {
       </BrowserRouter>
     </Suspense>
   );
-};
+});
