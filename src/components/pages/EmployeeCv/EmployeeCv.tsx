@@ -1,11 +1,14 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { PageHeader } from '@molecules/page-header';
+import { PageHeaderStore } from '@store/PageHeaderStore/PageHeaderStore';
 
 const EmployeeCv: FC = () => {
+  useEffect(() => {
+    PageHeaderStore.setPageInfo({ header: 'Employee', description: "Employee's CV" });
+  }, []);
+
   return (
     <>
-      <PageHeader header={'Employee'} description={"Employee's CV"} />
       <Typography variant={'h3'}>Employee CV</Typography>
     </>
   );

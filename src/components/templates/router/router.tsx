@@ -17,6 +17,7 @@ import { EmployeeCv } from '@pages/EmployeeCv';
 import { EmployeeInfo } from '@pages/EmployeeInfo';
 import { CustomizedToast } from '@templates/Toasts/toasts';
 import { userStore } from '@store/UserStore';
+import { PageHeader } from '@molecules/page-header';
 
 export const AppRouter = () => {
   return (
@@ -24,28 +25,24 @@ export const AppRouter = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<CustomizedToast />}>
-            <Route path={PathEnum.employees} element={<ProtectedRoute guards={[authGuard]} />}>
-              <Route
-                path=""
-                element={
-                  <PageWithNavbar>
-                    <Employees />
-                  </PageWithNavbar>
-                }
-              />
-            </Route>
-            <Route
-              path={PathEnum.languages}
-              element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}
-            >
-              <Route path="*" element={<></>} />
-            </Route>
+            <Route element={<PageWithNavbar />}>
+              <Route element={<PageHeader />}>
+                <Route path={PathEnum.employees} element={<ProtectedRoute guards={[authGuard]} />}>
+                  <Route path="" element={<Employees />} />
+                </Route>
+                <Route
+                  path={PathEnum.languages}
+                  element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}
+                >
+                  <Route path="*" element={<></>} />
+                </Route>
 
-            <Route element={<EmployeeDetailsTabs />}>
-              <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
-              <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
+                <Route element={<EmployeeDetailsTabs />}>
+                  <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
+                  <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
+                </Route>
+              </Route>
             </Route>
-
             {!userStore.user$ && (
               <>
                 <Route element={<TabsBetweenSign />}>
