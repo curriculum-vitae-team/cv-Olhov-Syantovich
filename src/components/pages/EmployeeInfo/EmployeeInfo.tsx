@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { PageHeader } from '@molecules/page-header';
 import { PersonalInformation } from '@pages/EmployeeInfo/components/PersonalInformation';
 import { Button, Divider } from '@mui/material';
 import { WrapRow } from '@atoms/wrap-row';
@@ -23,8 +22,6 @@ const EmployeeInfo: FC = () => {
 
   return (
     <>
-      <PageHeader header={'Employees'} description={`Employee's details`} />
-
       <PersonalInformation user={data.user} />
 
       {!!data.user.profile.skills.length && (

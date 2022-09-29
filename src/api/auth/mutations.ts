@@ -8,6 +8,7 @@ export const SIGNUP = gql`
         role
         email
         profile {
+          avatar
           id
           full_name
         }

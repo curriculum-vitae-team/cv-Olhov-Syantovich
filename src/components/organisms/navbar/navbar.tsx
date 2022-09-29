@@ -44,7 +44,7 @@ export const Navbar = () => {
           </Box>
 
           <MenuItem sx={menuItemSX} onClick={toggleAnchorElSettings}>
-            <Avatar src="https://as2.ftcdn.net/v2/jpg/01/42/39/07/1000_F_142390782_d2lz4ZJFf5zlgdzPZyL3AmOY6OoHwlaP.jpg" />
+            <Avatar src={userStore.user$?.profile?.avatar} />
             <Typography sx={typographySX}>
               {userStore.user$?.profile?.full_name
                 ? userStore.user$?.profile?.full_name
