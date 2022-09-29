@@ -4,6 +4,6 @@ export type openDialogTypes = {
   defaultValuesForm: object;
   element: ElementType;
   propsOfElement: object;
-  isUpdate: boolean;
+  textOfSubmit: string;
   header?: string;
 };

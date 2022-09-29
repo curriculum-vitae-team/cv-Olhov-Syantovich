@@ -5,13 +5,13 @@ import { openDialogTypes } from '@store/FullScreenDialogStore/FullScreenDialogSt
 class FullScreenDialogStore {
   header?: string;
   isOpened$ = false;
-  isUpdate$ = false;
+  textOfSubmit$ = '';
   elementToRender?: ElementType;
   defaultValuesForm: object = {};
   propsOfElement: object = {};
   constructor() {
     makeObservable(this, {
-      isUpdate$: observable,
+      textOfSubmit$: observable,
       isOpened$: observable,
       elementToRender: observable,
       propsOfElement: observable,
@@ -19,11 +19,17 @@ class FullScreenDialogStore {
       closeDialog: action
     });
   }
-  openDialog({ defaultValuesForm, element, propsOfElement, isUpdate, header }: openDialogTypes) {
+  openDialog({
+    defaultValuesForm,
+    element,
+    propsOfElement,
+    textOfSubmit,
+    header
+  }: openDialogTypes) {
     this.isOpened$ = true;
     this.header = header;
     this.defaultValuesForm = defaultValuesForm;
-    this.isUpdate$ = isUpdate;
+    this.textOfSubmit$ = textOfSubmit;
     this.elementToRender = element;
     this.propsOfElement = propsOfElement;
   }
@@ -32,6 +38,7 @@ class FullScreenDialogStore {
     this.isOpened$ = false;
     this.elementToRender = undefined;
     this.propsOfElement = {};
+    this.textOfSubmit$ = '';
   };
 }
 export const DialogStore = new FullScreenDialogStore();

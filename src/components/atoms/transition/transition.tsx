@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactElement, Ref } from 'react';
+import { forwardRef, ReactElement, Ref } from 'react';
 import { TransitionProps } from '@mui/material/transitions';
 import Slide from '@mui/material/Slide';
 

@@ -17,6 +17,7 @@ import { EmployeeCv } from '@pages/EmployeeCv';
 import { EmployeeInfo } from '@pages/EmployeeInfo';
 import { CustomizedToast } from '@templates/Toasts/toasts';
 import { userStore } from '@store/UserStore';
+import { FullScreenDialog } from '@templates/FullScreenDialog';
 
 export const AppRouter = () => {
   return (
@@ -24,41 +25,43 @@ export const AppRouter = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<CustomizedToast />}>
-            <Route path={PathEnum.employees} element={<ProtectedRoute guards={[authGuard]} />}>
-              <Route
-                path=""
-                element={
-                  <PageWithNavbar>
-                    <Employees />
-                  </PageWithNavbar>
-                }
-              />
-            </Route>
-            <Route
-              path={PathEnum.languages}
-              element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}
-            >
-              <Route path="*" element={<></>} />
-            </Route>
-
-            <Route element={<ProtectedRoute guards={[authGuard]} />}>
-              <Route element={<EmployeeDetailsTabs />}>
-                <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
-                <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
+            <Route element={<FullScreenDialog />}>
+              <Route path={PathEnum.employees} element={<ProtectedRoute guards={[authGuard]} />}>
+                <Route
+                  path=""
+                  element={
+                    <PageWithNavbar>
+                      <Employees />
+                    </PageWithNavbar>
+                  }
+                />
               </Route>
-            </Route>
+              <Route
+                path={PathEnum.languages}
+                element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}
+              >
+                <Route path="*" element={<></>} />
+              </Route>
 
-            {!userStore.user$ && (
-              <>
-                <Route element={<TabsBetweenSign />}>
-                  <Route path={PathEnum.signIn} element={<SignInPage />} />
-                  <Route path={PathEnum.signUp} element={<SignUpPage />} />
+              <Route element={<ProtectedRoute guards={[authGuard]} />}>
+                <Route element={<EmployeeDetailsTabs />}>
+                  <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
+                  <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
                 </Route>
-                <Route path="*" element={<Navigate to={PathEnum.signIn} replace />} />
-              </>
-            )}
-            <Route path={'/404'} element={<></>} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
+              </Route>
+
+              {!userStore.user$ && (
+                <>
+                  <Route element={<TabsBetweenSign />}>
+                    <Route path={PathEnum.signIn} element={<SignInPage />} />
+                    <Route path={PathEnum.signUp} element={<SignUpPage />} />
+                  </Route>
+                  <Route path="*" element={<Navigate to={PathEnum.signIn} replace />} />
+                </>
+              )}
+              <Route path={'/404'} element={<></>} />
+              <Route path="*" element={<Navigate to="/404" replace />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

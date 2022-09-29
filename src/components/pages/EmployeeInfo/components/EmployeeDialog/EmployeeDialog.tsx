@@ -5,7 +5,7 @@ import {
   avatarSX,
   boxSX
 } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.styles';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_DEPARTMENTS } from '@api/department/queries';
 import { Loader } from '@atoms/loader/loader';
 import { GET_SKILLS } from '@api/skill/queries';
@@ -17,8 +17,10 @@ import { SkillsForm } from '@pages/EmployeeInfo/components/Form/SkillsForm';
 import { LanguagesForm } from '@pages/EmployeeInfo/components/Form/LanguagesForm';
 import { useForm, FormProvider } from 'react-hook-form';
 import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore';
+import { UPDATE_USER } from '@api/user/mutations';
 
 export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
+  const [updateUser] = useMutation(UPDATE_USER);
   const { loading: loadingDepartments, data: departmentsData } = useQuery(GET_DEPARTMENTS);
   const { loading: loadingSkills, data: skillsData } = useQuery(GET_SKILLS);
   const { loading: loadingPositions, data: positionsData } = useQuery(GET_POSITIONS);
@@ -35,7 +37,9 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
     <Box sx={boxSX}>
       <FormProvider {...useForm_}>
         <form
-          onSubmit={useForm_.handleSubmit((data) => alert(JSON.stringify(data)))}
+          onSubmit={useForm_.handleSubmit((data) =>
+            updateUser({ variables: { id: user.id, user: data } })
+          )}
           id="formInDialog"
         >
           <Avatar sx={avatarSX} src={user.profile.full_name || ''} />
@@ -48,8 +52,8 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
                   skills: user.profile.skills,
                   languages: user.profile.languages
                 },
-                departmentId: user.department_name,
-                positionId: user.position_name
+                departmentId: user.department?.id,
+                positionId: user.position?.id
               } as IUpdateUserInput
             }
             departments={departmentsData.departments}

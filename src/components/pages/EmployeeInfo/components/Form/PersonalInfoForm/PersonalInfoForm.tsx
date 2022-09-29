@@ -33,10 +33,10 @@ export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({
         placeholder="Department"
         label="Department"
         defaultValue={personalInfo.departmentId || null}
-        {...register('department_name')}
+        {...register('departmentId')}
       >
         {departments.map(({ name, id }) => (
-          <MenuItem key={id} value={name}>
+          <MenuItem key={id} value={id}>
             {name}
           </MenuItem>
         ))}
@@ -47,10 +47,10 @@ export const PersonalInfoForm: FC<PersonalInfoFormProps> = ({
         placeholder="Position"
         label="Position"
         defaultValue={personalInfo.positionId || null}
-        {...register('position_name')}
+        {...register('positionId')}
       >
         {positions.map(({ name, id }) => (
-          <MenuItem key={id} value={name}>
+          <MenuItem key={id} value={id}>
             {name}
           </MenuItem>
         ))}

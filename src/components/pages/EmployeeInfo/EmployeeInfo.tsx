@@ -9,7 +9,7 @@ import { useQuery } from '@apollo/client';
 import { GET_USER_BY_ID } from '@api/user/queries';
 import { Loader } from '@atoms/loader/loader';
 import { LanguagesInfo } from '@pages/EmployeeInfo/components/Info/LanguagesInfo';
-import { EmployeeDialog } from '@pages/EmployeeInfo/components/EmployeeDialog';
+import { EmployeeDialog } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog';
 import { userStore } from '@store/UserStore';
 import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore';
 
@@ -18,7 +18,6 @@ const EmployeeInfo: FC = () => {
   const { loading, data } = useQuery(GET_USER_BY_ID, {
     variables: { id: id }
   });
-
   if (loading) {
     return <Loader />;
   }
@@ -50,13 +49,19 @@ const EmployeeInfo: FC = () => {
             onClick={() =>
               DialogStore.openDialog({
                 defaultValuesForm: {
-                  profile: { last_name: '', first_name: '', skills: [] },
-                  position_name: '',
-                  department_name: ''
+                  profile: {
+                    last_name: data.user.profile.last_name,
+                    first_name: data.user.profile.first_name,
+                    skills: data.user.profile.skills,
+                    languages: []
+                  },
+                  positionId: data.user.position.id,
+                  departmentId: data.user.department.id,
+                  cvsIds: []
                 },
                 element: EmployeeDialog,
                 propsOfElement: { user: data.user },
-                isUpdate: false,
+                textOfSubmit: 'Update',
                 header: 'Employee'
               })
             }

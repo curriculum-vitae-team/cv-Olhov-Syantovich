@@ -26,7 +26,11 @@ export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
     ].reduce((res, value) => [...res, value.name], [] as string[]);
   }, [allSkills, getValues]);
 
-  const handleSkillAdd = () => append({ skill_name: availableSkills[0], mastery: skillMastery[0] });
+  const handleSkillAdd = () =>
+    append({
+      skill_name: availableSkills[0],
+      mastery: skillMastery[0]
+    });
 
   const handleDelete = (id: number) => () => remove(id);
 

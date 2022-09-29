@@ -30,9 +30,11 @@ export const FullScreenDialog = observer(() => {
             <Typography sx={typographySX} variant="h6">
               {DialogStore.header}
             </Typography>
-            <Button autoFocus color="primary" type="submit" form="formInDialog">
-              {DialogStore.isUpdate$ ? 'Update' : 'Create'}
-            </Button>
+            {DialogStore.textOfSubmit$ && (
+              <Button autoFocus color="primary" type="submit" form="formInDialog">
+                {DialogStore.textOfSubmit$}
+              </Button>
+            )}
           </Toolbar>
         </AppBar>
         {InnerElement && <InnerElement {...DialogStore.propsOfElement} />}
