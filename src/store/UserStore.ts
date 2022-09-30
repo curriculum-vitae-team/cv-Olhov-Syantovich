@@ -3,8 +3,8 @@ import { IUser } from '@interfaces/IUser';
 import { getFromLocalStorage } from '@utils/getFromLocalStorage';
 
 class UserStore {
-  user$: IUser | undefined = getFromLocalStorage('user');
-  token$: string | undefined = getFromLocalStorage('token');
+  user$?: IUser = getFromLocalStorage('user');
+  token$?: string = getFromLocalStorage('token');
   constructor() {
     makeObservable(this, {
       user$: observable,
@@ -14,11 +14,11 @@ class UserStore {
     });
   }
 
-  setToken(token: string) {
+  setToken(token?: string) {
     this.token$ = token;
   }
 
-  setUser(user: IUser) {
+  setUser(user?: IUser) {
     this.user$ = user;
   }
 }

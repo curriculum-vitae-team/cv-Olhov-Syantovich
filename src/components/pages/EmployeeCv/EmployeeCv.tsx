@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { EmployeeDetailsContext } from '@templates/employee-details-tabs/employee-details.context';
 import { getPathToCvs } from '@utils/getPathToCv';
 import { theme } from '@templates/app/app.theme';
+import { PageHeaderStore } from '@store/PageHeaderStore/PageHeaderStore';
 
 const EmployeeCv: FC = () => {
   const { userCvs, setCvTab, cvTab } = useContext(EmployeeDetailsContext);
@@ -18,6 +19,10 @@ const EmployeeCv: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    PageHeaderStore.setPageInfo({ header: 'Employee', description: "Employee's CV" });
+  }, []);
+
+  useEffect(() => {
     if (cvId && !userCvs.find((cv) => cv.id === cvId)) {
       navigate(getPathToCvs(userCvs, id as string));
     }
@@ -26,41 +31,38 @@ const EmployeeCv: FC = () => {
   const handleChange = (event: SyntheticEvent, newValue: string) => setCvTab(newValue);
 
   return (
-    <>
-      <TemplateCv>
-        <Tabs
-          value={cvTab}
-          onChange={handleChange}
-          variant="scrollable"
-          scrollButtons={false}
-          orientation={wideScreen ? 'vertical' : 'horizontal'}
-          sx={{ width: { md: '200px' } }}
-        >
-          {userCvs.map(({ id: cvId, name }) => (
-            <Tab
-              key={cvId}
-              value={name}
-              label={name}
-              component={Link}
-              to={PathEnum.cvDetails.replace(':id', id as string).replace(':cvId', cvId)}
-            />
-          ))}
-          <WrapRow>
-            <IconButton>
-              <AddIcon />
-            </IconButton>
-          </WrapRow>
-        </Tabs>
+    <TemplateCv>
+      <Tabs
+        value={cvTab}
+        onChange={handleChange}
+        variant="scrollable"
+        scrollButtons={false}
+        orientation={wideScreen ? 'vertical' : 'horizontal'}
+      >
+        {userCvs.map(({ id: cvId, name }) => (
+          <Tab
+            key={cvId}
+            value={name}
+            label={name}
+            component={Link}
+            to={PathEnum.cvDetails.replace(':id', id as string).replace(':cvId', cvId)}
+          />
+        ))}
+        <WrapRow>
+          <IconButton>
+            <AddIcon />
+          </IconButton>
+        </WrapRow>
+      </Tabs>
 
-        {!userCvs.length && (
-          <Typography variant="h4" textAlign="center">
-            {"The user doesn't have any CVs"}
-          </Typography>
-        )}
+      {!userCvs.length && (
+        <Typography variant="h4" textAlign="center">
+          {"The user doesn't have any CVs"}
+        </Typography>
+      )}
 
-        <Outlet />
-      </TemplateCv>
-    </>
+      <Outlet />
+    </TemplateCv>
   );
 };
 

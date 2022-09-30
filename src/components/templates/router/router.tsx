@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
 import { userStore } from '@store/UserStore';
+import { observer } from 'mobx-react-lite';
 
 import { authGuard } from '@templates/router/guards/authGuard';
 import { roleGuard } from '@templates/router/guards/roleGuard';
@@ -19,38 +20,38 @@ import { EmployeeCv } from '@pages/EmployeeCv';
 import { EmployeeInfo } from '@pages/EmployeeInfo';
 import { CustomizedToast } from '@templates/Toasts/toasts';
 import { CvDetails } from '@pages/CvDetails';
+import { PageHeader } from '@molecules/page-header';
 
-export const AppRouter = () => {
+export const AppRouter = observer(() => {
   return (
     <Suspense fallback={<Loader />}>
       <BrowserRouter>
         <Routes>
           <Route element={<CustomizedToast />}>
-            <Route path={PathEnum.employees} element={<ProtectedRoute guards={[authGuard]} />}>
-              <Route
-                path=""
-                element={
-                  <PageWithNavbar>
-                    <Employees />
-                  </PageWithNavbar>
-                }
-              />
-            </Route>
-            <Route
-              path={PathEnum.languages}
-              element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}
-            >
-              <Route path="*" element={<></>} />
-            </Route>
-            <Route element={<EmployeeDetailsTabs />}>
-              <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
-              <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
-              <Route element={<EmployeeCv />}>
-                <Route path={PathEnum.cvDetails} element={<CvDetails />} />
+            <Route element={<PageWithNavbar />}>
+              <Route element={<PageHeader />}>
+                <Route path={PathEnum.employees} element={<ProtectedRoute guards={[authGuard]} />}>
+                  <Route path="" element={<Employees />} />
+                </Route>
+                <Route
+                  path={PathEnum.languages}
+                  element={<ProtectedRoute guards={[authGuard, roleGuard(RolesEnum.admin)]} />}
+                >
+                  <Route path="*" element={<></>} />
+                </Route>
+
+                <Route element={<ProtectedRoute guards={[authGuard]} />}>
+                  <Route element={<EmployeeDetailsTabs />}>
+                    <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
+                    <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
+                    <Route element={<EmployeeCv />}>
+                      <Route path={PathEnum.cvDetails} element={<CvDetails />} />
+                    </Route>
+                  </Route>
+                </Route>
               </Route>
             </Route>
-
-            {!userStore.user$ && (
+            {!userStore.user$ && !userStore.token$ && (
               <>
                 <Route element={<TabsBetweenSign />}>
                   <Route path={PathEnum.signIn} element={<SignInPage />} />
@@ -66,4 +67,4 @@ export const AppRouter = () => {
       </BrowserRouter>
     </Suspense>
   );
-};
+});

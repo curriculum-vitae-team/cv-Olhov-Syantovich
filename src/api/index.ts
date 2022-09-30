@@ -10,7 +10,16 @@ const httpLink = createHttpLink({
 });
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
-    graphQLErrors.forEach(({ message }) => ToastStore.addToast(SeverityEnum.error, message));
+    graphQLErrors.forEach(({ message }) => {
+      if (message === 'Unauthorized') {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        userStore.setToken(undefined);
+        userStore.setUser(undefined);
+      }
+
+      ToastStore.addToast(SeverityEnum.error, message);
+    });
 
   if (networkError) ToastStore.addToast(SeverityEnum.error, `[Network error]: ${networkError}`);
 });

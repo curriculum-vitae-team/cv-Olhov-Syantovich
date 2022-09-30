@@ -4,7 +4,6 @@ import { PathEnum } from '@templates/router/router.types';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { Loader } from '@atoms/loader/loader';
 import { WrapPageInfo } from '@atoms/wrap-page-info';
-import { PageWithNavbar } from '@templates/page-with-navbar';
 import { useQuery } from '@apollo/client';
 import { ICv } from '@interfaces/ICv';
 import { GET_CVS } from '@api/cv/queries';
@@ -42,29 +41,22 @@ export const EmployeeDetailsTabs = () => {
   }
 
   return (
-    <PageWithNavbar>
-      <WrapPageInfo>
-        <EmployeeDetailsContext.Provider value={context}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab
-              value="Info"
-              label={'Info'}
-              component={Link}
-              to={PathEnum.employeeInfo.replace(':id', id || '')}
-            />
-            <Tab
-              value="CV"
-              label={'CV'}
-              component={Link}
-              to={getPathToCvs(userCvs, id as string)}
-            />
-          </Tabs>
-          <Divider />
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
-        </EmployeeDetailsContext.Provider>
-      </WrapPageInfo>
-    </PageWithNavbar>
+    <WrapPageInfo>
+      <EmployeeDetailsContext.Provider value={context}>
+        <Tabs value={value} onChange={handleChange}>
+          <Tab
+            value="Info"
+            label={'Info'}
+            component={Link}
+            to={PathEnum.employeeInfo.replace(':id', id || '')}
+          />
+          <Tab value="CV" label={'CV'} component={Link} to={getPathToCvs(userCvs, id as string)} />
+        </Tabs>
+        <Divider />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
+      </EmployeeDetailsContext.Provider>
+    </WrapPageInfo>
   );
 };
