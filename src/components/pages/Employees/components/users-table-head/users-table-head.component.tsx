@@ -3,11 +3,15 @@ import { TableCell, TableRow, TextField } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { TableSortCell } from '@atoms/table-sort-cell';
 import { IUser } from '@interfaces/IUser';
-import { useTableContext } from '@hooks/use-table-context.hook';
+import { TableHeadProps } from '@templates/table/table.types';
 
-const UsersTableHead = () => {
-  const { search, sortBy, order, handleSearch, handleSort } = useTableContext<IUser>();
-
+const UsersTableHead = ({
+  search,
+  sortBy,
+  order,
+  handleSort,
+  handleSearch
+}: TableHeadProps<IUser>) => {
   return (
     <>
       <TableRow sx={{ top: 205 }}>
