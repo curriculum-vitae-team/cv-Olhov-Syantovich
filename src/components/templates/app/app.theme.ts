@@ -21,16 +21,25 @@ export const theme = createTheme({
           borderColor: 'white',
           fontFamily: 'Poppins',
           color: 'rgba(255, 255, 255, 1)',
-          fontWeight: 600,
-          '&:hover': {
-            backgroundColor: 'rgb(55, 55, 55)'
-          }
+          fontWeight: 600
         },
         textPrimary: {
-          backgroundColor: '#757de8'
+          backgroundColor: '#757de8',
+          '&:hover': {
+            backgroundColor: 'rgba(100,100,200,0.9)'
+          }
+        },
+        textError: {
+          backgroundColor: '#96001E',
+          '&:hover': {
+            backgroundColor: 'rgba(130,0,20,0.9)'
+          }
         },
         textSecondary: {
-          backgroundColor: '#666'
+          backgroundColor: '#666',
+          '&:hover': {
+            backgroundColor: 'rgba(90,90,90,0.9)'
+          }
         }
       }
     },
@@ -53,8 +62,7 @@ export const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: 'rgba(255, 255, 255, 1)',
-          backgroundColor: 'rgb(44, 44, 44)'
+          color: 'rgba(255, 255, 255, 1)'
         }
       }
     },
@@ -125,7 +133,10 @@ export const theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
-          color: 'rgba(255, 255, 255, 1)'
+          margin: '10px 0',
+          color: 'rgba(255, 255, 255, 1)',
+          height: 40,
+          width: 40
         }
       }
     },

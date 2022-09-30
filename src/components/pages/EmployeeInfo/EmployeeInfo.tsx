@@ -16,9 +16,11 @@ const EmployeeInfo: FC = () => {
   const { loading, data } = useQuery(GET_USER_BY_ID, {
     variables: { id: id }
   });
+
   useEffect(() => {
     PageHeaderStore.setPageInfo({ header: 'Employees', description: "Employee's details" });
   }, []);
+
   if (loading) {
     return <Loader />;
   }

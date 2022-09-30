@@ -3,7 +3,8 @@ export enum PathEnum {
   signUp = 'signup',
   employees = 'employees',
   employeeInfo = 'employees/:id',
-  employeeCv = 'employees/:id/cvs',
+  employeeCv = '/employees/:id/cvs',
+  cvDetails = '/employees/:id/cvs/:cvId',
   notFound = '404',
   languages = 'languages'
 }
