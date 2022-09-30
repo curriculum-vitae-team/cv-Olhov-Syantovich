@@ -1,6 +1,5 @@
 import { FC, MouseEvent } from 'react';
-import PersonIcon from '@mui/icons-material/Person';
-import LogoutIcon from '@mui/icons-material/Logout';
+import { Person, Logout } from '@mui/icons-material';
 
 export interface ISettingsMenuProps {
   anchorElSettings: null | HTMLElement;
@@ -13,6 +12,6 @@ interface ISettingsMenuItem {
 }
 
 export const settingsMenuList: ISettingsMenuItem[] = [
-  { IconComponent: PersonIcon, setting: 'Profile' },
-  { IconComponent: LogoutIcon, setting: 'Logout' }
+  { IconComponent: Person, setting: 'Profile' },
+  { IconComponent: Logout, setting: 'Logout' }
 ];

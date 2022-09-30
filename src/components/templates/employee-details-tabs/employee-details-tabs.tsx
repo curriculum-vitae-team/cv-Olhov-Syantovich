@@ -2,7 +2,7 @@ import { Suspense, SyntheticEvent, useEffect, useMemo, useState } from 'react';
 import { Tabs, Tab, Divider } from '@mui/material';
 import { PathEnum } from '@templates/router/router.types';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { Loader } from '@atoms/loader/loader';
+import { Loader } from '@atoms/loader';
 import { WrapPageInfo } from '@atoms/wrap-page-info';
 import { useQuery } from '@apollo/client';
 import { ICv } from '@interfaces/ICv';

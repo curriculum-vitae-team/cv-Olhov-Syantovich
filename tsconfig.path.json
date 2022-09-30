@@ -7,7 +7,6 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@utils/*": ["src/utils/*"],
       "@constants/*": ["src/constants/*"],
-      "@helpers/*": ["src/helpers/*"],
       "@atoms/*": ["src/components/atoms/*"],
       "@molecules/*": ["src/components/molecules/*"],
       "@organisms/*": ["src/components/organisms/*"],

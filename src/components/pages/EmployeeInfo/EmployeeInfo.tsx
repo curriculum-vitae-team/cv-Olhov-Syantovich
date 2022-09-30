@@ -6,7 +6,7 @@ import { SkillsInfo } from '@pages/EmployeeInfo/components/SkillsInfo';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_USER_BY_ID } from '@api/user/queries';
-import { Loader } from '@atoms/loader/loader';
+import { Loader } from '@atoms/loader';
 import { LanguagesInfo } from '@pages/EmployeeInfo/components/LanguagesInfo';
 import { userStore } from '@store/UserStore';
 import { PageHeaderStore } from '@store/PageHeaderStore/PageHeaderStore';

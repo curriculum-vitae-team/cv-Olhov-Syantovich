@@ -11,7 +11,7 @@ import { PathEnum } from '@templates/router/router.types';
 import { ProtectedRoute } from '@templates/router/protected-route';
 import { SignInPage } from '@pages/SignIn';
 import { SignUpPage } from '@pages/SignUp';
-import { Loader } from '@atoms/loader/loader';
+import { Loader } from '@atoms/loader';
 import { Employees } from '@pages/Employees';
 import { PageWithNavbar } from '@templates/page-with-navbar';
 import { TabsBetweenSign } from '@templates/tabs-between-sign/tabs-between-sign';
