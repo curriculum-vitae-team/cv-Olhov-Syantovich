@@ -1,6 +1,9 @@
 import { Suspense } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
+import { userStore } from '@store/UserStore';
+import { observer } from 'mobx-react-lite';
+
 import { authGuard } from '@templates/router/guards/authGuard';
 import { roleGuard } from '@templates/router/guards/roleGuard';
 import { RolesEnum } from '@constants/user-roles.enum';
@@ -16,9 +19,8 @@ import { EmployeeDetailsTabs } from '@templates/employee-details-tabs/employee-d
 import { EmployeeCv } from '@pages/EmployeeCv';
 import { EmployeeInfo } from '@pages/EmployeeInfo';
 import { CustomizedToast } from '@templates/Toasts/toasts';
-import { userStore } from '@store/UserStore';
+import { CvDetails } from '@pages/CvDetails';
 import { PageHeader } from '@molecules/page-header';
-import { observer } from 'mobx-react-lite';
 
 export const AppRouter = observer(() => {
   return (
@@ -42,6 +44,9 @@ export const AppRouter = observer(() => {
                   <Route element={<EmployeeDetailsTabs />}>
                     <Route path={PathEnum.employeeInfo} element={<EmployeeInfo />} />
                     <Route path={PathEnum.employeeCv} element={<EmployeeCv />} />
+                    <Route element={<EmployeeCv />}>
+                      <Route path={PathEnum.cvDetails} element={<CvDetails />} />
+                    </Route>
                   </Route>
                 </Route>
               </Route>
