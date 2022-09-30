@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { ISignInDataForm } from '@pages/SignIn/SignIn.interface';
@@ -8,7 +8,7 @@ import { PathEnum } from '@templates/router/router.types';
 import { useNavigate } from 'react-router-dom';
 
 export const useSignIn = () => {
-  const { data, error, loading, refetch } = useQuery(LOGIN);
+  const [login, { data, error, loading }] = useLazyQuery(LOGIN);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,8 +21,8 @@ export const useSignIn = () => {
     }
   }, [data, error, navigate]);
   const onSubmit: SubmitHandler<ISignInDataForm> = ({ email, password }) => {
-    refetch({
-      auth: { email, password }
+    login({
+      variables: { auth: { email, password } }
     });
   };
   return { onSubmit, error, loading };

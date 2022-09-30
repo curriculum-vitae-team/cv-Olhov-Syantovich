@@ -1,13 +1,31 @@
 import { FC } from 'react';
-import { AppBar, Typography } from '@mui/material';
-import { PageHeaderProps } from '@molecules/page-header/page-header.types';
+import { AppBar, Typography, Container } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+import { Breadcrumb } from '@organisms/breadcrumbs/breadcrumbs';
+import { PageHeaderStore } from '@store/PageHeaderStore/PageHeaderStore';
+import { observer } from 'mobx-react-lite';
 
-export const PageHeader: FC<PageHeaderProps> = ({ header, description }) => {
+export const PageHeader: FC = observer(() => {
   return (
-    <AppBar position="sticky" sx={{ top: 64, background: '#212121', boxShadow: 'none', zIndex: 1 }}>
-      <Typography variant="h6">Breadcrumbs</Typography>
-      <Typography variant="h3">{header}</Typography>
-      <Typography variant="h6">{description}</Typography>
-    </AppBar>
+    <>
+      <AppBar
+        sx={{
+          top: 44,
+          right: 0,
+          width: '100%',
+          background: '#212121',
+          boxShadow: 'none',
+          zIndex: 1,
+          padding: '30px 20px 0 40px'
+        }}
+      >
+        <Breadcrumb config={{ employees: 'Employees' }} />
+        <Typography variant="h3">{PageHeaderStore.header$}</Typography>
+        <Typography variant="h6">{PageHeaderStore.description$}</Typography>
+      </AppBar>
+      <Container maxWidth="xl" sx={{ marginTop: '230px' }}>
+        <Outlet />
+      </Container>
+    </>
   );
-};
+});

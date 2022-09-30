@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import { PageHeader } from '@molecules/page-header';
+import { FC, useEffect } from 'react';
 import { PersonalInfo } from '@pages/EmployeeInfo/components/Info/PersonalInfo';
 import { Button, Divider } from '@mui/material';
 import { WrapRow } from '@atoms/wrap-row';
@@ -11,6 +10,7 @@ import { Loader } from '@atoms/loader/loader';
 import { LanguagesInfo } from '@pages/EmployeeInfo/components/Info/LanguagesInfo';
 import { EmployeeDialog } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog';
 import { userStore } from '@store/UserStore';
+import { PageHeaderStore } from '@store/PageHeaderStore/PageHeaderStore';
 import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore';
 
 const EmployeeInfo: FC = () => {
@@ -18,14 +18,17 @@ const EmployeeInfo: FC = () => {
   const { loading, data } = useQuery(GET_USER_BY_ID, {
     variables: { id: id }
   });
+
+  useEffect(() => {
+    PageHeaderStore.setPageInfo({ header: 'Employees', description: "Employee's details" });
+  }, []);
+
   if (loading) {
     return <Loader />;
   }
 
   return (
     <>
-      <PageHeader header={'Employees'} description={`Employee's details`} />
-
       <PersonalInfo user={data.user} />
 
       {!!data.user.profile.skills.length && (
