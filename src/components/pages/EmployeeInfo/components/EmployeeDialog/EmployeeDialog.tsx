@@ -15,11 +15,12 @@ import { IUpdateUserInput } from '@interfaces/inputs/IUpdateUserInput';
 import { PersonalInfoForm } from '@pages/EmployeeInfo/components/Form/PersonalInfoForm';
 import { SkillsForm } from '@pages/EmployeeInfo/components/Form/SkillsForm';
 import { LanguagesForm } from '@pages/EmployeeInfo/components/Form/LanguagesForm';
-import { useForm, FormProvider } from 'react-hook-form';
-import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore';
+import { FormProvider, useForm } from 'react-hook-form';
 import { UPDATE_USER } from '@api/user/mutations';
+import { ToastStore } from '@store/toastStore/ToastsStore';
+import { SeverityEnum } from '@store/toastStore/ToastsStore.type';
 
-export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
+export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {} }) => {
   const [updateUser] = useMutation(UPDATE_USER);
   const { loading: loadingDepartments, data: departmentsData } = useQuery(GET_DEPARTMENTS);
   const { loading: loadingSkills, data: skillsData } = useQuery(GET_SKILLS);
@@ -27,7 +28,17 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
   const { loading: loadingLanguages, data: languagesData } = useQuery(GET_LANGUAGES);
 
   const useForm_ = useForm({
-    defaultValues: DialogStore.defaultValuesForm
+    defaultValues: {
+      profile: {
+        last_name: user.profile?.last_name || '',
+        first_name: user.profile?.first_name || '',
+        skills: user.profile?.skills || '',
+        languages: []
+      },
+      positionId: user.position?.id || '',
+      departmentId: user.department?.id || '',
+      cvsIds: []
+    }
   });
 
   if (loadingDepartments || loadingSkills || loadingPositions || loadingLanguages) {
@@ -38,24 +49,15 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
       <FormProvider {...useForm_}>
         <form
           onSubmit={useForm_.handleSubmit((data) =>
-            updateUser({ variables: { id: user.id, user: data } })
+            updateUser({ variables: { id: user.id, user: data } }).then(() =>
+              ToastStore.addToast(SeverityEnum.success, 'Success')
+            )
           )}
           id="formInDialog"
         >
-          <Avatar sx={avatarSX} src={user.profile.full_name || ''} />
+          <Avatar sx={avatarSX} src={user.profile?.full_name || ''} />
           <PersonalInfoForm
-            personalInfo={
-              {
-                profile: {
-                  first_name: user.profile.first_name,
-                  last_name: user.profile.last_name,
-                  skills: user.profile.skills,
-                  languages: user.profile.languages
-                },
-                departmentId: user.department?.id,
-                positionId: user.position?.id
-              } as IUpdateUserInput
-            }
+            personalInfo={useForm_.getValues() as IUpdateUserInput}
             departments={departmentsData.departments}
             positions={positionsData.positions}
           />
@@ -63,7 +65,7 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user }) => {
           <SkillsForm allSkills={skillsData.skills} />
           <Divider />
           <LanguagesForm
-            languages={user.profile.languages}
+            languages={user.profile?.languages || []}
             allAvailableLanguages={languagesData.languages}
           />
         </form>

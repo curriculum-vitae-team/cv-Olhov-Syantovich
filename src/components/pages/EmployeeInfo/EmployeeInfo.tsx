@@ -48,19 +48,7 @@ const EmployeeInfo: FC = () => {
             color="primary"
             onClick={() =>
               DialogStore.openDialog({
-                defaultValuesForm: {
-                  profile: {
-                    last_name: data.user.profile.last_name,
-                    first_name: data.user.profile.first_name,
-                    skills: data.user.profile.skills,
-                    languages: []
-                  },
-                  positionId: data.user.position.id,
-                  departmentId: data.user.department.id,
-                  cvsIds: []
-                },
-                element: EmployeeDialog,
-                propsOfElement: { user: data.user },
+                element: <EmployeeDialog user={data.user} />,
                 textOfSubmit: 'Update',
                 header: 'Employee'
               })

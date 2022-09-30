@@ -1,9 +1,5 @@
-import { ElementType } from 'react';
-
 export type openDialogTypes = {
-  defaultValuesForm: object;
-  element: ElementType;
-  propsOfElement: object;
+  element: JSX.Element;
   textOfSubmit: string;
   header?: string;
 };

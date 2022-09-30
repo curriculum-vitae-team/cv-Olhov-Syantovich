@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -13,7 +12,7 @@ import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore'
 import { observer } from 'mobx-react-lite';
 
 export const FullScreenDialog = observer(() => {
-  const InnerElement: React.ElementType | undefined = DialogStore.elementToRender;
+  const InnerElement: JSX.Element | undefined = DialogStore.elementToRender;
   return (
     <>
       <Dialog
@@ -37,7 +36,7 @@ export const FullScreenDialog = observer(() => {
             )}
           </Toolbar>
         </AppBar>
-        {InnerElement && <InnerElement {...DialogStore.propsOfElement} />}
+        {InnerElement}
       </Dialog>
       <Outlet />
     </>
