@@ -5,13 +5,13 @@ import {
   boxSX,
   emailSX,
   wrapSX
-} from '@pages/EmployeeInfo/components/PersonalInformation/PersonalInformation.styles';
-import { PersonalInformationProps } from '@pages/EmployeeInfo/components/PersonalInformation/PersonalInformation.types';
+} from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.styles';
+import { PersonalInformationProps } from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.types';
 
-export const PersonalInformation: FC<PersonalInformationProps> = ({ user }) => {
+export const PersonalInfo: FC<PersonalInformationProps> = ({ user }) => {
   return (
     <Box sx={wrapSX}>
-      <Avatar sx={avatarSX} src={user.profile.full_name || ''} />
+      <Avatar sx={avatarSX} src={user.profile.avatar || ''} />
       <Typography variant={'h3'}>{user.profile.full_name || ''}</Typography>
       <Typography variant={'h5'} sx={emailSX}>
         {user.email || 'vitalyableat@gmail.com'}

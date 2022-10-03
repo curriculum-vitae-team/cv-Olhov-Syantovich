@@ -26,6 +26,7 @@ export const GET_USER_BY_ID = gql`
       id
       email
       profile {
+        avatar
         first_name
         last_name
         full_name
@@ -37,6 +38,12 @@ export const GET_USER_BY_ID = gql`
           language_name
           proficiency
         }
+      }
+      department {
+        id
+      }
+      position {
+        id
       }
       department_name
       position_name

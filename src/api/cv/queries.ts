@@ -9,15 +9,6 @@ export const GET_CVS = gql`
       description
       user {
         id
-        email
-        created_at
-        profile {
-          first_name
-          last_name
-        }
-        department_name
-        position_name
-        role
       }
       skills {
         skill_name
