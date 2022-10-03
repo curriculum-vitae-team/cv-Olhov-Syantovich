@@ -5,10 +5,10 @@ import {
   boxSX,
   emailSX,
   wrapSX
-} from '@pages/EmployeeInfo/components/PersonalInformation/PersonalInformation.styles';
-import { PersonalInformationProps } from '@pages/EmployeeInfo/components/PersonalInformation/PersonalInformation.types';
+} from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.styles';
+import { PersonalInformationProps } from '@pages/EmployeeInfo/components/Info/PersonalInfo/PersonalInfo.types';
 
-export const PersonalInformation: FC<PersonalInformationProps> = ({ user }) => {
+export const PersonalInfo: FC<PersonalInformationProps> = ({ user }) => {
   return (
     <Box sx={wrapSX}>
       <Avatar sx={avatarSX} src={user.profile.avatar || ''} />

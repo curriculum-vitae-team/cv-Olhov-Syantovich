@@ -39,6 +39,12 @@ export const GET_USER_BY_ID = gql`
           proficiency
         }
       }
+      department {
+        id
+      }
+      position {
+        id
+      }
       department_name
       position_name
       role
