@@ -1,29 +1,17 @@
-import { ChangeEvent, memo, useCallback } from 'react';
-import { Path } from 'react-hook-form';
+import { memo } from 'react';
 import { TableCell, TableRow, TextField } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { TableSortCell } from '@atoms/table-sort-cell';
 import { IUser } from '@interfaces/IUser';
-import { useTableContext } from '@hooks/use-table-context.hook';
+import { TableHeadProps } from '@templates/table/table.types';
 
-const UsersTableHead = () => {
-  const { search, sortBy, order, setSearch, setSortBy, toggleOrder } = useTableContext<IUser>();
-
-  const handleSearch = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setSearch && setSearch(event.target.value);
-    },
-    [setSearch]
-  );
-
-  const handleSort = useCallback(
-    (sortKey: Path<IUser>) => () => {
-      setSortBy && setSortBy(sortKey);
-      sortKey === sortBy && toggleOrder && toggleOrder();
-    },
-    [sortBy, setSortBy, toggleOrder]
-  );
-
+const UsersTableHead = ({
+  search,
+  sortBy,
+  order,
+  handleSort,
+  handleSearch
+}: TableHeadProps<IUser>) => {
   return (
     <>
       <TableRow sx={{ top: 205 }}>

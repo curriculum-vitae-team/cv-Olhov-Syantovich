@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
-import { wrapSX, titleSX } from '@pages/EmployeeInfo/components/SkillsInfo/SkillsInfo.styles';
-import { SkillsInfoProps } from '@pages/EmployeeInfo/components/SkillsInfo/SkillsInfo.types';
+import { wrapSX, titleSX } from '@pages/EmployeeInfo/components/Info/SkillsInfo/SkillsInfo.styles';
+import { SkillsInfoProps } from '@pages/EmployeeInfo/components/Info/SkillsInfo/SkillsInfo.types';
 
 export const SkillsInfo: FC<SkillsInfoProps> = ({ skills }) => {
   return (

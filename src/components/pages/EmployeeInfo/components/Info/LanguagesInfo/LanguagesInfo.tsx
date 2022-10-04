@@ -1,7 +1,10 @@
 import { FC } from 'react';
-import { LanguagesInfoProps } from '@pages/EmployeeInfo/components/LanguagesInfo/LanguagesInfo.types';
+import { LanguagesInfoProps } from '@pages/EmployeeInfo/components/Info/LanguagesInfo/LanguagesInfo.types';
 import { Box, Typography } from '@mui/material';
-import { wrapSX, titleSX } from '@pages/EmployeeInfo/components/LanguagesInfo/LanguagesInfo.styles';
+import {
+  wrapSX,
+  titleSX
+} from '@pages/EmployeeInfo/components/Info/LanguagesInfo/LanguagesInfo.styles';
 
 export const LanguagesInfo: FC<LanguagesInfoProps> = ({ languages }) => {
   return (
