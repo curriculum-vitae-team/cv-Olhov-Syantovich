@@ -1,14 +1,14 @@
 import { useLocation } from 'react-router-dom';
-import { Breadcrumbs, Typography } from '@mui/material';
+import { Breadcrumbs as Breadcrumb, Typography } from '@mui/material';
 
 import { BreadcrumbsProps } from '@organisms/breadcrumbs/breadcrumbs.types';
-import { LinkTo } from '@atoms/link-to/LinkTo';
+import { LinkTo } from '@atoms/link-to';
 
-export const Breadcrumb = ({ config = {} }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ config = {} }: BreadcrumbsProps) => {
   const { pathname } = useLocation();
   const crumbs = pathname.split('/').filter((e) => e);
   return (
-    <Breadcrumbs aria-label="breadcrumb">
+    <Breadcrumb aria-label="breadcrumb">
       {crumbs.map((crumb, index, array) => {
         const routeTo = crumbs.slice(0, index + 1).join('/');
         const configItem = config[crumb] || crumb;
@@ -20,6 +20,6 @@ export const Breadcrumb = ({ config = {} }: BreadcrumbsProps) => {
           </LinkTo>
         );
       })}
-    </Breadcrumbs>
+    </Breadcrumb>
   );
 };

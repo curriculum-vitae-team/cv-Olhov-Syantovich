@@ -1,7 +1,6 @@
 import { FC, useState, forwardRef } from 'react';
 import { IconButton, InputAdornment, TextField, TextFieldProps } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export const InputPassword: FC<TextFieldProps> = forwardRef((props: TextFieldProps, ref) => {
   const [visible, setVisible] = useState<boolean>(false);

@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import Box from '@mui/material/Box';
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box } from '@mui/material';
 import { navigationMenuList } from '@molecules/navigation-menu/navigation-menu.types';
 import { boxSX } from '@molecules/navigation-menu/navigation-menu.styles';
 
@@ -22,5 +21,3 @@ export const NavigationMenu: FC = () => {
     </Box>
   );
 };
-
-export default NavigationMenu;

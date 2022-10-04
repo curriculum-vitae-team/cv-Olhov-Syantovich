@@ -1,8 +1,8 @@
 import { memo, useState, useDeferredValue, FC, useCallback, ChangeEvent } from 'react';
 import { Table, TableBody, TableHead } from '@mui/material';
 import { SortOrder } from '@constants/sort-order.constant';
-import { handleSearch as handleSearchHelpers } from '@helpers/table-search.helper';
-import { handleOrder, handleSort as handleSortHelpers } from '@helpers/table-sort.helper';
+import { handleSearch as handleSearchHelpers } from '@utils/table/table-search.helper';
+import { handleOrder, handleSort as handleSortHelpers } from '@utils/table/table-sort.helper';
 import { Item, TableProps } from './table.types';
 import { Path } from 'react-hook-form';
 

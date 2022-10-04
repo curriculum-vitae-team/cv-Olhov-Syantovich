@@ -5,7 +5,7 @@ import { WrapRow } from '@atoms/wrap-row';
 import { userStore } from '@store/UserStore';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { useMutation, useQuery } from '@apollo/client';
-import { Loader } from '@atoms/loader/loader';
+import { Loader } from '@atoms/loader';
 import { ICv } from '@interfaces/ICv';
 import { GET_CV_BY_ID } from '@api/cv/queries';
 import { UNBIND_CV } from '@api/cv/mutations';

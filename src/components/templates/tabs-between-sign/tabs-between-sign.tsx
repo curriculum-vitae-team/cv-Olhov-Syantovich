@@ -2,7 +2,7 @@ import React, { Suspense, useState } from 'react';
 import { Tabs, Tab, AppBar } from '@mui/material';
 import { PathEnum } from '@templates/router/router.types';
 import { Link, Outlet } from 'react-router-dom';
-import { Loader } from '@atoms/loader/loader';
+import { Loader } from '@atoms/loader';
 
 export const TabsBetweenSign = () => {
   const [value, setValue] = useState(0);
