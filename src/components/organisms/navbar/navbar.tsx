@@ -1,11 +1,15 @@
 import { useState, MouseEvent } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import TranslateIcon from '@mui/icons-material/Translate';
-import { Avatar, Drawer, MenuItem, Typography } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Avatar,
+  Drawer,
+  MenuItem,
+  Typography
+} from '@mui/material';
+import { Menu, Translate } from '@mui/icons-material';
 import { NavigationMenu } from '@molecules/navigation-menu';
 import { SettingsMenu } from '@molecules/settings-menu';
 import { LanguageMenu } from '@molecules/language-menu';
@@ -39,7 +43,7 @@ export const Navbar = () => {
         <Toolbar>
           <Box sx={boxToolbarSX}>
             <IconButton size="large" edge="start" color="inherit" onClick={toggleDrawer}>
-              <MenuIcon />
+              <Menu />
             </IconButton>
           </Box>
 
@@ -53,7 +57,7 @@ export const Navbar = () => {
           </MenuItem>
 
           <IconButton size="large" edge="start" color="inherit" onClick={toggleAnchorElLanguage}>
-            <TranslateIcon />
+            <Translate />
           </IconButton>
         </Toolbar>
       </AppBar>

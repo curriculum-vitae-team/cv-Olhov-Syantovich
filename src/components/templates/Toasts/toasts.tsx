@@ -1,10 +1,9 @@
 import { Suspense } from 'react';
-import Stack from '@mui/material/Stack';
-import MuiAlert from '@mui/material/Alert';
+import { Stack, Alert } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { ToastStore } from '@store/toastStore/ToastsStore';
-import { Loader } from '@atoms/loader/loader';
+import { Loader } from '@atoms/loader';
 import { AlertStyleSX, StackStyleSX } from '@templates/Toasts/toast.style';
 
 export const CustomizedToast = observer(() => {
@@ -23,7 +22,7 @@ export const CustomizedToast = observer(() => {
         {ToastStore.toasts$.map(
           (toast) =>
             toast && (
-              <MuiAlert
+              <Alert
                 key={toast.id}
                 severity={toast.severity}
                 sx={AlertStyleSX}
@@ -32,7 +31,7 @@ export const CustomizedToast = observer(() => {
                 onClose={handleClose(toast.id)}
               >
                 {toast.message}
-              </MuiAlert>
+              </Alert>
             )
         )}
       </Stack>
