@@ -1,3 +1,5 @@
 export interface IDeleteResult {
-  affected: number;
+  deleteUser: {
+    affected: number;
+  };
 }
