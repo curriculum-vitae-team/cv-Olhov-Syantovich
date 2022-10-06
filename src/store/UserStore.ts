@@ -16,10 +16,16 @@ class UserStore {
 
   setToken(token?: string) {
     this.token$ = token;
+    if (token === undefined) {
+      localStorage.removeItem('token');
+    }
   }
 
   setUser(user?: IUser) {
     this.user$ = user;
+    if (user === undefined) {
+      localStorage.removeItem('user');
+    }
   }
 }
 
