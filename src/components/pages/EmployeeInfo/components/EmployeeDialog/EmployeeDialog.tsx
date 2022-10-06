@@ -19,9 +19,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { UPDATE_USER } from '@api/user/mutations';
 import { ToastStore } from '@store/toastStore/ToastsStore';
 import { SeverityEnum } from '@store/toastStore/ToastsStore.type';
+import { updateUserCacheUpdate } from '@api/user/cache';
+import { IUpdateUserOutput } from '@interfaces/results/IUpdateUserOutput';
 
 export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {} }) => {
-  const [updateUser] = useMutation(UPDATE_USER);
+  const [updateUser] = useMutation<IUpdateUserOutput, { id?: string; user: IUpdateUserInput }>(
+    UPDATE_USER
+  );
   const { loading: loadingDepartments, data: departmentsData } = useQuery(GET_DEPARTMENTS);
   const { loading: loadingSkills, data: skillsData } = useQuery(GET_SKILLS);
   const { loading: loadingPositions, data: positionsData } = useQuery(GET_POSITIONS);
@@ -32,7 +36,7 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {} }) => {
       profile: {
         last_name: user.profile?.last_name || '',
         first_name: user.profile?.first_name || '',
-        skills: user.profile?.skills || '',
+        skills: user.profile?.skills || [],
         languages: []
       },
       positionId: user.position?.id || '',
@@ -49,9 +53,10 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {} }) => {
       <FormProvider {...useForm_}>
         <form
           onSubmit={useForm_.handleSubmit((data) =>
-            updateUser({ variables: { id: user.id, user: data } }).then(() =>
-              ToastStore.addToast(SeverityEnum.success, 'Success')
-            )
+            updateUser({
+              variables: { id: user.id, user: data },
+              update: updateUserCacheUpdate(user?.id || '')
+            }).then(() => ToastStore.addToast(SeverityEnum.success, 'Success'))
           )}
           id="formInDialog"
         >
