@@ -13,10 +13,10 @@ export const useSignUp = () => {
 
   useEffect(() => {
     if (data) {
-      userStore.setUser(data.login.user);
-      userStore.setToken(data.login.access_token);
-      localStorage.setItem('user', JSON.stringify(data.login.user));
-      localStorage.setItem('token', JSON.stringify(data.login.access_token));
+      userStore.setUser(data.signup.user);
+      userStore.setToken(data.signup.access_token);
+      localStorage.setItem('user', JSON.stringify(data.signup.user));
+      localStorage.setItem('token', JSON.stringify(data.signup.access_token));
       navigate(`/${PathEnum.employees}`);
     }
   }, [data, error, navigate]);

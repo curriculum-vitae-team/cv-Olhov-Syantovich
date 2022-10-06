@@ -66,6 +66,7 @@ export const AppRouter = observer(() => {
                 <Route path="*" element={<Navigate to={PathEnum.signIn} replace />} />
               </>
             )}
+            <Route path={'/'} element={<Navigate to={PathEnum.employees} />} />
             <Route path={'/404'} element={<></>} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Route>
