@@ -1,5 +1,9 @@
 import { styled } from '@mui/material/styles';
 
+export const titleSX = {
+  textAlign: 'center'
+};
+
 export const CustomGrid = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('xs')]: {
     padding: '10px',

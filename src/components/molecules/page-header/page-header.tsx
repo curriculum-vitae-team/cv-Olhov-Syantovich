@@ -15,7 +15,7 @@ export const PageHeader: FC = observer(() => {
           width: '100%',
           background: '#212121',
           boxShadow: 'none',
-          zIndex: 1,
+          zIndex: 2,
           padding: '30px 20px 0 40px'
         }}
       >
