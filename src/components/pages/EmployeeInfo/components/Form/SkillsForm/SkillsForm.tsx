@@ -15,18 +15,24 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { ISkillMastery } from '@interfaces/ISkillMastery';
 
 export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
-  const { control, register, getValues } = useFormContext();
+  const { control, register, getValues, watch } = useFormContext();
   const { fields, append, remove } = useFieldArray({ control, name: 'profile.skills' });
+
+  const watchFieldArray = watch('profile.skills');
+
+  const controlledFields = fields.map((field, index) => {
+    return { ...field, ...watchFieldArray[index] };
+  });
+
   const availableSkills = useMemo(() => {
-    const currSkills = getValues('profile.skills');
     return [
       ...allSkills.filter(
-        (skill) => !currSkills.find((item: ISkillMastery) => item.skill_name === skill.name)
+        (skill) => !controlledFields.find((item: ISkillMastery) => item.skill_name === skill.name)
       )
     ].reduce((res, value) => [...res, value.name], [] as string[]);
-  }, [allSkills, getValues]);
+  }, [allSkills, controlledFields]);
 
-  const handleSkillAdd = () =>
+  const handleAdd = () =>
     append({
       skill_name: availableSkills[0],
       mastery: skillMastery[0]
@@ -39,18 +45,17 @@ export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
       <Typography variant={'h3'} sx={titleSX}>
         Skills
       </Typography>
-      {fields.map((field, index) => (
+      {controlledFields.map((field, index) => (
         <SkillGrid key={field.id}>
           <TextField
             select
             required
             placeholder="Skill"
             label="Skill"
-            defaultValue={getValues('profile.skills')[index].skill_name}
-            // onChange={handleChange(index, 'skill_name')}
-            {...register(`profile.skills.${index}.skill_name`)}
+            value={controlledFields[index].skill_name}
+            {...register(`profile.skills.${index}.skill_name` as const)}
           >
-            {[getValues('profile.skills')[index].skill_name, ...availableSkills].map((name) => (
+            {[controlledFields[index].skill_name, ...availableSkills].map((name) => (
               <MenuItem key={name} value={name}>
                 {name}
               </MenuItem>
@@ -61,8 +66,8 @@ export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
             required
             placeholder="Mastery"
             label="Mastery"
-            defaultValue={getValues('profile.skills')[index].mastery}
-            {...register(`profile.skills.${index}.mastery`)}
+            value={getValues('profile.skills')[index].mastery}
+            {...register(`profile.skills.${index}.mastery` as const)}
           >
             {skillMastery.map((mastery: string) => (
               <MenuItem key={mastery} value={mastery}>
@@ -76,7 +81,7 @@ export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
         </SkillGrid>
       ))}
       {!!availableSkills.length && (
-        <Button color="primary" sx={buttonSX} onClick={handleSkillAdd}>
+        <Button color="primary" sx={buttonSX} onClick={handleAdd}>
           Add
         </Button>
       )}
