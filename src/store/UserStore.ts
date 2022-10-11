@@ -10,7 +10,8 @@ class UserStore {
       user$: observable,
       token$: observable,
       setToken: action,
-      setUser: action
+      setUser: action,
+      setAvatar: action
     });
   }
 
@@ -20,6 +21,13 @@ class UserStore {
 
   setUser(user?: IUser) {
     this.user$ = user;
+  }
+
+  setAvatar(avatar?: string) {
+    if (this.user$) {
+      this.user$.profile.avatar = avatar;
+      localStorage.setItem('user', JSON.stringify(this.user$));
+    }
   }
 }
 

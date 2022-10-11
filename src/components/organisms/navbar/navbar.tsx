@@ -21,8 +21,9 @@ import {
   typographySX
 } from '@organisms/navbar/navbar.styles';
 import { userStore } from '@store/UserStore';
+import { observer } from 'mobx-react-lite';
 
-export const Navbar = () => {
+export const Navbar = observer(() => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [anchorElSettings, setAnchorElSettings] = useState<null | HTMLElement>(null);
   const [anchorElLanguage, setAnchorElLanguage] = useState<null | HTMLElement>(null);
@@ -76,4 +77,4 @@ export const Navbar = () => {
       </Drawer>
     </Box>
   );
-};
+});

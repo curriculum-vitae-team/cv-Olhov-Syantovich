@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, DragEventHandler, FC, useEffect, useState } from 'react';
 import { Avatar as AvatarMaterial, Box, IconButton } from '@mui/material';
 import { AvatarFormProps } from '@pages/EmployeeInfo/components/Info/Avatar/Avatar.types';
 import {
@@ -13,6 +13,7 @@ import { SeverityEnum } from '@store/toastStore/ToastsStore.type';
 import { IAvatarInput } from '@interfaces/inputs/IAvatarInput';
 import { Add, Close } from '@mui/icons-material';
 import { compressImage } from '@utils/compressImage';
+import { userStore } from '@store/UserStore';
 
 let avatar = {} as IAvatarInput;
 
@@ -33,6 +34,7 @@ export const Avatar: FC<AvatarFormProps> = ({
           avatar
         }
       }).then(() => {
+        userStore.user$?.profile.id === profile.id && userStore.setAvatar(avatar.base64);
         avatar = {} as IAvatarInput;
         refetch();
         ToastStore.addToast(SeverityEnum.success, 'Success');
@@ -58,8 +60,16 @@ export const Avatar: FC<AvatarFormProps> = ({
     };
   };
 
+  const handleDrop: DragEventHandler<HTMLInputElement> = (e) => {
+    const allowedTypes = 'image/jpeg,image/png,image/gif,image/svg+xml';
+    if (!allowedTypes.includes(e.dataTransfer.files[0].type) || !e.dataTransfer.files[0].type) {
+      e.preventDefault();
+    }
+  };
+
   const handleDelete = () => {
     deleteAvatar({ variables: { id: profile.id } }).then(() => {
+      userStore.user$?.profile.id === profile.id && userStore.setAvatar('');
       refetch();
       ToastStore.addToast(SeverityEnum.success, 'Success');
     });
@@ -84,6 +94,9 @@ export const Avatar: FC<AvatarFormProps> = ({
         onChange={handleChange}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
+        onDragEnter={() => setIsHover(true)}
+        onDragLeave={() => setIsHover(false)}
+        onDrop={handleDrop}
       />
       <AvatarMaterial sx={avatarSX} src={profile.avatar} />
     </Box>
