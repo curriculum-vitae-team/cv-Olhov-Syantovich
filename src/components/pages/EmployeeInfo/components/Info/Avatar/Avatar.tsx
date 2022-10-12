@@ -1,10 +1,11 @@
 import { ChangeEvent, DragEventHandler, FC, useEffect, useState } from 'react';
-import { Avatar as AvatarMaterial, Box, IconButton } from '@mui/material';
+import { Avatar as AvatarMaterial, Box, CircularProgress, IconButton } from '@mui/material';
 import { AvatarFormProps } from '@pages/EmployeeInfo/components/Info/Avatar/Avatar.types';
 import {
   addSX,
   avatarSX,
   boxSX,
+  centerSX,
   closeSX,
   inputSX
 } from '@pages/EmployeeInfo/components/Info/Avatar/Avatar.styles';
@@ -14,16 +15,16 @@ import { IAvatarInput } from '@interfaces/inputs/IAvatarInput';
 import { Add, Close } from '@mui/icons-material';
 import { compressImage } from '@utils/compressImage';
 import { userStore } from '@store/UserStore';
+import { useMutation } from '@apollo/client';
+import { DELETE_AVATAR, UPLOAD_AVATAR } from '@api/avatar/mutations';
 
 let avatar = {} as IAvatarInput;
+let loading = false;
 
-export const Avatar: FC<AvatarFormProps> = ({
-  profile,
-  haveRights,
-  uploadAvatar,
-  deleteAvatar,
-  refetch
-}) => {
+export const Avatar: FC<AvatarFormProps> = ({ profile, haveRights, refetch }) => {
+  const [uploadAvatar] = useMutation(UPLOAD_AVATAR);
+  const [deleteAvatar] = useMutation(DELETE_AVATAR);
+
   const [isHover, setIsHover] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,8 +37,8 @@ export const Avatar: FC<AvatarFormProps> = ({
       }).then(() => {
         userStore.user$?.profile.id === profile.id && userStore.setAvatar(avatar.base64);
         avatar = {} as IAvatarInput;
-        refetch();
         ToastStore.addToast(SeverityEnum.success, 'Success');
+        refetch().then(() => (loading = false));
       });
     }
   }, [avatar.base64]);
@@ -46,6 +47,7 @@ export const Avatar: FC<AvatarFormProps> = ({
     const reader = new FileReader();
 
     if (e.target.files && e.target.files.length) {
+      loading = true;
       avatar.type = e.target.files[0].type;
       avatar.size = e.target.files[0].size;
       reader.readAsDataURL(e.target.files[0]);
@@ -68,12 +70,21 @@ export const Avatar: FC<AvatarFormProps> = ({
   };
 
   const handleDelete = () => {
+    loading = true;
     deleteAvatar({ variables: { id: profile.id } }).then(() => {
       userStore.user$?.profile.id === profile.id && userStore.setAvatar('');
-      refetch();
       ToastStore.addToast(SeverityEnum.success, 'Success');
+      refetch().then(() => (loading = false));
     });
   };
+
+  if (loading) {
+    return (
+      <Box sx={{ ...centerSX, ...boxSX }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box sx={boxSX}>

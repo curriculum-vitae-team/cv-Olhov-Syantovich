@@ -9,6 +9,12 @@ export const boxSX = {
   margin: '20px auto 0'
 };
 
+export const centerSX = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+};
+
 export const avatarSX = {
   height: '200px',
   width: '200px',

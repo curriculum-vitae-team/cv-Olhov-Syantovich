@@ -49,7 +49,7 @@ export const Navbar = observer(() => {
           </Box>
 
           <MenuItem sx={menuItemSX} onClick={toggleAnchorElSettings}>
-            <Avatar src={userStore.user$?.profile?.avatar} />
+            <Avatar src={userStore.user$?.profile.avatar} />
             <Typography sx={typographySX}>
               {userStore.user$?.profile?.full_name
                 ? userStore.user$?.profile?.full_name
