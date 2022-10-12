@@ -15,7 +15,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { ISkillMastery } from '@interfaces/ISkillMastery';
 
 export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
-  const { control, register, getValues, watch } = useFormContext();
+  const { control, register, watch } = useFormContext();
   const { fields, append, remove } = useFieldArray({ control, name: 'profile.skills' });
 
   const watchFieldArray = watch('profile.skills');
@@ -66,7 +66,7 @@ export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
             required
             placeholder="Mastery"
             label="Mastery"
-            value={getValues('profile.skills')[index].mastery}
+            value={controlledFields[index].mastery}
             {...register(`profile.skills.${index}.mastery` as const)}
           >
             {skillMastery.map((mastery: string) => (
