@@ -10,7 +10,8 @@ class UserStore {
       user$: observable,
       token$: observable,
       setToken: action,
-      setUser: action
+      setUser: action,
+      setFullName: action
     });
   }
 
@@ -20,6 +21,13 @@ class UserStore {
 
   setUser(user?: IUser) {
     this.user$ = user;
+  }
+
+  setFullName(fullName?: string) {
+    if (this.user$) {
+      this.user$.profile.full_name = fullName;
+      localStorage.setItem('user', JSON.stringify(this.user$));
+    }
   }
 }
 

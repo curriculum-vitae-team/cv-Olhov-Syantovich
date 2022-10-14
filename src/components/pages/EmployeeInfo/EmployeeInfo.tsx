@@ -15,7 +15,7 @@ import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore'
 
 const EmployeeInfo: FC = () => {
   const { id } = useParams();
-  const { loading, data } = useQuery(GET_USER_BY_ID, {
+  const { loading, data, refetch } = useQuery(GET_USER_BY_ID, {
     variables: { id: id }
   });
 
@@ -51,7 +51,7 @@ const EmployeeInfo: FC = () => {
             color="primary"
             onClick={() =>
               DialogStore.openDialog({
-                element: <EmployeeDialog user={data.user} />,
+                element: <EmployeeDialog user={data.user} refetch={refetch} />,
                 textOfSubmit: 'Update',
                 header: 'Employee'
               })
