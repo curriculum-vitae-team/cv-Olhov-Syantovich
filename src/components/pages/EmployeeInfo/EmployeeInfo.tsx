@@ -58,7 +58,7 @@ const EmployeeInfo: FC = () => {
             color="primary"
             onClick={() =>
               DialogStore.openDialog({
-                element: <EmployeeDialog user={data.user} />,
+                element: <EmployeeDialog user={data.user} refetch={refetch} />,
                 textOfSubmit: 'Update',
                 header: 'Employee'
               })

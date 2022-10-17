@@ -16,8 +16,9 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { UPDATE_USER } from '@api/user/mutations';
 import { ToastStore } from '@store/toastStore/ToastsStore';
 import { SeverityEnum } from '@store/toastStore/ToastsStore.type';
+import { userStore } from '@store/UserStore';
 
-export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {} }) => {
+export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {}, refetch }) => {
   const [updateUser] = useMutation(UPDATE_USER);
   const { loading: loadingDepartments, data: departmentsData } = useQuery(GET_DEPARTMENTS);
   const { loading: loadingSkills, data: skillsData } = useQuery(GET_SKILLS);
@@ -30,7 +31,7 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {} }) => {
         last_name: user.profile?.last_name || '',
         first_name: user.profile?.first_name || '',
         skills: user.profile?.skills || '',
-        languages: []
+        languages: user.profile?.languages || ''
       },
       positionId: user.position?.id || '',
       departmentId: user.department?.id || '',
@@ -41,17 +42,20 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {} }) => {
   if (loadingDepartments || loadingSkills || loadingPositions || loadingLanguages) {
     return <Loader />;
   }
+
+  const handleSubmit = useForm_.handleSubmit((data) =>
+    updateUser({ variables: { id: user.id, user: data } }).then(() => {
+      userStore.user$?.id === user.id &&
+        userStore.setFullName(`${data.profile.first_name} ${data.profile.last_name}`);
+      refetch();
+      ToastStore.addToast(SeverityEnum.success, 'Success');
+    })
+  );
+
   return (
     <Box sx={boxSX}>
       <FormProvider {...useForm_}>
-        <form
-          onSubmit={useForm_.handleSubmit((data) =>
-            updateUser({ variables: { id: user.id, user: data } }).then(() =>
-              ToastStore.addToast(SeverityEnum.success, 'Success')
-            )
-          )}
-          id="formInDialog"
-        >
+        <form id="formInDialog" onSubmit={handleSubmit}>
           <PersonalInfoForm
             personalInfo={useForm_.getValues() as IUpdateUserInput}
             departments={departmentsData.departments}
@@ -60,10 +64,7 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {} }) => {
           <Divider />
           <SkillsForm allSkills={skillsData.skills} />
           <Divider />
-          <LanguagesForm
-            languages={user.profile?.languages || []}
-            allAvailableLanguages={languagesData.languages}
-          />
+          <LanguagesForm allLanguages={languagesData.languages} />
         </form>
       </FormProvider>
     </Box>
