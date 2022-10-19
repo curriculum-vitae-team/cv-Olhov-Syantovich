@@ -1,11 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
+import { Button, Dialog, AppBar, Toolbar, IconButton, Typography } from '@mui/material';
+import { Close } from '@mui/icons-material';
 import { Transition } from '@atoms/transition';
 import { appBarSX, typographySX } from '@templates/FullScreenDialog/FullScreenDialog.styles';
 import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore';
@@ -24,7 +19,7 @@ export const FullScreenDialog = observer(() => {
         <AppBar sx={appBarSX}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={DialogStore.closeDialog}>
-              <CloseIcon />
+              <Close />
             </IconButton>
             <Typography sx={typographySX} variant="h6">
               {DialogStore.header}

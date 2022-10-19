@@ -4,7 +4,7 @@ import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { PathEnum } from '@templates/router/router.types';
 import { TemplateCv } from '@pages/EmployeeCv/EmployeeCv.styles';
 import { WrapRow } from '@atoms/wrap-row';
-import AddIcon from '@mui/icons-material/Add';
+import { Add } from '@mui/icons-material';
 import { EmployeeDetailsContext } from '@templates/employee-details-tabs/employee-details.context';
 import { getPathToCvs } from '@utils/getPathToCv';
 import { theme } from '@templates/app/app.theme';
@@ -50,7 +50,7 @@ const EmployeeCv: FC = () => {
         ))}
         <WrapRow>
           <IconButton>
-            <AddIcon />
+            <Add />
           </IconButton>
         </WrapRow>
       </Tabs>
