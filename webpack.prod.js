@@ -7,7 +7,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    filename: `[name].[hash].js`,
+    filename: `[name].[contenthash].js`,
     path: path.join(__dirname, 'build'),
     clean: true
   },
@@ -25,5 +25,10 @@ module.exports = merge(common, {
       }
     }),
     new BundleAnalyzerPlugin()
-  ]
+  ],
+  performance: {
+    hints: false,
+    maxEntrypointSize: 1024,
+    maxAssetSize: 1024
+  }
 });
