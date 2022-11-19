@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, IconButton } from '@mui/material';
 import { WrapRow } from '@atoms/wrap-row';
 import { userStore } from '@store/UserStore';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { PictureAsPdf } from '@mui/icons-material';
 import { useMutation, useQuery } from '@apollo/client';
 import { Loader } from '@atoms/loader';
 import { ICv } from '@interfaces/ICv';
@@ -52,7 +52,7 @@ const CvDetails: FC = () => {
           </>
         )}
         <IconButton>
-          <PictureAsPdfIcon />
+          <PictureAsPdf />
         </IconButton>
       </WrapRow>
     </Box>

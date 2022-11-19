@@ -8,7 +8,7 @@ import {
   titleSX,
   wrapSX
 } from '@pages/EmployeeInfo/components/Form/LanguagesForm/LanguagesForm.styles';
-import CloseIcon from '@mui/icons-material/Close';
+import { Close } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import { languageProficiency } from '@constants/languageProficiency';
 import { useFieldArray, useFormContext } from 'react-hook-form';
@@ -79,7 +79,7 @@ export const LanguagesForm: FC<LanguagesFormProps> = ({ allLanguages }) => {
             ))}
           </TextField>
           <IconButton edge="start" color="inherit" sx={iconSX} onClick={handleDelete(index)}>
-            <CloseIcon />
+            <Close />
           </IconButton>
         </LanguageGrid>
       ))}

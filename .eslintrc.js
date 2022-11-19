@@ -1,11 +1,10 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    node: true
   },
   extends: [
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
@@ -27,7 +26,8 @@ module.exports = {
   rules: {
     'prettier/prettier': ['warn'],
     'no-console': 'warn',
-    '@typescript-eslint/no-empty-function': 'warn'
+    '@typescript-eslint/no-empty-function': 'warn',
+    'import/extensions': 'off'
   },
   settings: {
     'import/resolver': {

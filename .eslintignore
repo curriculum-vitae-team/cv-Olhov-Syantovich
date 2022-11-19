@@ -1,4 +1,5 @@
 /node_modules
 /build
-
-craco.config.js
+webpack.common.js
+webpack.dev.js
+webpack.prod.js

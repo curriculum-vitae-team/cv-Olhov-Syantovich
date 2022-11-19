@@ -10,7 +10,6 @@ class FullScreenDialogStore {
     makeObservable(this, {
       textOfSubmit$: observable,
       isOpened$: observable,
-      elementToRender: observable,
       openDialog: action,
       closeDialog: action
     });
