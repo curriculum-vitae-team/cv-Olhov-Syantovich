@@ -1,12 +1,6 @@
 export const wrapSX = {
-  padding: '20px 10px',
+  padding: '0 10px 20px',
   textAlign: 'center'
-};
-
-export const avatarSX = {
-  height: '200px',
-  width: '200px',
-  margin: 'auto'
 };
 
 export const emailSX = {

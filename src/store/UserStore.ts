@@ -11,6 +11,7 @@ class UserStore {
       token$: observable,
       setToken: action,
       setUser: action,
+      setAvatar: action,
       setFullName: action
     });
   }
@@ -21,6 +22,12 @@ class UserStore {
 
   setUser(user?: IUser) {
     this.user$ = user;
+  }
+
+  setAvatar(avatar?: string) {
+    if (this.user$) {
+      this.user$.profile.avatar = avatar;
+    }
   }
 
   setFullName(fullName?: string) {
