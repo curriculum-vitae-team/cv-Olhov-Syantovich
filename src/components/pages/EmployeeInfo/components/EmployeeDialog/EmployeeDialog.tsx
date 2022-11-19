@@ -1,10 +1,7 @@
 import { FC } from 'react';
 import { EmployeeDialogProps } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.types';
-import { Avatar, Box, Divider } from '@mui/material';
-import {
-  avatarSX,
-  boxSX
-} from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.styles';
+import { Box, Divider } from '@mui/material';
+import { boxSX } from '@pages/EmployeeInfo/components/EmployeeDialog/EmployeeDialog.styles';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_DEPARTMENTS } from '@api/department/queries';
 import { Loader } from '@atoms/loader/loader';
@@ -59,7 +56,6 @@ export const EmployeeDialog: FC<EmployeeDialogProps> = ({ user = {}, refetch }) 
     <Box sx={boxSX}>
       <FormProvider {...useForm_}>
         <form id="formInDialog" onSubmit={handleSubmit}>
-          <Avatar sx={avatarSX} src={user.profile?.full_name || ''} />
           <PersonalInfoForm
             personalInfo={useForm_.getValues() as IUpdateUserInput}
             departments={departmentsData.departments}

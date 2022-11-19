@@ -26,6 +26,7 @@ export const GET_USER_BY_ID = gql`
       id
       email
       profile {
+        id
         avatar
         first_name
         last_name

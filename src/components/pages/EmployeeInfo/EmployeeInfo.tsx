@@ -12,6 +12,7 @@ import { EmployeeDialog } from '@pages/EmployeeInfo/components/EmployeeDialog';
 import { userStore } from '@store/UserStore';
 import { PageHeaderStore } from '@store/PageHeaderStore/PageHeaderStore';
 import { DialogStore } from '@store/FullScreenDialogStore/FullScreenDialogStore';
+import { Avatar } from '@pages/EmployeeInfo/components/Info/Avatar';
 
 const EmployeeInfo: FC = () => {
   const { id } = useParams();
@@ -29,6 +30,12 @@ const EmployeeInfo: FC = () => {
 
   return (
     <>
+      <Avatar
+        profile={data.user.profile}
+        haveRights={userStore.user$?.role === 'admin' || userStore.user$?.id === data.user.id}
+        refetch={refetch}
+      />
+
       <PersonalInfo user={data.user} />
 
       {!!data.user.profile.skills.length && (
