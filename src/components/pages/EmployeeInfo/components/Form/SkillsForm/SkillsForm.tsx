@@ -8,7 +8,7 @@ import {
   titleSX,
   wrapSX
 } from '@pages/EmployeeInfo/components/Form/SkillsForm/SkillForm.styles';
-import CloseIcon from '@mui/icons-material/Close';
+import { Close } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import { skillMastery } from '@constants/skillMasteries';
 import { useFieldArray, useFormContext } from 'react-hook-form';
@@ -76,7 +76,7 @@ export const SkillsForm: FC<SkillsFormProps> = ({ allSkills }) => {
             ))}
           </TextField>
           <IconButton edge="start" color="inherit" sx={iconSX} onClick={handleDelete(index)}>
-            <CloseIcon />
+            <Close />
           </IconButton>
         </SkillGrid>
       ))}
